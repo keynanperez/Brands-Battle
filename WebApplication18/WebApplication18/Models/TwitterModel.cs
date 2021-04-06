@@ -110,7 +110,7 @@ namespace WebApplication18.Models
         {
 
             var tc = new TwitterClient(_API_key, _API_key_secret, access_token, access_token_secret);
-            var parameters = new GetUserTimelineParameters("Nike")
+            var parameters = new GetUserTimelineParameters("nike")
             {
                 //SinceId = DateTime.Today.AddDays(-7),
                 IncludeEntities = true,
