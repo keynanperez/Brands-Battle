@@ -8,22 +8,38 @@
             crossorigin="anonymous"></script>
     <script src="ajaxCalls.js"></script>
     <script>
-        function activate() {
-            ajaxCall('GET', '../api/Twitter', '', scb, ecb);
+
+        function InputVal(inputQ)
+        {
+       
+         
         }
 
-        function scb(data) {
-            console.log(data);
-        }
 
-        function ecb(data) {
+  function activate() {
+          var x = document.getElementById('inpQ1').value;
+          ajaxCall('GET', '../api/Twitter', x, scb, ecb)
+       
+    }
+
+    function scb(data) {
+            document.getElementById("ansQ1").innerHTML = data.data.public_metrics.followers_count;
             console.log(data);
-        }
+    }
+
+    function ecb(data) {
+         console.log(data);
+    }
     </script>
 </head>
 <body>
-
+    <h1>question number 1 </h1>
+    <h2>how many followers <input id="inpQ1" type="text" />  does have? </h2>
     <button onclick="activate()">get command from twitter API</button>
+    <div id="ansQ1"></div>
 
+    <h1>question number 2 </h1>
+
+    <h1>question number 3</h1>
 </body>
 </html>

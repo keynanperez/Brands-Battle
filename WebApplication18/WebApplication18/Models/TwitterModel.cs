@@ -38,10 +38,13 @@ namespace WebApplication18.Models
         /*--------------------Access token & secret--------------------------*/
         string access_token = "1324056647027884033-uVxW1p60vwskIt7LBf9tbDZIkF8EC8";
         string access_token_secret = "fPDWuQFGGQat4X3tdbSqgGR7y7EjqqNIfMkFxT4gKZzNt";
-        /*
-                //id , logoimg , followers 
 
-                public async Task<object> test()
+
+
+        /*---------basic user info---id , logoimg , followers-----------*/ 
+               
+
+                public async Task<object> getBasicUserInfo()
                  {
                      var tc = new TwitterClient(_API_key, _API_key_secret, access_token, access_token_secret);
                      var userParameters = new GetUserByNameV2Parameters("Nike")
@@ -57,8 +60,8 @@ namespace WebApplication18.Models
 
                  }
              
-                */
-        /*
+               
+    /*
            //serch #
        public async Task<object> test()
        {
@@ -80,14 +83,13 @@ namespace WebApplication18.Models
              var tweets = await tc.Search.SearchTweetsAsync(parameters);
               return tweets;
        }
-       */
-
+    
         //search @
-        /*  public async Task<object> test()
+        public async Task<object> test()
           {
               var tc = new TwitterClient(_API_key, _API_key_secret, access_token, access_token_secret);
               var ourDate = DateTime.Today;
-              var parameters = new SearchTweetsParameters("1374754579280138240")
+              var parameters = new SearchTweetsParameters("1371008303057174531")
 
               {
 
@@ -104,41 +106,43 @@ namespace WebApplication18.Models
               return tweets;
           }
 
-          */
-
+        
         public async Task<object> test()
         {
 
             var tc = new TwitterClient(_API_key, _API_key_secret, access_token, access_token_secret);
             var parameters = new GetUserTimelineParameters("nike")
-            {
+            {//מסננים לציר זמן כשכולם שקר מוצא אתציר הזמן המלא 
                 //SinceId = DateTime.Today.AddDays(-7),
+                IncludeContributorDetails=true,
                 IncludeEntities = true,
                 IncludeRetweets = true,
-                ExcludeReplies = true,
+                ExcludeReplies = true,//כשזה אמת מוצא ציר זמ ן של פירסום 
                 //Until = DateTime.Today,//7 days
              
             };
             var tweets = await tc.Timelines.GetUserTimelineAsync(parameters);
-
-            //var homeTimelineTweets = await tc.Timelines.GetHomeTimelineAsync(); 
-            //,new PublishRetweetParameters
-            //  Expansions = { UserResponseFields.Expansions.PinnedTweetId },
-            //TweetFields = { UserResponseFields.Tweet.Attachments, UserResponseFields.Tweet.Entities },
-            // UserFields = UserResponseFields.User.ALL
-            //};
-
-            //filters=TweetSearchFilters.Videos,
-            //start_time = DateTime.Today.AddDays(-7),
-            // Until = DateTime.Today,//7 days
-
-
-            //tweet.created_at= DateTime.Today;
             return tweets;
 
         }
-        }
+        */
+    }
 
-    }  
+}
 
+   
+/*
+ 
 
+   פופולריות 
+   __________
+   כמות עוקבים 
+    חלקי
+ ExcludeReplies- אמת         
+     ______
+   
+  לייקים +תגובות +ציוצים 
+       חלקי  
+  ExcludeReplies- שקר         
+
+     */

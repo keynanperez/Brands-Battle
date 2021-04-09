@@ -15,7 +15,7 @@ namespace WebApplication18.Controllers
         public async Task<object> Get()
         {
             TwitterModel tm = new TwitterModel();
-            return await tm.test();
+            return await tm.getBasicUserInfo();
         }
 
         // GET api/<controller>/5
