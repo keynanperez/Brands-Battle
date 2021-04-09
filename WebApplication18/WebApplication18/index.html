@@ -9,37 +9,65 @@
     <script src="ajaxCalls.js"></script>
     <script>
 
-        function InputVal(inputQ)
-        {
-       
-         
-        }
+      
 
-
-  function activate() {
+  function activate1() {
           var x = document.getElementById('inpQ1').value;
-          ajaxCall('GET', '../api/Twitter', x, scb, ecb)
+          ajaxCall('GET', '../api/Twitter', '', scb1, ecb1)
        
     }
 
-    function scb(data) {
+    function scb1(data) {
             document.getElementById("ansQ1").innerHTML = data.data.public_metrics.followers_count;
             console.log(data);
     }
 
-    function ecb(data) {
+    function ecb1(data) {
          console.log(data);
-    }
+        }
+
+
+
+        function activate2() {
+            var x = document.getElementById('inpQ2').value;
+            ajaxCall('GET', '../api/Twitter', '', scb2, ecb2)
+
+        }
+        function scb2(data) {
+            document.getElementById("ansQ2").innerHTML = data.data.description;
+            console.log(data);
+        }
+
+        function ecb2(data) {
+            console.log(data);
+        }
+
+
+        function activate() {
+            
+            ajaxCall('GET', '../api/Twitter', '', scb, ecb)
+
+        }
+        function scb(data) {
+         
+            console.log(data);
+        }
+
+        function ecb(data) {
+            console.log(data);
+        }
     </script>
 </head>
 <body>
     <h1>question number 1 </h1>
-    <h2>how many followers <input id="inpQ1" type="text" />  does have? </h2>
-    <button onclick="activate()">get command from twitter API</button>
+    <h2>How many followers <input id="inpQ1" type="text" />  does have? </h2>
+    <button onclick="activate1()">get command from twitter API</button>
     <div id="ansQ1"></div>
-
     <h1>question number 2 </h1>
-
+    <h2>What is <input id="inpQ2" type="text" />  last campaign? </h2>
+    <button onclick="activate2()">get command from twitter API</button>
+    <div id="ansQ2"></div>
     <h1>question number 3</h1>
+    <button onclick="activate()">get command from twitter API</button>
 </body>
 </html>

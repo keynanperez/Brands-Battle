@@ -47,7 +47,7 @@ namespace WebApplication18.Models
                 public async Task<object> getBasicUserInfo()
                  {
                      var tc = new TwitterClient(_API_key, _API_key_secret, access_token, access_token_secret);
-                     var userParameters = new GetUserByNameV2Parameters("Nike")
+                     var userParameters = new GetUserByNameV2Parameters("Adidas")
                      {
                          Expansions = { UserResponseFields.Expansions.PinnedTweetId },
                          TweetFields = { UserResponseFields.Tweet.Attachments, UserResponseFields.Tweet.Entities },
@@ -105,27 +105,28 @@ namespace WebApplication18.Models
               var tweets = await tc.Search.SearchTweetsAsync(parameters);
               return tweets;
           }
-
+          */
         
         public async Task<object> test()
         {
 
             var tc = new TwitterClient(_API_key, _API_key_secret, access_token, access_token_secret);
             var parameters = new GetUserTimelineParameters("nike")
-            {//מסננים לציר זמן כשכולם שקר מוצא אתציר הזמן המלא 
-                //SinceId = DateTime.Today.AddDays(-7),
-                IncludeContributorDetails=true,
+            {//מסננים לציר זמן כשכולם שקר מוצא אתציר הזמן המלא
+               //SinceId = DateTime.Now.AddDays(-7).Ticks,
+            
+                IncludeContributorDetails =true,
                 IncludeEntities = true,
-                IncludeRetweets = true,
-                ExcludeReplies = true,//כשזה אמת מוצא ציר זמ ן של פירסום 
-                //Until = DateTime.Today,//7 days
-             
+              ///  IncludeRetweets = true,
+                ExcludeReplies = false,//כשזה אמת מוצא ציר זמ ן של פירסום 
+                // = DateTime.Today.Ticks,//7 days
+         
             };
             var tweets = await tc.Timelines.GetUserTimelineAsync(parameters);
             return tweets;
 
         }
-        */
+        
     }
 
 }
