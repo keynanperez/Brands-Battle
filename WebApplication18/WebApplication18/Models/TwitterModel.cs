@@ -114,11 +114,12 @@ namespace WebApplication18.Models
             var parameters = new GetUserTimelineParameters("nike")
             {//מסננים לציר זמן כשכולם שקר מוצא אתציר הזמן המלא
                //SinceId = DateTime.Now.AddDays(-7).Ticks,
-            
+               
+               
                 IncludeContributorDetails =true,
                 IncludeEntities = true,
               ///  IncludeRetweets = true,
-                ExcludeReplies = false,//כשזה אמת מוצא ציר זמ ן של פירסום 
+                ExcludeReplies = true,//כשזה אמת מוצא ציר זמ ן של פירסום 
                 // = DateTime.Today.Ticks,//7 days
          
             };

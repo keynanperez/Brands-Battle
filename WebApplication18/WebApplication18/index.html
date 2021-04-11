@@ -42,7 +42,19 @@
             console.log(data);
         }
 
+        function activate3() {
 
+            ajaxCall('GET', '../api/Twitter', '', scb3, ecb3)
+
+        }
+        function scb3(data) {
+            document.getElementById("ansQ3").innerHTML = data[0].FavoriteCount;
+            console.log(data);
+        }
+
+        function ecb3(data) {
+            console.log(data);
+        }
         function activate() {
             
             ajaxCall('GET', '../api/Twitter', '', scb, ecb)
@@ -68,6 +80,8 @@
     <button onclick="activate2()">get command from twitter API</button>
     <div id="ansQ2"></div>
     <h1>question number 3</h1>
-    <button onclick="activate()">get command from twitter API</button>
+    <h2>How many like did <input id="inpQ3" type="text" />  last post got? </h2>
+    <button onclick="activate3()">get command from twitter API</button>
+    <div id="ansQ3"></div>
 </body>
 </html>
