@@ -111,7 +111,7 @@ namespace WebApplication18.Models
         {
 
             var tc = new TwitterClient(_API_key, _API_key_secret, access_token, access_token_secret);
-            var parameters = new GetUserTimelineParameters("nike")
+            var parameters = new GetUserTimelineParameters("adidas")
             {//מסננים לציר זמן כשכולם שקר מוצא אתציר הזמן המלא
                //SinceId = DateTime.Now.AddDays(-7).Ticks,
                

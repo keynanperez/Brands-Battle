@@ -55,6 +55,37 @@
         function ecb3(data) {
             console.log(data);
         }
+
+      
+        function activate4() {
+
+            ajaxCall('GET', '../api/Twitter', '', scb4, ecb4)
+
+        }
+        function scb4(data) {
+            document.getElementById("ansQ4").innerHTML = data[0].RetweetCount;
+            console.log(data);
+        }
+
+        function ecb4(data) {
+            console.log(data);
+        }
+
+
+        function activate5() {
+
+            ajaxCall('GET', '../api/Twitter', '', scb5, ecb5)
+
+        }
+        function scb5(data) {
+            document.getElementById("ansQ5").innerHTML = "<img src='"+data[0].Media[0].media_url +"'width='300' height='300'>";
+            console.log(data);
+        }
+
+        function ecb5(data) {
+            console.log(data);
+        }
+ 
         function activate() {
             
             ajaxCall('GET', '../api/Twitter', '', scb, ecb)
@@ -83,5 +114,13 @@
     <h2>How many like did <input id="inpQ3" type="text" />  last post got? </h2>
     <button onclick="activate3()">get command from twitter API</button>
     <div id="ansQ3"></div>
+    <h1>question number 4</h1>
+    <h2>How many retweet did <input id="inpQ4" type="text" />  last post got? </h2>
+    <button onclick="activate4()">get command from twitter API</button>
+    <div id="ansQ4"></div>
+    <h1>question number 5</h1>
+    <h2>What is he last image that<input id="inpQ5" type="text" />  post? </h2>
+    <button onclick="activate5()">get command from twitter API</button>
+    <div id="ansQ5"></div>
 </body>
 </html>
