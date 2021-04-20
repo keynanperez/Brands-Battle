@@ -111,19 +111,18 @@ namespace WebApplication18.Models
         {
 
             var tc = new TwitterClient(_API_key, _API_key_secret, access_token, access_token_secret);
-            var parameters = new GetUserTimelineParameters("adidas")
+            var parameters = new GetUserTimelineParameters("nike")
             {//מסננים לציר זמן כשכולם שקר מוצא אתציר הזמן המלא
-               //SinceId = DateTime.Now.AddDays(-7).Ticks,
-               
-               
+              SinceId = 637534920600000000,
                 IncludeContributorDetails =true,
                 IncludeEntities = true,
               ///  IncludeRetweets = true,
-                ExcludeReplies = true,//כשזה אמת מוצא ציר זמ ן של פירסום 
+                ExcludeReplies = false,//כשזה אמת מוצא ציר זמ ן של פירסום 
                 // = DateTime.Today.Ticks,//7 days
          
             };
             var tweets = await tc.Timelines.GetUserTimelineAsync(parameters);
+
             return tweets;
 
         }
