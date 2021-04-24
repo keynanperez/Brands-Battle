@@ -13,8 +13,15 @@ import {StyleSheet} from 'react-native';
     flex: 1,
     resizeMode: "cover",
     width: '100%',
-
   
+  
+  },
+  headline:{
+    color: "white",
+    fontSize: 52,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop:"20%",
   },
   text: {
     color: "#5271ff",
@@ -172,7 +179,7 @@ notetitle:{
 noteViewtitle:{
 
   textAlign: "center",
-  backgroundColor: "#4682b4",
+ 
   paddingTop:'20%'
 
 },

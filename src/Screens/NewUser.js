@@ -17,45 +17,12 @@ class NewUser extends Component {
       VerPass:"",
       points:0,
       stage:1,
-      image:"",
+      image:'../usav.png',
       newuser:"",
       hasCameraPermission: null,
 
     };
 
-  }
-
-  
-  async componentDidMount() {
-  
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    this.setState({ hasCameraPermission: status === "granted" });  
-
-  }
-
-
-
-  OpenGallery = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-     allowsEditing: true,
-     aspect: [4, 3]
-    });
-    if (!result.cancelled) {
-      this.setState({ image: result.uri });
-      alert("image uploded")
-    }
-  }
-  OpenCamera = async () => {
-    let result = await ImagePicker.launchCameraAsync({
-     allowsEditing: true,
-     aspect: [4, 3],
-     quality:1
-     
-    });
-    if (!result.cancelled) {
-      this.setState({ image: result.uri });
-      alert("image uploded")
-    }
   }
 
   SubmitNew =()=>{
@@ -108,20 +75,11 @@ else{
 
   
   render() {
-    const {image,hasCameraPermission} = this.state;
-    const {navigation} = this.props
-
-    if (hasCameraPermission === null) {
-      return <View />;
-     }
-     else if (hasCameraPermission === false) {
-      return <Text>Access err</Text>;
-     }
-     else {
+  
     return (
       <>
       
-      <ImageBackground source= {require('../backc.png')} style={styles.image}>
+      <ImageBackground source= {require('../back.png')} style={styles.image}>
    
             <View style={styles.noteViewtitle}>
             <Text style={styles.notetitle} > Add new user </Text>
@@ -143,13 +101,7 @@ else{
              </Item>
             </Form>  
             <Text>You can add an image</Text>
-                <View style={styles.imagecon} >
-                {image ? (<Image source={{ uri: image }} />) : (<View/>)}
-                </View>     
-                <Row>
-                <Icon raised name='camera' onPress={this.OpenCamera}></Icon>
-                <Icon raised name='image'onPress={this.OpenGallery}></Icon>  
-               </Row>       
+             
               <Button style={styles.SubmitBtn} onPress={this.SubmitNew} >
                <Text>Submit</Text>
               </Button>
@@ -161,7 +113,7 @@ else{
 </>
     );
    }
-  }
+  
   }
 
 export default NewUser;

@@ -42,7 +42,7 @@ class MyPageView extends Component {
   render()
   {
   return (
-    <ImageBackground source= {require('../backb.png')} style={styles.image}>
+    <ImageBackground source= {require('../back.png')} style={styles.image}>
     <SafeAreaView>
     <ScrollView >
 
@@ -52,14 +52,16 @@ class MyPageView extends Component {
             <Text style={styles.notetitle} > Hello {this.state.UserNameU} </Text>
             </View>
             <Text  style={styles.proftext}  > points : {this.state.points} </Text>
-            <Text  style={styles.proftext}  > stage : {this.state.stage} </Text>
+            <Text  style={styles.proftext}  > choose your view </Text>
            <Button  style={styles.butn}  onPress={() =>this.props.navigation.navigate('gameView',{id:this.state.id,points:this.state.points,stage:this.state.stage,UserName:this.state.UserNameU,imgU:this.state.img})}>
-           <Text style={styles.words} > let's Go </Text>
+           <Text style={styles.words} >Player </Text>
+             </Button>
+           <Button  style={styles.butn}  onPress={() =>this.props.navigation.navigate('gameView',{id:this.state.id,points:this.state.points,stage:this.state.stage,UserName:this.state.UserNameU,imgU:this.state.img})}>
+           <Text style={styles.words} > Marketing view </Text>
              </Button>
              <Button rounded style={styles.butn} onPress={() =>this.props.navigation.navigate('WinnerPage')}
 >
           <Text style={styles.words}> winners table</Text>
-        
           </Button>
 </ScrollView>
   </SafeAreaView>
