@@ -11,6 +11,7 @@ import mypro from "./src/Screens/MyPageView";
 import nextlevel from './src/Screens/nextlevel';
 import WinnerPage from "./src/Screens/WinnerPage";
 import NewUser from './src/Screens/NewUser';
+import UserHome from './src/Screens/UserHome';
 import { I18nManager } from "react-native";
 import endgame from "./src/Screens/endgame";
 I18nManager.forceRTL(false);
@@ -34,6 +35,8 @@ export default class App extends React.Component {
        <Drawer.Screen name="gameView" component={gameView} />
        <Drawer.Screen name="Categories" component={CategoriesPage} />
        <Drawer.Screen name="Quiz" component={Quiz} />
+       <Drawer.Screen name="UserHome" component={UserHome} />
+       
        <Drawer.Screen name="mypro" component={mypro} />
        <Drawer.Screen name="newuser" component={NewUser} />
        <Drawer.Screen name="endgame" component={endgame} />

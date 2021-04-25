@@ -21,6 +21,7 @@ class HomeView extends Component {
     <ImageBackground source= {require('../back.png')} style={styles.image}>
        
           <Text style={styles.headline}>Brand Battle</Text>
+
           <Button  style={styles.butn} onPress={() => this.props.navigation.navigate('login')}>
           <Icon reverse style={styles.go}  name='play'  />
           <Text style={styles.words}> log in  </Text>

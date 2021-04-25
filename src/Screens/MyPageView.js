@@ -53,18 +53,12 @@ class MyPageView extends Component {
             </View>
             <Text  style={styles.proftext}  >  Total Points : </Text>
             <Text  style={styles.notetitlex}  > {this.state.points} </Text>
-            <Text  style={styles.proftext}  > Choose Your View: </Text>
-            <Row style={styles.rowprontn}>
+           
            <Button  style={styles.butnn}  onPress={() =>this.props.navigation.navigate('Categories',{id:this.state.id,points:this.state.points,stage:this.state.stage,UserName:this.state.UserNameU,imgU:this.state.img})}>
            <Text style={styles.words} >Player </Text>
              </Button>
-           <Button  style={styles.butnn}  onPress={() =>this.props.navigation.navigate('gameView',{id:this.state.id,points:this.state.points,stage:this.state.stage,UserName:this.state.UserNameU,imgU:this.state.img})}>
-           <Text style={styles.words} > Marketing view </Text>
-             </Button>
-             </Row>
-             <Text  style={styles.proftext}  > Other Options: </Text>
-             <Button rounded style={styles.butn} onPress={() =>this.props.navigation.navigate('WinnerPage')}
->
+     
+             <Button rounded style={styles.butn} onPress={() =>this.props.navigation.navigate('WinnerPage')}>
           <Text style={styles.words}> winners table</Text>
           </Button>
 </ScrollView>
