@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {SafeAreaView, ScrollView, Text,View ,Image,ImageBackground} from 'react-native';
 import styles from "./MyStyle";
 import { Icon,Avatar } from 'react-native-elements';
-import { Button } from 'native-base';
+import { Button, Row } from 'native-base';
 class MyPageView extends Component {
     constructor(props) {
       super(props);
@@ -51,14 +51,18 @@ class MyPageView extends Component {
             <Image style={styles.ava} rounded size="large" source={{  uri:  'https://img.pngio.com/fileuser-circlepng-wikimedia-commons-png-user-256_256.png', }}/>
             <Text style={styles.notetitle} > Hello {this.state.UserNameU} </Text>
             </View>
-            <Text  style={styles.proftext}  > points : {this.state.points} </Text>
-            <Text  style={styles.proftext}  > choose your view </Text>
-           <Button  style={styles.butn}  onPress={() =>this.props.navigation.navigate('gameView',{id:this.state.id,points:this.state.points,stage:this.state.stage,UserName:this.state.UserNameU,imgU:this.state.img})}>
+            <Text  style={styles.proftext}  >  Total Points : </Text>
+            <Text  style={styles.notetitlex}  > {this.state.points} </Text>
+            <Text  style={styles.proftext}  > Choose Your View: </Text>
+            <Row style={styles.rowprontn}>
+           <Button  style={styles.butnn}  onPress={() =>this.props.navigation.navigate('Categories',{id:this.state.id,points:this.state.points,stage:this.state.stage,UserName:this.state.UserNameU,imgU:this.state.img})}>
            <Text style={styles.words} >Player </Text>
              </Button>
-           <Button  style={styles.butn}  onPress={() =>this.props.navigation.navigate('gameView',{id:this.state.id,points:this.state.points,stage:this.state.stage,UserName:this.state.UserNameU,imgU:this.state.img})}>
+           <Button  style={styles.butnn}  onPress={() =>this.props.navigation.navigate('gameView',{id:this.state.id,points:this.state.points,stage:this.state.stage,UserName:this.state.UserNameU,imgU:this.state.img})}>
            <Text style={styles.words} > Marketing view </Text>
              </Button>
+             </Row>
+             <Text  style={styles.proftext}  > Other Options: </Text>
              <Button rounded style={styles.butn} onPress={() =>this.props.navigation.navigate('WinnerPage')}
 >
           <Text style={styles.words}> winners table</Text>

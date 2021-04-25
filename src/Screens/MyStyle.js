@@ -76,6 +76,15 @@ marginTop:'55%'
     padding:10,
     borderWidth: 1
   },
+  butnn:{
+    color: "#4682b4",
+    alignSelf: 'center',
+    borderColor:"#f632f4",
+    borderRadius: 100,
+    padding:10,
+    marginLeft:10,
+    borderWidth: 1
+  },
   butnx:{
     marginTop:'20%',
     color: "#4682b4",
@@ -176,6 +185,19 @@ notetitle:{
 
  
 },
+notetitlex:{
+
+  color: "white",
+  fontSize: 42,
+  fontWeight: "bold",
+  textAlign: "center",
+  marginBottom:'5%',
+  textShadowColor:"#f632f4",
+  textShadowRadius:10,
+
+
+ 
+},
 noteViewtitle:{
 
   textAlign: "center",
@@ -188,10 +210,14 @@ proftext:{
   fontSize: 42,
   fontWeight: "bold",
   textAlign: "center",
-  marginBottom:'20%',
+  marginBottom:'5%',
   textShadowColor:"#17F1FF",
   textShadowRadius:10,
 
+},
+rowprontn:{
+  paddingLeft: 60,
+  paddingBottom:20
 },
 proftexts:{
   color: "white",
