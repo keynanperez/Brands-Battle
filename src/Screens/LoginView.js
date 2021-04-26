@@ -53,7 +53,7 @@ class  LoginView extends React.Component {
         const res= await userf.json()
           if(res.UserName != null)
             {
-             this.props.navigation.navigate('mypro',{UserId:res.Id,pointsU:res.Points,stageU:res.UserStage,UserName:res.UserName,imgU:res.Img});
+             this.props.navigation.navigate('UserHome',{UserId:res.Id,pointsU:res.Points,stageU:res.UserStage,UserName:res.UserName,imgU:res.Img});
            };
           
             
@@ -78,7 +78,7 @@ class  LoginView extends React.Component {
   {
 
    return(
-    <ImageBackground source= {require('../backb.png')} style={styles.image}>
+    <ImageBackground source= {require('../back.png')} style={styles.image}>
    
     <View style={styles.login} >
    

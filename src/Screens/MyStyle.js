@@ -13,8 +13,15 @@ import {StyleSheet} from 'react-native';
     flex: 1,
     resizeMode: "cover",
     width: '100%',
-
   
+  
+  },
+  headline:{
+    color: "white",
+    fontSize: 52,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginTop:"20%",
   },
   text: {
     color: "#5271ff",
@@ -67,6 +74,15 @@ marginTop:'55%'
     borderColor:"#f632f4",
     borderRadius: 100,
     padding:10,
+    borderWidth: 1
+  },
+  butnn:{
+    color: "#4682b4",
+    alignSelf: 'center',
+    borderColor:"#f632f4",
+    borderRadius: 100,
+    padding:10,
+    marginLeft:10,
     borderWidth: 1
   },
   butnx:{
@@ -169,10 +185,23 @@ notetitle:{
 
  
 },
+notetitlex:{
+
+  color: "white",
+  fontSize: 42,
+  fontWeight: "bold",
+  textAlign: "center",
+  marginBottom:'5%',
+  textShadowColor:"#f632f4",
+  textShadowRadius:10,
+
+
+ 
+},
 noteViewtitle:{
 
   textAlign: "center",
-  backgroundColor: "#4682b4",
+ 
   paddingTop:'20%'
 
 },
@@ -181,10 +210,14 @@ proftext:{
   fontSize: 42,
   fontWeight: "bold",
   textAlign: "center",
-  marginBottom:'20%',
+  marginBottom:'5%',
   textShadowColor:"#17F1FF",
   textShadowRadius:10,
 
+},
+rowprontn:{
+  paddingLeft: 60,
+  paddingBottom:20
 },
 proftexts:{
   color: "white",

@@ -79,7 +79,13 @@
 
         }
         function scb5(data) {
-            document.getElementById("ansQ5").innerHTML = "<img src='"+data[0].Media[0].media_url +"'width='300' height='300'>";
+          i = 0;
+         //   while (data[0].Media[0].media_url == null) {
+                
+           //     i++;
+
+            //}
+            document.getElementById("ansQ5").innerHTML = "<img src='"+data[i].Media[i].media_url +"'width='300' height='300'>";
             console.log(data);
         }
 
