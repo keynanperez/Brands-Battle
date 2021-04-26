@@ -44,10 +44,10 @@ namespace WebApplication18.Models
         /*---------basic user info---id , logoimg , followers-----------*/ 
                
 
-                public async Task<object> getBasicUserInfo()
+                public async Task<object> getBasicUserInfo(string input)
                  {
                      var tc = new TwitterClient(_API_key, _API_key_secret, access_token, access_token_secret);
-                     var userParameters = new GetUserByNameV2Parameters("Adidas")
+                     var userParameters = new GetUserByNameV2Parameters(input)
                      {
                          Expansions = { UserResponseFields.Expansions.PinnedTweetId },
                          TweetFields = { UserResponseFields.Tweet.Attachments, UserResponseFields.Tweet.Entities },
@@ -107,11 +107,11 @@ namespace WebApplication18.Models
           }
           */
         
-        public async Task<object> test()
+        public async Task<object> test(string input)
         {
 
             var tc = new TwitterClient(_API_key, _API_key_secret, access_token, access_token_secret);
-            var parameters = new GetUserTimelineParameters("adidas")
+            var parameters = new GetUserTimelineParameters(input)
             {//מסננים לציר זמן כשכולם שקר מוצא אתציר הזמן המלא
                //SinceId = DateTime.Now.AddDays(-7).Ticks,
                
