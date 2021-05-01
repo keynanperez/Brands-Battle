@@ -35,10 +35,38 @@ export default class UserHome extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {};
+        this.state = {
+            points:0,
+            stage:1,
+            id:0,
+            UserNameU: "",
+            img:""
+        };
         //alert(this.state.prevScreentor[1].Barber_Email)
     }
-
+    async componentDidMount  (){
+        await this.getdata()
+        this._unsubscribeFocus  = await this.props.navigation.addListener('focus',(payload) =>{
+        this.getdata()
+    
+      
+    });
+      }
+     
+    getdata=async()=>{
+    
+        const {UserId}=this.props.route.params;
+        this.setState({id:UserId})
+        const{UserName}=this.props.route.params;
+        this.setState({UserNameU:UserName})
+        const {pointsU}=this.props.route.params;
+        this.setState({points:pointsU})
+        const{stageU}=this.props.route.params;
+        this.setState({stage:stageU})
+        const{imgU}=this.props.route.params;
+        this.setState({img:imgU})
+    
+    }
     render() {
         const { navigation } = this.props;
 
@@ -74,8 +102,8 @@ export default class UserHome extends Component {
                         title="Play"
                         backgroundColor="#417C7B"
                         source={require("../images/game.jpg")}
+                        onPress={() =>  this.props.navigation.push('MyPageView',{id:this.state.id,points:this.state.points,stage:this.state.stage,UserName:this.state.UserNameU,imgU:this.state.img})}
 
-                       
 
 
 

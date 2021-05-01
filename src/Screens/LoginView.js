@@ -5,8 +5,10 @@ import {Button, Item, Text, View } from 'native-base';
 import { ImageBackground } from 'react-native';
 import styles from "./MyStyle";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input } from 'react-native-elements';
+import { Input, ThemeConsumer } from 'react-native-elements';
 import myUrl from "./Url";
+import * as Localization from 'expo-localization'
+import { ThemeContext } from 'react-navigation';
 class  LoginView extends React.Component {
   constructor(props) {
     super(props);
@@ -38,8 +40,9 @@ class  LoginView extends React.Component {
         alert("Please insert info!")
     }
     else{
+      this.props.navigation.push('UserHome',{UserId:this.state.UserId,pointsU:this.state.pointsU,stageU:this.state.stageU,UserName:this.state.UserName,imgU:this.state.imgU});
     
-      const url = (myUrl+'Users/')
+      const url = ('http://192.168.0.105:44387/api/'+'Users/')
 
       const userf = await fetch(url, {
           method: 'Put',
@@ -49,11 +52,15 @@ class  LoginView extends React.Component {
             'Accept': 'application/json; charset=UTF-8'
           })
         })
-     
+        .catch(function(error) {
+          console.log('There has been a problem with your fetch operation: ' + error.message);
+           // ADD THIS THROW error
+            throw error;
+          });
         const res= await userf.json()
           if(res.UserName != null)
             {
-             this.props.navigation.navigate('UserHome',{UserId:res.Id,pointsU:res.Points,stageU:res.UserStage,UserName:res.UserName,imgU:res.Img});
+             this.props.navigation.push('UserHome',{UserId:res.Id,pointsU:res.Points,stageU:res.UserStage,UserName:res.UserName,imgU:res.Img});
            };
           
             

@@ -26,16 +26,16 @@ class MyPageView extends Component {
    
     getdata=async()=>{
     
-    const {UserId}=this.props.route.params;
-    this.setState({id:UserId})
+    const {id}=this.props.route.params;
+    this.setState({id:id})
     const{UserName}=this.props.route.params;
-    this.setState({UserNameU:UserName})
-    const {pointsU}=this.props.route.params;
-    this.setState({points:pointsU})
-    const{stageU}=this.props.route.params;
-    this.setState({stage:stageU})
-    const{imgU}=this.props.route.params;
-    this.setState({img:imgU})
+    this.setState({UserName:UserName})
+    const {points}=this.props.route.params;
+    this.setState({points:points})
+    const{stage}=this.props.route.params;
+    this.setState({stage:stage})
+    const{img}=this.props.route.params;
+    this.setState({img:img})
 
 }
   
@@ -54,8 +54,8 @@ class MyPageView extends Component {
             <Text  style={styles.proftext}  >  Total Points : </Text>
             <Text  style={styles.notetitlex}  > {this.state.points} </Text>
            
-           <Button  style={styles.butnn}  onPress={() =>this.props.navigation.navigate('Categories',{id:this.state.id,points:this.state.points,stage:this.state.stage,UserName:this.state.UserNameU,imgU:this.state.img})}>
-           <Text style={styles.words} >Player </Text>
+           <Button  style={styles.butnn}  onPress={() =>this.props.navigation.push('Categories',{id:this.state.id,points:this.state.points,stage:this.state.stage,UserName:this.state.UserNameU,imgU:this.state.img})}>
+           <Text style={styles.words} >Play</Text>
              </Button>
      
              <Button rounded style={styles.butn} onPress={() =>this.props.navigation.navigate('WinnerPage')}>
