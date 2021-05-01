@@ -12,8 +12,8 @@
       
 
   function activate1() {
-          var x = document.getElementById('inpQ1').value;
-          ajaxCall('GET', '../api/Twitter', '', scb1, ecb1)
+          let UsreInput = document.getElementById('inpQ1').value;
+      ajaxCall('GET', '../api/Twitter?Input=' + UsreInput +'&question='+1, '', scb1, ecb1)
        
     }
 
@@ -29,8 +29,8 @@
 
 
         function activate2() {
-            var x = document.getElementById('inpQ2').value;
-            ajaxCall('GET', '../api/Twitter', '', scb2, ecb2)
+            let UsreInput = document.getElementById('inpQ2').value;
+            ajaxCall('GET', '../api/Twitter?Input=' + UsreInput +'&question='+2, '', scb2, ecb2)
 
         }
         function scb2(data) {
@@ -44,7 +44,8 @@
 
         function activate3() {
 
-            ajaxCall('GET', '../api/Twitter', '', scb3, ecb3)
+            let userInput = document.getElementById("inpQ3").value;
+            ajaxCall('GET', '../api/Twitter?Input=' + userInput +'&question='+3, '', scb3, ecb3)
 
         }
         function scb3(data) {
@@ -58,8 +59,8 @@
 
       
         function activate4() {
-
-            ajaxCall('GET', '../api/Twitter', '', scb4, ecb4)
+            let userInput = document.getElementById("inpQ4").value;
+            ajaxCall('GET', '../api/Twitter?Input=' + userInput +'&question='+4, '', scb4, ecb4)
 
         }
         function scb4(data) {
@@ -73,8 +74,8 @@
 
 
         function activate5() {
-
-            ajaxCall('GET', '../api/Twitter', '', scb5, ecb5)
+            let userInput = document.getElementById("inpQ5").value;
+            ajaxCall('GET', '../api/Twitter?Input=' + userInput +'&question='+5, '', scb5, ecb5)
 
         }
         function scb5(data) {
