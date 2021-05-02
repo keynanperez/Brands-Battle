@@ -15,6 +15,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, ThemeConsumer } from 'react-native-elements';
 import myUrl from "./Url";
 import * as Localization from 'expo-localization'
+import color from 'color'
 export default  class  LoginView extends React.Component {
   constructor(props) {
     super(props);
@@ -100,9 +101,9 @@ export default  class  LoginView extends React.Component {
        <TextInput style={styles.forgot} label="Password" />
        <View style={styles.forgotPassword}>
          <TouchableOpacity
-         //onPress={() => navigation.navigate('ResetPasswordScreen')}
+         onPress={() => this.props.navigation.navigate('ResetPasswordScreen')}
          >
-           <Text style={styles.forgot}>Forgot your password?</Text>
+           <Text style={styles.link}>Forgot your password?</Text>
          </TouchableOpacity>
        </View>
 
@@ -111,16 +112,14 @@ export default  class  LoginView extends React.Component {
          <TouchableOpacity
        onPress={() => this.props.navigation.navigate("RegisterScreen")}
          >
-           <Text style={styles.forgot}>Sign up</Text>
+           <Text style={styles.link}>Sign up</Text>
          </TouchableOpacity>
        </View>
-       <Button
-         rounded
-         style={styles.forgot}
-         onPress={() => this.props.navigation.navigate("UserHome")}
-       >
-         <Text style={styles.forgot}> Sign in</Text>
-       </Button>
+        <TouchableOpacity
+       onPress={() => this.props.navigation.navigate("UserHome")}
+         >
+           <Text style={styles.login}>Sign in</Text>
+         </TouchableOpacity>
      </Background>
    );}
 
@@ -144,6 +143,11 @@ export default  class  LoginView extends React.Component {
     link: {
       fontWeight: 'bold',
       color: theme.colors.primary,
+     },
+    login: {
+      fontSize: 43,
+      color: '#0000ff',
+      fontWeight: 'bold',
     },
   })
   

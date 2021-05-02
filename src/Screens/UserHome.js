@@ -111,7 +111,7 @@ export default class UserHome extends React.Component {
            
             
             onPress={() =>
-              this.props.navigation.push("mypro", {
+              this.props.navigation.push("UserDashboard", {
                 id: this.state.id,
                 points: this.state.points,
                 stage: this.state.stage,

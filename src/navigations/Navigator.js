@@ -3,12 +3,14 @@
 /* eslint-disable prettier/prettier */
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
-import HomeView from '../../src/Screens/HomeView';
+
 import LoginView from '../../src/Screens/LoginView'
 import gameView from '../../src/Screens/gameView';
 import Quiz from '../../src/Screens/Quiz';
 import CategoriesPage from '../../src/Screens/CategoriesPage';
-import mypro from "../../src/Screens/MyPageView";
+import UserDashboard from "../Screens/UserDashboard";
+import ResetPasswordScreen from "../../src/Screens/ResetPasswordScreen";
+import RegisterScreen from "../../src/Screens/RegisterScreen";
 import nextlevel from '../../src/Screens/nextlevel';
 import WinnerPage from "../../src/Screens/WinnerPage";
 import NewUser from '../../src/Screens/NewUser';
@@ -29,7 +31,9 @@ const AppNavigator = createStackNavigator(
         Categories: { screen:CategoriesPage },
         Quiz: { screen: Quiz },
         UserHome: { screen: UserHome },
-        mypro: { screen: mypro },
+        UserDashboard: { screen: UserDashboard },
+        ResetPasswordScreen: { screen: ResetPasswordScreen },
+        RegisterScreen: { screen: RegisterScreen },
         newuser: { screen: NewUser },
         endgame: { screen: endgame },
         nextlevel: { screen: nextlevel },
