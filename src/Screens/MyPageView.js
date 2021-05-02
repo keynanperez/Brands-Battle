@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {SafeAreaView, ScrollView, Text,View ,Image,ImageBackground} from 'react-native';
 import styles from "./MyStyle";
+import Background from '../components/Background'
 import { Icon,Avatar } from 'react-native-elements';
 import { Button, Row } from 'native-base';
 class MyPageView extends Component {
@@ -42,11 +43,11 @@ class MyPageView extends Component {
   render()
   {
   return (
-    <ImageBackground source= {require('../back.png')} style={styles.image}>
+    <Background>
     <SafeAreaView>
     <ScrollView >
 
-            <View style={styles.noteViewtitlex}>
+            <View >
 
             <Image style={styles.ava} rounded size="large" source={{  uri:  'https://img.pngio.com/fileuser-circlepng-wikimedia-commons-png-user-256_256.png', }}/>
             <Text style={styles.notetitle} > Hello {this.state.UserNameU} </Text>
@@ -63,7 +64,7 @@ class MyPageView extends Component {
           </Button>
 </ScrollView>
   </SafeAreaView>
-  </ImageBackground >
+  </Background >
   );
   }
 

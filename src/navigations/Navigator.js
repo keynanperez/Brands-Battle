@@ -13,7 +13,7 @@ import nextlevel from '../../src/Screens/nextlevel';
 import WinnerPage from "../../src/Screens/WinnerPage";
 import NewUser from '../../src/Screens/NewUser';
 import UserHome from '../../src/Screens/UserHome';
-
+import Marketing from "../../src/Screens/MarketingPage";
 import endgame from "../../src/Screens/endgame";
 //import MarketingHome from "../screens/MarketingHome";
 
@@ -23,7 +23,7 @@ const stackNavigatorOptions = {
 const AppNavigator = createStackNavigator(
     {
          
-        Home: { screen: HomeView },
+       
         login : { screen: LoginView },
         gameView: { screen: gameView },
         Categories: { screen:CategoriesPage },
@@ -34,6 +34,7 @@ const AppNavigator = createStackNavigator(
         endgame: { screen: endgame },
         nextlevel: { screen: nextlevel },
         WinnerPage: { screen: WinnerPage },
+        Marketing: { screen : Marketing },
 
 
     },

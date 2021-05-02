@@ -3,6 +3,7 @@ import {SafeAreaView, Text,View,ImageBackground,Image,ScrollView } from 'react-n
 import styles from "./MyStyle";
 import {Row, Col} from 'react-native-easy-grid';
 import { Button } from 'native-base';
+import Background from '../components/Background';
 import CountDown from 'react-native-countdown-component';
 //import { Input,Item} from 'native-base';
 //import CountDown from 'react-native-countdown-component';
@@ -169,7 +170,7 @@ class gameView extends Component {
     
    
 
-      <ImageBackground source= {require('../backb.png')} style={styles.image}>
+      <Background>
       <ScrollView >
       <View >
       <Text style={styles.proftexts} > Stage {this.state.level} </Text>
@@ -210,7 +211,7 @@ class gameView extends Component {
             </Row>
       
             </ScrollView>
-      </ImageBackground>
+      </Background>
     
     );
   }

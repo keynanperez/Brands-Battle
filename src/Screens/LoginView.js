@@ -1,15 +1,21 @@
-import React from 'react';
-import {SafeAreaView, ScrollView } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Button, Item, Text, View } from 'native-base';
-import { ImageBackground } from 'react-native';
-import styles from "./MyStyle";
+import React, { useState } from 'react'
+import { TouchableOpacity, StyleSheet, View } from 'react-native'
+//import { Text } from 'react-native-paper'
+import Background from '../components/Background'
+import Logo from '../components/Logo'
+import Header from '../components/Header'
+import Button from '../components/Button'
+import TextInput from '../components/TextInput'
+import BackButton from '../components/BackButton'
+import { Item, Text } from 'native-base';
+import { theme } from '../core/theme'
+import { ThemeContext ,navigation} from 'react-navigation';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, ThemeConsumer } from 'react-native-elements';
 import myUrl from "./Url";
 import * as Localization from 'expo-localization'
-import { ThemeContext } from 'react-navigation';
-class  LoginView extends React.Component {
+export default  class  LoginView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,6 +50,7 @@ class  LoginView extends React.Component {
     
       const url = ('http://192.168.0.105:44387/api/'+'Users/')
 
+     
       const userf = await fetch(url, {
           method: 'Put',
           body:   JSON.stringify([name, pass]),
@@ -78,52 +85,69 @@ class  LoginView extends React.Component {
        
 
     }
+    
   }
 
 
   render()
   {
 
-   return(
-    <ImageBackground source= {require('../back.png')} style={styles.image}>
-   
-    <View style={styles.login} >
-   
+   return (
+     <Background>
+       <Logo />
+       <Header>Welcome back.</Header>
+       <TextInput label="Email" style={styles.forgot} />
+       <TextInput style={styles.forgot} label="Password" />
+       <View style={styles.forgotPassword}>
+         <TouchableOpacity
+         //onPress={() => navigation.navigate('ResetPasswordScreen')}
+         >
+           <Text style={styles.forgot}>Forgot your password?</Text>
+         </TouchableOpacity>
+       </View>
 
-<Input  onChangeText={Info=> this.setState({UserName: Info})}
-  placeholder='User Name'
-  leftIcon={
-    <Icon
-      name='user'
-      size={24}
-      color='black'
-     />
-  }
-/>
+       <View style={styles.forgot}>
+         <Text style={styles.forgot}>Don’t have an account? </Text>
+         <TouchableOpacity
+       onPress={() => this.props.navigation.navigate("RegisterScreen")}
+         >
+           <Text style={styles.forgot}>Sign up</Text>
+         </TouchableOpacity>
+       </View>
+       <Button
+         rounded
+         style={styles.forgot}
+         onPress={() => this.props.navigation.navigate("UserHome")}
+       >
+         <Text style={styles.forgot}> Sign in</Text>
+       </Button>
+     </Background>
+   );}
 
-
-<Input placeholder="Password" secureTextEntry={true}   onChangeText={InputTitle=> this.setState({UserPass: InputTitle})}/>
-
-          <Button rounded style={styles.butn} onPress ={this.SubmitNote}>
-        
-               <Text style={styles.words}>Log in</Text>
-              </Button>
-            
-
-    </View>
-
-    
-    <Button rounded style={styles.butnx} onPress={() => this.props.navigation.navigate('newuser')}>
-          <Text style={styles.words}> New Player</Text>
-        
-          </Button>
-    </ImageBackground>
-   );
-  }
-}
-
+   }
+   const styles = StyleSheet.create({
+    forgotPassword: {
+      width: '100%',
+      alignItems: 'flex-end',
+      marginBottom: 24,
+      color: '#000000',
+    },
+    row: {
+      flexDirection: 'row',
+      marginTop: 4,
+      color: '#000000',
+    },
+    forgot: {
+      fontSize: 13,
+      color: '#000000',
+    },
+    link: {
+      fontWeight: 'bold',
+      color: theme.colors.primary,
+    },
+  })
   
 
   
-export default LoginView;
+
   

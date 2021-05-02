@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Icon, Text ,Button} from 'native-base';
 import { ImageBackground, Image } from 'react-native';
 import { Col, Row } from 'react-native-easy-grid';
+
 import styles from "./MyStyle";
 import myUrl from "./Url";
 class HomeView extends Component {
