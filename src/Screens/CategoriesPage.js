@@ -7,8 +7,14 @@ import PersonalCareQuestions from "../data/PersonalCare";
 import RetailQuestions from "../data/Retail";
 import TechnologyQuestions from "../data/Technology";
 import CircularCard from "../lib/CircularCard";
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+
 class Categories extends Component {
+
+  
   render() {
+    
     return (  
       <ImageBackground source= {require('../back.png')} style={styles.image}>
     <ScrollView>
@@ -17,7 +23,7 @@ class Categories extends Component {
         title="Cars"
         source={require("../images/car.jpg")}
         onPress={() =>
-          navigation.navigate("Quiz", {
+         this.props.navigation.navigate("Quiz", {
             title: "Cars",
             questions: CarsQuestions,
             color: "#6F96B8"
@@ -28,7 +34,7 @@ class Categories extends Component {
         title="Fast Food"
         source={require("../images/fastfood.jpg")}
         onPress={() =>
-          navigation.navigate("Quiz", {
+          this.props.navigation.navigate("Quiz", {
             title: "FastFood",
             questions: FastFoodQuestions,
             color: "#6F96B8"
@@ -39,7 +45,7 @@ class Categories extends Component {
         title="Technology"
         source={require("../images/Technology.jpg")}
         onPress={() =>
-          navigation.navigate("Quiz", {
+          this.props.navigation.navigate("Quiz", {
             title: "Technology",
             questions: TechnologyQuestions,
             color: "#6F96B8",
@@ -50,7 +56,7 @@ class Categories extends Component {
         title="Retail"
         source={require("../images/Retail.png")}
         onPress={() =>
-          navigation.navigate("Quiz", {
+          this.props.navigation.navigate("Quiz", {
             title: "Retail",
             questions: RetailQuestions,
             color: "#6F96B8"
@@ -61,7 +67,7 @@ class Categories extends Component {
         title="Personal Care"
         source={require("../images/PersonalCare.png")}
         onPress={() =>
-          navigation.navigate("Quiz", {
+          this.props.navigation.navigate("Quiz", {
             title: "PersonalCare",
             questions: PersonalCareQuestions,
             color: "#6F96B8"
@@ -72,7 +78,7 @@ class Categories extends Component {
         title="Apparel"
         source={require("../images/Apparel.jpg")}
         onPress={() =>
-          navigation.navigate("Quiz", {
+          this.props.navigation.navigate("Quiz", {
             title: "Apparel",
             questions: ApparelQuestions,
             color: "#6F96B8",

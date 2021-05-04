@@ -93,7 +93,7 @@ export default class UserHome extends React.Component {
            
             
             onPress={() =>
-              this.props.navigation.push("Marketing", {
+              this.props.navigation.navigate("Marketing", {
                 id: this.state.id,
                 points: this.state.points,
                 stage: this.state.stage,
@@ -111,7 +111,7 @@ export default class UserHome extends React.Component {
            
             
             onPress={() =>
-              this.props.navigation.push("UserDashboard", {
+              this.props.navigation.navigate("UserDashboard", {
                 id: this.state.id,
                 points: this.state.points,
                 stage: this.state.stage,

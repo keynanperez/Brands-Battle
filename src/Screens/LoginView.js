@@ -47,7 +47,7 @@ export default  class  LoginView extends React.Component {
         alert("Please insert info!")
     }
     else{
-      this.props.navigation.push('UserHome',{UserId:this.state.UserId,pointsU:this.state.pointsU,stageU:this.state.stageU,UserName:this.state.UserName,imgU:this.state.imgU});
+      this.props.navigation.navigate('UserHome',{UserId:this.state.UserId,pointsU:this.state.pointsU,stageU:this.state.stageU,UserName:this.state.UserName,imgU:this.state.imgU});
     
       const url = ('http://192.168.0.105:44387/api/'+'Users/')
 
@@ -68,7 +68,7 @@ export default  class  LoginView extends React.Component {
         const res= await userf.json()
           if(res.UserName != null)
             {
-             this.props.navigation.push('UserHome',{UserId:res.Id,pointsU:res.Points,stageU:res.UserStage,UserName:res.UserName,imgU:res.Img});
+             this.props.navigation.navigate('UserHome',{UserId:res.Id,pointsU:res.Points,stageU:res.UserStage,UserName:res.UserName,imgU:res.Img});
            };
           
             

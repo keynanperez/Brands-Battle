@@ -1,6 +1,5 @@
 import React from "react";
 import { View, StyleSheet, StatusBar, Text, SafeAreaView } from "react-native";
-
 import { Button, ButtonContainer } from "../components/Button";
 import Alert from "../components/Alert";
 
@@ -25,9 +24,10 @@ const styles = StyleSheet.create({
 });
 
 class Quiz extends React.Component {
+
   state = {
     correctCount: 0,
-    totalCount: this.props.navigation.getParam("questions", []).length,
+    totalCount:this.props.navigation.state.params.questions.length,//this,props.navigation.getParams('questions',[])
     activeQuestionIndex: 0,
     answered: false,
     answerCorrect: false
@@ -55,7 +55,7 @@ class Quiz extends React.Component {
 
   nextQuestion = () => {
     this.setState(state => {
-      const nextIndex = state.activeQuestionIndex + 1;
+      const nextIndex = this.state.activeQuestionIndex + 1;
 
       if (nextIndex >= state.totalCount) {
         return this.props.navigation.popToTop();
@@ -69,14 +69,16 @@ class Quiz extends React.Component {
   };
 
   render() {
-    const questions = this.props.navigation.getParam("questions", []);
+   
+
+    const questions =this.props.navigation.state.params.questions// []);//this.props.navigation.state.param.questions;
     const question = questions[this.state.activeQuestionIndex];
 
     return (
       <View
         style={[
           styles.container,
-          { backgroundColor: this.props.navigation.getParam("color") }
+          { backgroundColor:this.props.navigation.state.params.color}
         ]}
       >
         <StatusBar barStyle="light-content" />
@@ -96,16 +98,17 @@ class Quiz extends React.Component {
           </View>
 
           <Text style={styles.text}>
-            {`${this.state.correctCount}/${this.state.totalCount}`}
+         
           </Text>
         </SafeAreaView>
-        <Alert
-          correct={this.state.answerCorrect}
-          visible={this.state.answered}
-        />
+       
       </View>
     );
   }
 }
 
 export default Quiz;
+//<Alert
+//correct={this.state.answerCorrect}
+//visible={this.state.answered}
+///>
