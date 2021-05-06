@@ -37,26 +37,26 @@ class Categories extends React.Component {
   }
 
   getallqustions=async()=>{
-      const i=0;
+      var i=0;
       var arryQuestions=Questions;
       var prevQ=""
       var endQ=""
       var chosenbrand=""
-      
+      var array=[]
       while (i<=10)
       {
-          var randomNumberB = Math.floor(Math.random() * (this.state.currentBrands.length));
-          var randomNumberQ = Math.floor(Math.random() * 4);
+          var randomNumberB = Math.floor(Math.random() * ((this.state.currentBrands.length)+1));
+          var randomNumberQ = Math.floor(Math.random() * 4 +1);
           chosenbrand=this.state.currentBrands[randomNumberB];
          prevQ= arryQuestions[randomNumberQ].prev;
          endQ=arryQuestions[randomNumberQ].end;
          var fuuQ= prevQ+chosenbrand+endQ;
-         this.state.arryOfQuestions.push(fuuQ);
+          array.push(fuuQ);
          i++;
 
       }
       
-
+      this.state.arryOfQuestions=array;
 
   };
 

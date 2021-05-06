@@ -27,7 +27,7 @@ import Questions from "./Questions"
            arryQuestions.push(fuuQ);
 
         }
-        return arryQuestions.toString();
+        return arryQuestions;
 
     };
   
