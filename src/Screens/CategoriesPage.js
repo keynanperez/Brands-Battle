@@ -19,9 +19,10 @@ class Categories extends Component {
 
   
   render() {
-    
+    <View> <Text> Please choose category to play with </Text> </View>
     return (  
            <Background>
+          
     <View style={styles.add}>
                 <ScrollView horizontal={true} showHorizontalScrollIndicator={false}>
          
