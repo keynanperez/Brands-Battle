@@ -29,7 +29,7 @@ class Categories extends React.Component {
 
   getQ=async()=>{
     this.state.currentBrands=await this.getallbrands()
-     await this.getallqustions()
+    return await this.getallqustions()
   }
   getallbrands=async()=>{
       return["adidas","zara","nike"]
@@ -56,7 +56,7 @@ class Categories extends React.Component {
 
       }
       
-      this.state.arryOfQuestions=array;
+      return this.state.arryOfQuestions=array;
 
   };
 
