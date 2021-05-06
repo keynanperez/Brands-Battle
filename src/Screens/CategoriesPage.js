@@ -32,7 +32,7 @@ class Categories extends Component {
         onPress={() =>
          this.props.navigation.navigate("Quiz", {
             title: "Cars",
-            questions: CarsQuestions,
+            questions: QuizQuestions.getQ(),
             color: "#6F96B8"
           })
         }
