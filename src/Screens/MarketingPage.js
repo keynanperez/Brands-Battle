@@ -1,28 +1,37 @@
-import React, { Component } from "react";
-import {  View, StyleSheet } from 'react-native';
-import { Container, Header,  Button, Content, Icon, Picker, Form,Text } from "native-base";
-import Background from '../components/Background';
-import Paragraph from '../components/Paragraph';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-//import SearchBar from "react-native-dynamic-search-bar";
-
-import Logo from '../components/Logo';
-//import Header from '../components/Header';
-
-
-
-
-
-
-export default class Test extends Component {
-
-
+import React, { Component } from 'react';
+import { Container, Header, Item, Input, Icon, Button, Text,List,Left,ListItem,Right,Thumbnail,Body,Content } from 'native-base';
+export default class SearchBarExample extends Component {
   render() {
-   
     return (
-      <View>
-     
-      </View>
+      <Container>
+        <Header searchBar rounded>
+          <Item>
+            <Icon name="ios-search" />
+            <Input placeholder="Search" />
+            <Icon name="ios-people" />
+          </Item>
+          <Button transparent>
+            <Text>Search</Text>
+          </Button>
+        </Header>
+        
+          <List>
+            <ListItem thumbnail>
+              <Left>
+                <Thumbnail square source={{ uri: 'Image URL' }} />
+              </Left>
+              <Body>
+                <Text>Sankhadeep</Text>
+                <Text note numberOfLines={1}>Its time to build a difference . .</Text>
+              </Body>
+              <Right>
+                <Button transparent>
+                  <Text>View</Text>
+                </Button>
+              </Right>
+            </ListItem>
+          </List>
+      </Container>
     );
   }
 }

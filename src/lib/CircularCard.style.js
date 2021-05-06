@@ -9,10 +9,7 @@ export const _container = (height, width, backgroundColor) => {
     height,
     width,
     backgroundColor,
-    borderTopEndRadius: 30,
-    borderBottomEndRadius: 30,
-    borderTopStartRadius: 100,
-    borderBottomStartRadius: 100
+   
   };
 };
 
@@ -29,11 +26,12 @@ export const _shadowStyle = shadowColor => {
 };
 
 export default {
-  containerGlue: { flexDirection: "row" },
+  //containerGlue: { flexDirection: "row" },
   imageStyle: {
     width: 125,
     height: 125,
     borderRadius: 105,
+    margin: 16,
   },
   textContainer: {
     margin: 16,

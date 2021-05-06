@@ -148,6 +148,7 @@ export default  class  LoginView extends React.Component {
       fontSize: 43,
       color: '#0000ff',
       fontWeight: 'bold',
+      
     },
   })
   

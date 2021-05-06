@@ -10,8 +10,6 @@ import PersonalCareQuestions from "../data/PersonalCare";
 import RetailQuestions from "../data/Retail";
 import TechnologyQuestions from "../data/Technology";
 import CircularCard from "../lib/CircularCard";
-import ImagedCarouselCard from "../lib/ImagedCarouselCard";
-import Background from '../components/Background';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
@@ -21,11 +19,54 @@ class Categories extends Component {
   render() {
     
     return (  
-           <Background>
-    <View style={styles.add}>
+      <ImageBackground source= {require('../back.png')} style={styles.image}>
                 <ScrollView horizontal={true} showHorizontalScrollIndicator={false}>
-         
-            <CircularCard 
+            <View style={styles.mediaImageContainer}>
+              <Image
+                source={require("../assets/media1.jpg")}
+                style={styles.image}
+                resizeMode="cover"
+              ></Image>
+            </View>
+            <View style={styles.mediaImageContainer}>
+              <Image
+                source={require("../assets/media2.jpg")}
+                style={styles.image}
+                resizeMode="cover"
+              ></Image>
+            </View>
+            <View style={styles.mediaImageContainer}>
+              <Image
+                source={require("../assets/media3.jpg")}
+                style={styles.image}
+                resizeMode="cover"
+              ></Image>
+            </View>
+            <View style={styles.mediaImageContainer}>
+              <Image
+                source={require("../assets/media4.jpg")}
+                style={styles.image}
+                resizeMode="cover"
+              ></Image>
+            </View>
+            <View style={styles.mediaImageContainer}>
+              <Image
+                source={require("../assets/media6.jpg")}
+                style={styles.image}
+                resizeMode="cover"
+              ></Image>
+            </View>
+            <View style={styles.mediaImageContainer}>
+              <Image
+                source={require("../assets/media8.jpg")}
+                style={styles.image}
+                resizeMode="cover"
+              ></Image>
+            </View>
+          </ScrollView>
+    <ScrollView>
+
+      <CircularCard style={styles.card}
         title="Cars"
         source={require("../images/car.jpg")}
         onPress={() =>
@@ -36,9 +77,7 @@ class Categories extends Component {
           })
         }
       />
-      
-      <CircularCard 
-      
+      <CircularCard style={styles.card}
         title="Fast Food"
         source={require("../images/fastfood.jpg")}
         onPress={() =>
@@ -49,7 +88,7 @@ class Categories extends Component {
           })
         }
       />
-      <CircularCard 
+      <CircularCard style={styles.card}
         title="Technology"
         source={require("../images/Technology.jpg")}
         onPress={() =>
@@ -60,7 +99,7 @@ class Categories extends Component {
           })
         }
       />
-      <CircularCard 
+      <CircularCard style={styles.card}
         title="Retail"
         source={require("../images/Retail.png")}
         onPress={() =>
@@ -71,7 +110,7 @@ class Categories extends Component {
           })
         }
       />
-      <CircularCard 
+      <CircularCard style={styles.card}
         title="Personal Care"
         source={require("../images/PersonalCare.png")}
         onPress={() =>
@@ -82,7 +121,7 @@ class Categories extends Component {
           })
         }
       />
-      <CircularCard 
+      <CircularCard style={styles.card}
         title="Apparel"
         source={require("../images/Apparel.jpg")}
         onPress={() =>
@@ -93,12 +132,8 @@ class Categories extends Component {
           })
         }
       />
-     
-          </ScrollView>
-          </View>
-           </Background>
-   
- 
+    </ScrollView>
+  </ImageBackground>
 )
 }
 }
@@ -166,129 +201,5 @@ const styles = StyleSheet.create({
     //backgroundColor: "#000000a0"
     borderWidth: 3,
     borderColor: "#000000",
-  },
-
-
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-  text: {
-    fontFamily: "HelveticaNeue",
-    color: "#52575d",
-  },
-  subText: {
-    fontSize: 12,
-    color: "#aeb5bc",
-    textTransform: "uppercase",
-    fontWeight: "500",
-  },
-  image: {
-    flex: 1,
-    width: undefined,
-    height: undefined,
-  },
-  titleBar: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 24,
-    marginHorizontal: 16,
-  },
-  profileImage: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    overflow: "hidden",
-  },
-  dm: {
-    backgroundColor: "#41444b",
-    position: "absolute",
-    top: 20,
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  active: {
-    backgroundColor: "#34ffb9",
-    position: "absolute",
-    bottom: 28,
-    left: 10,
-    padding: 4,
-    height: 20,
-    width: 20,
-    borderRadius: 10,
-  },
-  add: {
-    //backgroundColor: "#41444b",
-    //position: "absolute",
-    bottom: 0,
-    right: 0,
-    //width: 200,
-    height: 200,
-    borderRadius: 30,
-    alignItems: "center",
-    justifyContent: "center",
-  
-  },
-  infoContainer: {
-    alignSelf: "center",
-    alignItems: "center",
-    marginTop: 16,
-  },
-  statsContainer: {
-    flexDirection: "row",
-    alignSelf: "center",
-    marginTop: 32,
-  },
-  statsBox: {
-    alignItems: "center",
-    flex: 1,
-  },
-  mediaImageContainer: {
-    width: 180,
-    height: 200,
-    borderRadius: 12,
-    overflow: "hidden",
-    marginHorizontal: 10,
-  },
-  mediaCount: {
-    backgroundColor: "#41444b",
-    position: "absolute",
-    top: "50%",
-    marginTop: -50,
-    marginLeft: 30,
-    width: 100,
-    height: 100,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 12,
-    shadowColor: "rgba(0, 0, 0, 0.38)",
-    shadowOffset: { width: 0, height: 10 },
-    shadowRadius: 20,
-    shadowOpacity: 1,
-  },
-  recent: {
-    marginLeft: 78,
-    marginTop: 32,
-    marginBottom: 6,
-    fontSize: 10,
-  },
-  recentItem: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    marginBottom: 16,
-  },
-  recentItemIndicator: {
-    backgroundColor: "#CADFAB",
-    padding: 4,
-    height: 12,
-    width: 12,
-    borderRadius: 6,
-    marginTop: 3,
-    marginRight: 20,
-  },
-
-
+  }
 });

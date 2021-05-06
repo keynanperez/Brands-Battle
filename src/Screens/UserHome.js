@@ -89,7 +89,7 @@ export default class UserHome extends React.Component {
    
       
           <View>
-            <Button
+            <Button icon="twitter" mode="contained" style={styles.card}
            
             
             onPress={() =>
@@ -102,12 +102,13 @@ export default class UserHome extends React.Component {
               })
             }
         >
-            <MaterialCommunityIcons name="twitter" size={200} color="blue" />
-            
+          
+             <Text style={styles.text}> Marketing  </Text>
+     
           </Button>
         
           </View>
-          <Button
+          <Button  icon="gamepad-variant" mode="contained" style={styles.card}
            
             
             onPress={() =>
@@ -120,9 +121,10 @@ export default class UserHome extends React.Component {
               })
             }
         >
-        <MaterialCommunityIcons name="gamepad-variant" size={200} color="black" />
-        </Button>
        
+        <Text style={styles.text}> Game </Text>
+        </Button>
+        
       </Background>
     );
   }
@@ -145,12 +147,21 @@ const styles = StyleSheet.create({
     backgroundColor: "beige",
     borderWidth: 5,
   },
-  bottom: {
+  Bottom: {
     flex: 0.3,
-    backgroundColor: "pink",
+    //backgroundColor: "pink",
     borderWidth: 5,
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
+       //backgroundColor: "#41444b",
+    //position: "absolute",
+    bottom: 0,
+    right: 0,
+    //width: 200,
+    height: 200,
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
   },
   image: {
     flex: 1,
@@ -171,25 +182,27 @@ const styles = StyleSheet.create({
   },
   text: {
     //color: "white",
-    marginTop: 150,
-    fontSize: 42,
+    //marginTop: 150,
+    fontSize: 22,
     fontWeight: "bold",
     textAlign: "center",
+    marginRight : 100,
     //backgroundColor: "#000000a0"
   },
   card: {
-    //color: "white",
-    borderRadius: 105,
-    margin: 20,
-    //padding: 20,
-    //fontSize: 42,
-    //fontWeight: "bold",
-    //textAlign: "center",
-    //borderBottomLeftRadius: 8,
-    //borderBottomRightRadius: 8,
-    // justifyContent: 'center',
-    //backgroundColor: "#000000a0"
-    borderWidth: 4,
-    borderColor: "#181613",
+    //backgroundColor: "#41444b",
+    //position: "absolute",
+    bottom: 0,
+    right: 0,
+    //width: 200,
+    height: 150,
+    width:200,
+    margin:30,
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+    add: {
+   
   },
 });
