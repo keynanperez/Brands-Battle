@@ -14,8 +14,51 @@ import ImagedCarouselCard from "../lib/ImagedCarouselCard";
 import Background from '../components/Background';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+//import QuizQuestions from './QuizQuestions'
 
-class Categories extends Component {
+import Questions from "./Questions"
+class Categories extends React.Component {
+  constructor(props) {
+    super(props);
+  this.state={
+    currentBrands:[],
+    allQ:[],
+    arryOfQuestions:[],
+  }
+}
+
+  getQ=async()=>{
+    this.state.currentBrands=await this.getallbrands()
+     await this.getallqustions()
+  }
+  getallbrands=async()=>{
+      return["adidas","zara","nike"]
+
+  }
+
+  getallqustions=async()=>{
+      const i=0;
+      var arryQuestions=Questions;
+      var prevQ=""
+      var endQ=""
+      var chosenbrand=""
+      
+      while (i<=10)
+      {
+          var randomNumberB = Math.floor(Math.random() * (this.state.currentBrands.length));
+          var randomNumberQ = Math.floor(Math.random() * 4);
+          chosenbrand=this.state.currentBrands[randomNumberB];
+         prevQ= arryQuestions[randomNumberQ].prev;
+         endQ=arryQuestions[randomNumberQ].end;
+         var fuuQ= prevQ+chosenbrand+endQ;
+         this.state.arryOfQuestions.push(fuuQ);
+         i++;
+
+      }
+      
+
+
+  };
 
   
   render() {
@@ -29,10 +72,10 @@ class Categories extends Component {
             <CircularCard 
         title="Cars"
         source={require("../images/car.jpg")}
-        onPress={() =>
+        onPress={async() =>
          this.props.navigation.navigate("Quiz", {
             title: "Cars",
-            questions: QuizQuestions.getQ(),
+            questions:await this.getQ(),
             color: "#6F96B8"
           })
         }

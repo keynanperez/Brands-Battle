@@ -33,40 +33,7 @@ class Quiz extends React.Component {
     answerCorrect: false
   };
 
-  answer = correct => {
-    this.setState(
-      state => {
-        const nextState = { answered: true };
-
-        if (correct) {
-          nextState.correctCount = state.correctCount + 1;
-          nextState.answerCorrect = true;
-        } else {
-          nextState.answerCorrect = false;
-        }
-
-        return nextState;
-      },
-      () => {
-        setTimeout(() => this.nextQuestion(), 750);
-      }
-    );
-  };
-
-  nextQuestion = () => {
-    this.setState(state => {
-      const nextIndex = this.state.activeQuestionIndex + 1;
-
-      if (nextIndex >= state.totalCount) {
-        return this.props.navigation.popToTop();
-      }
-
-      return {
-        activeQuestionIndex: nextIndex,
-        answered: false
-      };
-    });
-  };
+ 
 
   render() {
    
@@ -84,17 +51,9 @@ class Quiz extends React.Component {
         <StatusBar barStyle="light-content" />
         <SafeAreaView style={styles.safearea}>
           <View>
-            <Text style={styles.text}>{question.question}</Text>
+            <Text style={styles.text}>{question}</Text>
 
-            <ButtonContainer>
-              {question.answers.map(answer => (
-                <Button
-                  key={answer.id}
-                  text={answer.text}
-                  onPress={() => this.answer(answer.correct)}
-                />
-              ))}
-            </ButtonContainer>
+          
           </View>
 
           <Text style={styles.text}>
