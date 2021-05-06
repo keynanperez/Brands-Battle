@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export const Alert = ({ correct, visible }) => {
+ const Alert = ({ correct, visible }) => {
   if (!visible) return null;
 
   const icon = correct
@@ -51,3 +51,5 @@ export const Alert = ({ correct, visible }) => {
     </View>
   );
 };
+
+export default Alert

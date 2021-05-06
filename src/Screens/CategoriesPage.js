@@ -43,15 +43,16 @@ class Categories extends React.Component {
       var endQ=""
       var chosenbrand=""
       var array=[]
-      while (i<=10)
+      while  (i<=10)
       {
           var randomNumberB = Math.floor(Math.random() * ((this.state.currentBrands.length)+1));
-          var randomNumberQ = Math.floor(Math.random() * 4 +1);
+          var randomNumberQ = Math.floor(Math.random() * 4);
           chosenbrand=this.state.currentBrands[randomNumberB];
          prevQ= arryQuestions[randomNumberQ].prev;
          endQ=arryQuestions[randomNumberQ].end;
          var fuuQ= prevQ+chosenbrand+endQ;
-          array.push(fuuQ);
+          answers= await this.ansgetA(arryQuestions[randomNumberQ].id)
+          array.push({ question:fuuQ, answers:answers});
          i++;
 
       }
@@ -59,6 +60,19 @@ class Categories extends React.Component {
       return this.state.arryOfQuestions=array;
 
   };
+  async ansgetA(questionNumber){
+    var twitterAns="2400"
+    var arrayOfUnmixAns=[]
+    var twitterAnsWithC=Number(twitterAns)
+    
+    arrayOfUnmixAns.push({ id:1,text:(twitterAnsWithC+(twitterAnsWithC*0.2)).toLocaleString()})
+    arrayOfUnmixAns.push({ id:2,text:(twitterAnsWithC-(twitterAnsWithC*0.2)).toLocaleString()})
+    arrayOfUnmixAns.push({ id:3,text:(Math.floor(twitterAnsWithC/2)).toLocaleString()})
+    arrayOfUnmixAns.push({ id:4,text:twitterAnsWithC.toLocaleString(),correct: true })
+
+
+  return arrayOfUnmixAns
+  }
 
   
   render() {

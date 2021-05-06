@@ -1,21 +1,25 @@
 const questions = [
-    {},
+ 
     {
+        id:1,
         prev: "How Many Followers Does ",
         end: " Have?",
     },
     {
+        id:2,
         prev: "What Is ",
         end: " Last Campaign?",
     },
     
     {
-        prev: "How Many Likes Got ",
+        id:3,
+        prev: "How Many Liked ",
         end: " Last Post?",
     },
     {
-        prev: "How Many Retweet Got ",
-        end: " last post?",
+        id:4,
+        prev: "How Many Retweeted  ",
+        end: " Last Post?",
     },
 ];
 
