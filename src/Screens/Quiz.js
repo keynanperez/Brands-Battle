@@ -116,6 +116,9 @@ class Quiz extends React.Component {
             visible={this.state.answered}
             ></Alert>
           <Text style={styles.text}></Text>
+          <Button rounded text='SKIP' onPress={() => this.nextQuestion()}/>
+    
+         
         </SafeAreaView>
        
       </View>
