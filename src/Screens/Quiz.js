@@ -32,6 +32,7 @@ class Quiz extends React.Component {
     answered: false,
     answerCorrect: false,
     shuffeled:[],
+    timer: 10,
   };
    shuffle=(array)=> {
     var tmp, current, top = array.length;
@@ -44,14 +45,25 @@ class Quiz extends React.Component {
     }
     return array;
   }
+ 
+  
   nextQuestion = () => {
     this.setState(state => {
+      const internal = setInterval(() => {
+        if (this.state.timer <= 0 ){
+          this.nextQuestion()}
+      else {
+        this.setState({timer: this.state.timer - 1}) 
+        clearInterval(internal)}
+      } , 1000)
+    
       const nextIndex = this.state.activeQuestionIndex + 1;
-
+    
       if (nextIndex >= state.totalCount) {
-        return this.props.navigation.popToTop();
+        return this.props.navigation.navigate('endgame')
+       // return this.props.navigation.popToTop();
       }
-
+  
       return {
         activeQuestionIndex: nextIndex,
         answered: false
@@ -88,6 +100,7 @@ class Quiz extends React.Component {
     const question = questions[this.state.activeQuestionIndex];
     var answers=questions[this.state.activeQuestionIndex].answers;
     answers=this.shuffle(answers);
+    
     return (
       <View
         style={[
@@ -98,6 +111,8 @@ class Quiz extends React.Component {
         <StatusBar barStyle="light-content" />
         <SafeAreaView style={styles.safearea}>
           <View>
+         <Text style={styles.proftextstime} > timer {this.state.timer} </Text>
+
             <Text style={styles.text}>{question.question}</Text>
 
             <ButtonContainer>

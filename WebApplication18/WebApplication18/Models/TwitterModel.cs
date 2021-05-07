@@ -107,7 +107,7 @@ namespace WebApplication18.Models
           }
           */
         
-        public async Task<object> test(string input)
+        public async Task<object> getTimeLine(string input)
         {
 
             var tc = new TwitterClient(_API_key, _API_key_secret, access_token, access_token_secret);

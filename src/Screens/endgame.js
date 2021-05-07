@@ -45,14 +45,13 @@ render() {
           <Text style={styles.words}> winners table</Text>
         
           </Button>
-          <Button rounded style={styles.butn} onPress={() =>this.props.navigation.navigate('mypro',{UserId:this.state.id,pointsU:this.state.points,stageU:this.state.stage,UserName:this.state.UserName,imgU:this.state.img})}>
-
+          <Button rounded style={styles.butn} onPress={() =>this.props.navigation.navigate('UserDashboard',{UserId:this.state.id,pointsU:this.state.points,stageU:this.state.stage,UserName:this.state.UserName,imgU:this.state.img})}>
            <Text style={styles.words}>my profile</Text>
 
           </Button>
-          <Button rounded style={styles.butn} onPress={() =>this.props.navigation.navigate('mypro',{UserId:this.state.id,pointsU:0,stageU:1,UserName:this.state.UserName,imgU:this.state.img})}>
+          <Button rounded style={styles.butn} onPress={() =>this.props.navigation.navigate('Categories',{UserId:this.state.id,pointsU:0,stageU:1,UserName:this.state.UserName,imgU:this.state.img})}>
 
-          <Text style={styles.words}> start over</Text>
+          <Text style={styles.words}> Choose differnt category</Text>
         
           </Button>
 

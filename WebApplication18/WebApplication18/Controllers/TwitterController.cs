@@ -23,13 +23,13 @@ namespace WebApplication18.Controllers
                 case 2:
                     return await tm.getBasicUserInfo(Input);
                 case 3:
-                    return await tm.test(Input);
+                    return await tm.getTimeLine(Input);
                 case 4:
-                    return await tm.test(Input);
+                    return await tm.getTimeLine(Input);
                 case 5:
-                    return await tm.test(Input);
+                    return await tm.getTimeLine(Input);
                 default:
-                    return await tm.test(Input);
+                    return await tm.getTimeLine(Input);
             }
         }
        
