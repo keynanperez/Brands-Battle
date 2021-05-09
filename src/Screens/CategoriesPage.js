@@ -68,12 +68,12 @@ getallbrands=async(Catname)=>{
       while  (i<=10)
       {
           var randomNumberB = Math.floor(Math.random() * ((this.state.currentBrands.length)+1));
-          var randomNumberQ = Math.floor(Math.random() * 4);
+          var randomNumberQ = Math.floor(Math.random() * 3);
           this.state.chosenbrand=this.state.currentBrands[randomNumberB];
          prevQ= arryQuestions[randomNumberQ].prev;
          endQ=arryQuestions[randomNumberQ].end;
          idtw=arryQuestions[randomNumberQ].id
-         var fuuQ= prevQ+chosenbrand+endQ;
+         var fuuQ= prevQ+this.state.chosenbrand+endQ;
           answers= await this.ansgetA(idtw)
           array.push({ question:fuuQ, answers:answers});
          i++;
@@ -89,8 +89,8 @@ getallbrands=async(Catname)=>{
     var arrayOfUnmixAns=[]
     var twitterAnsWithC=Number(twitterAns)
     
-    arrayOfUnmixAns.push({ id:1,text:(twitterAnsWithC+(twitterAnsWithC*0.2)).toLocaleString()})
-    arrayOfUnmixAns.push({ id:2,text:(twitterAnsWithC-(twitterAnsWithC*0.2)).toLocaleString()})
+    arrayOfUnmixAns.push({ id:1,text:(twitterAnsWithC+Math.floor(twitterAnsWithC*0.2)).toLocaleString()})
+    arrayOfUnmixAns.push({ id:2,text:(twitterAnsWithC-Math.floor(twitterAnsWithC*0.2)).toLocaleString()})
     arrayOfUnmixAns.push({ id:3,text:(Math.floor(twitterAnsWithC/2)).toLocaleString()})
     arrayOfUnmixAns.push({ id:4,text:twitterAnsWithC.toLocaleString(),correct: true })
 

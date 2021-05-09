@@ -5,11 +5,11 @@ const questions = [
         prev: "How Many Followers Does ",
         end: " Have?",
     },
-    {
-        id:2,
-        prev: "What Is ",
-        end: " Last Campaign?",
-    },
+    //{
+    //    id:2,
+      //  prev: "What Is ",
+     //   end: " Last Campaign?",
+ //   },
     
     {
         id:3,
