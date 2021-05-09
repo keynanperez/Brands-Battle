@@ -28,8 +28,22 @@ namespace WebApplication2.Controllers
                     return await tm.getTimeLine(Input);
                 case 5:
                     return await tm.getTimeLine(Input);
+                case 7:
+                    return await tm.getTimeLinerutrntw(Input);
                 default:
                     return await tm.getTimeLine(Input);
+            }
+        }
+        public async Task<object> Get([FromUri]string InputA, [FromUri]string InputB, [FromUri]int question)
+        {
+            TwitterModel tm = new TwitterModel();
+
+            switch (question)
+            {
+                case 6:
+                    return await tm.getBasicWEEKTimeLine2brands(InputA, InputB);
+                default:
+                    return await tm.getTimeLine(InputA);
             }
         }
 

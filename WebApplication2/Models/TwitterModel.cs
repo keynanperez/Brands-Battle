@@ -128,6 +128,71 @@ namespace WebApplication2.Models
 
         }
 
+        public async Task<object> getTimeLinerutrntw(string input)
+        {
+
+            var tc = new TwitterClient(_API_key, _API_key_secret, access_token, access_token_secret);
+            var parameters = new GetUserTimelineParameters(input)
+            {//מסננים לציר זמן כשכולם שקר מוצא אתציר הזמן המלא
+             //SinceId = DateTime.Now.AddDays(-7).Ticks,
+
+
+                IncludeContributorDetails = true,
+                IncludeEntities = true,
+                ///  IncludeRetweets = true,
+                ExcludeReplies = true,//כשזה אמת מוצא ציר זמ ן של פירסום 
+                                      // = DateTime.Today.Ticks,//7 days
+
+            };
+            var tweets = await tc.Timelines.GetUserTimelineAsync(parameters);
+
+            return tweets;
+
+        }
+
+
+        public async Task<object> getBasicWEEKTimeLine2brands(string inputa, string inputb)
+        {
+            //DateTime foo = DateTime.UtcNow.AddDays(-7);
+            var tc = new TwitterClient(_API_key, _API_key_secret, access_token, access_token_secret);
+            var parameters = new GetUserTimelineParameters(inputa)
+            {//מסננים לציר זמן כשכולם שקר מוצא אתציר הזמן המלא
+
+
+                // SinceId = ((DateTimeOffset)foo).ToUnixTimeSeconds(),
+                //SinceId = (DateTime.Now.AddDays(-7)).format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss a")
+
+                IncludeContributorDetails = true,
+                IncludeEntities = true,
+                ///  IncludeRetweets = true,
+                ExcludeReplies = false,//כשזה אמת מוצא ציר זמ ן של פירסום 
+
+            };
+            var tweetsA = await tc.Timelines.GetUserTimelineAsync(parameters);
+            var parametersb = new GetUserTimelineParameters(inputb)
+            {//מסננים לציר זמן כשכולם שקר מוצא אתציר הזמן המלא
+
+
+                // SinceId = ((DateTimeOffset)foo).ToUnixTimeSeconds(),
+                //SinceId = (DateTime.Now.AddDays(-7)).format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss a")
+
+                IncludeContributorDetails = true,
+                IncludeEntities = true,
+                ///  IncludeRetweets = true,
+                ExcludeReplies = false,//כשזה אמת מוצא ציר זמ ן של פירסום 
+
+            };
+            var tweetsB = await tc.Timelines.GetUserTimelineAsync(parametersb);
+
+            if (tweetsA.Length > tweetsB.Length)
+
+                return inputa;
+            else return inputb;
+
+            //  return tweets;
+
+        }
+
     }
 
 }
