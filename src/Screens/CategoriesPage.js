@@ -27,14 +27,35 @@ class Categories extends React.Component {
   }
 }
 
-  getQ=async()=>{
-    this.state.currentBrands=await this.getallbrands()
-    return await this.getallqustions()
-  }
-  getallbrands=async()=>{
-      return["adidas","zara","nike"]
+getQ=async(Catname)=>{
+  this.state.currentBrands=await this.getallbrands(Catname)
+   await this.getallqustions()
+}
+getallbrands=async(Catname)=>{
+  const brandOFcat=[]
+  const url = `http://192.168.1.27:44306/api/brands?Catname=`+Catname
+  const userf =await fetch(url, {
+      method: 'Get',
+      headers: new Headers({
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json; charset=UTF-8'
+      })
+    })
+    
+ const res=await userf.json()
+      if(res != null)
+        {
+        
+        res.forEach(element => {
+          brandOFcat.push(element.Brandname);
+          
+          });
 
-  }
+        }
+      return brandOFcat;
+  
+ };
+
 
   getallqustions=async()=>{
       var i=0;
@@ -89,7 +110,7 @@ class Categories extends React.Component {
         onPress={async() =>
          this.props.navigation.navigate("Quiz", {
             title: "Cars",
-            questions:await this.getQ(),
+            questions:await this.getQ("Cars"),
             color: "#6F96B8"
           })
         }
@@ -102,7 +123,7 @@ class Categories extends React.Component {
         onPress={() =>
           this.props.navigation.navigate("Quiz", {
             title: "FastFood",
-            questions: FastFoodQuestions,
+            questions:await this.getQ( "FastFood"),
             color: "#6F96B8"
           })
         }
@@ -113,7 +134,7 @@ class Categories extends React.Component {
         onPress={() =>
           this.props.navigation.navigate("Quiz", {
             title: "Technology",
-            questions: TechnologyQuestions,
+            questions:await this.getQ( "Technology"),
             color: "#6F96B8",
           })
         }
@@ -124,7 +145,7 @@ class Categories extends React.Component {
         onPress={() =>
           this.props.navigation.navigate("Quiz", {
             title: "Retail",
-            questions: RetailQuestions,
+            questions:await this.getQ( "Retail"),
             color: "#6F96B8"
           })
         }
@@ -135,7 +156,7 @@ class Categories extends React.Component {
         onPress={() =>
           this.props.navigation.navigate("Quiz", {
             title: "PersonalCare",
-            questions: PersonalCareQuestions,
+            questions:await this.getQ( "PersonalCare"),
             color: "#6F96B8"
           })
         }
@@ -146,7 +167,7 @@ class Categories extends React.Component {
         onPress={() =>
           this.props.navigation.navigate("Quiz", {
             title: "Apparel",
-            questions: ApparelQuestions,
+            questions:await this.getQ( "Apparel"),
             color: "#6F96B8",
           })
         }
