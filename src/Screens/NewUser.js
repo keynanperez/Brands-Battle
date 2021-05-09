@@ -2,11 +2,19 @@
 import { Row} from 'react-native-easy-grid';
 import * as Permissions from 'expo-permissions';  
 import React, { Component } from "react";
+
+import Background from '../components/Background'
+import Logo from '../components/Logo'
+import Header from '../components/Header'
+
+import TextInput from '../components/TextInput'
+import BackButton from '../components/BackButton'
+import { theme } from '../core/theme'
 import { Container } from "native-base";
 import * as ImagePicker from "expo-image-picker";
-import {Image,View ,ImageBackground} from 'react-native';
+import {Image,View ,ImageBackground,StyleSheet} from 'react-native';
 import {  Text,Item, Button,Form,Input, Label, Icon, Thumbnail } from 'native-base';
-import styles from "./MyStyle";
+//import styles from "./MyStyle";
 import myUrl from "./Url";
 class NewUser extends Component {
   constructor(props) {
@@ -65,7 +73,7 @@ else{
       image:""
       
     });
-      this.props.navigation.goBack();
+   
     }
   }
 
@@ -78,43 +86,52 @@ else{
   
     return (
       <>
+      <Background>
       
-      <ImageBackground source= {require('../back.png')} style={styles.image}>
+      <Logo />
+      <Header>Create Account</Header>
+      <TextInput
+        label="Name"
+    
+      />
+      <TextInput
+        label="Email"
+    
+      />
+      <TextInput
+        label="Password"
    
-            <View style={styles.noteViewtitle}>
-            <Text style={styles.notetitle} > Add new user </Text>
-            </View>
-            
-            <Form style={{paddingTop:'20%'}}>
-
-             <Item floatingLabel  > 
-             <Label>Insert your name</Label>
-                <Input onChangeText={newname=> this.setState({NewUserName: newname})}/>
-             </Item>
-             <Item floatingLabel  > 
-             <Label>Insert your password</Label>
-             <Input  onChangeText={Info=> this.setState({NewUserPass: Info})} />
-             </Item>
-             <Item floatingLabel  > 
-             <Label>verify password</Label>
-             <Input  onChangeText={Info=> this.setState({VerPass: Info})} />
-             </Item>
-            </Form>  
-            <Text>You can add an image</Text>
-             
-              <Button style={styles.SubmitBtn} onPress={this.SubmitNew} >
-               <Text>Submit</Text>
-              </Button>
-             
+      />
+      <Button
+        mode="contained"
+       
+        style={{ marginTop: 24 }}
+      >
+        <Text>Sign Up</Text>
+      </Button>
+      <View style={styles.row}>
+        <Text>Already have an account? </Text>
      
-              </ImageBackground>
-   
+      </View>
+    </Background>
+     
 
 </>
     );
    }
   
-  }
+}
+  const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    marginTop: 4,
+  },
+  link: {
+    fontWeight: 'bold',
+    color: theme.colors.primary,
+  },
+})
+
 
 export default NewUser;
 

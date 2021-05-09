@@ -1,30 +1,30 @@
 Arguments: 
-  /opt/homebrew/Cellar/node/15.13.0/bin/node /opt/homebrew/Cellar/yarn/1.22.10/libexec/bin/yarn.js add react-native-animated-spinkit: ^1.4.1,
+  /opt/homebrew/Cellar/node/16.1.0/bin/node /opt/homebrew/Cellar/yarn/1.22.10/libexec/bin/yarn.js add @ui-kitten
 
 PATH: 
-  /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/keynanperez/opt/anaconda3/bin:/Users/keynanperez/opt/anaconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin
+  /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/keynanperez/opt/anaconda3/bin:/Users/keynanperez/opt/anaconda3/condabin
 
 Yarn version: 
   1.22.10
 
 Node version: 
-  15.13.0
+  16.1.0
 
 Platform: 
   darwin arm64
 
 Trace: 
-  Error: react-native-animated-spinkit:: Invalid URI "react-native-animated-spinkit:/"
-      at Request.module.exports.Request.init (/opt/homebrew/Cellar/yarn/1.22.10/libexec/lib/cli.js:140837:31)
-      at new Request (/opt/homebrew/Cellar/yarn/1.22.10/libexec/lib/cli.js:140691:8)
-      at request (/opt/homebrew/Cellar/yarn/1.22.10/libexec/lib/cli.js:137597:10)
-      at RequestManager.execute (/opt/homebrew/Cellar/yarn/1.22.10/libexec/lib/cli.js:67040:15)
-      at RequestManager.shiftQueue (/opt/homebrew/Cellar/yarn/1.22.10/libexec/lib/cli.js:67078:10)
-      at /opt/homebrew/Cellar/yarn/1.22.10/libexec/lib/cli.js:66747:13
-      at new Promise (<anonymous>)
-      at new F (/opt/homebrew/Cellar/yarn/1.22.10/libexec/lib/cli.js:5301:28)
-      at RequestManager.request (/opt/homebrew/Cellar/yarn/1.22.10/libexec/lib/cli.js:66745:19)
-      at NpmRegistry.<anonymous> (/opt/homebrew/Cellar/yarn/1.22.10/libexec/lib/cli.js:31704:42)
+  Error: https://registry.yarnpkg.com/@ui-kitten: Request "https://registry.yarnpkg.com/@ui-kitten" returned a 405
+      at Request.params.callback [as _callback] (/opt/homebrew/Cellar/yarn/1.22.10/libexec/lib/cli.js:66997:18)
+      at Request.self.callback (/opt/homebrew/Cellar/yarn/1.22.10/libexec/lib/cli.js:140749:22)
+      at Request.emit (node:events:365:28)
+      at Request.<anonymous> (/opt/homebrew/Cellar/yarn/1.22.10/libexec/lib/cli.js:141721:10)
+      at Request.emit (node:events:365:28)
+      at IncomingMessage.<anonymous> (/opt/homebrew/Cellar/yarn/1.22.10/libexec/lib/cli.js:141643:12)
+      at Object.onceWrapper (node:events:471:28)
+      at IncomingMessage.emit (node:events:377:35)
+      at endReadableNT (node:internal/streams/readable:1312:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
 
 npm manifest: 
   {
@@ -37,6 +37,7 @@ npm manifest:
       "eject": "expo eject"
     },
     "dependencies": {
+      "@eva-design/eva": "^2.1.0",
       "@react-native-async-storage/async-storage": "^1.13.2",
       "@react-native-community/masked-view": "0.1.10",
       "@react-navigation/bottom-tabs": "^5.11.2",
@@ -51,12 +52,12 @@ npm manifest:
       "expo-localization": "~9.1.0",
       "expo-status-bar": "~1.0.3",
       "lottie-ios": "^3.2.0",
-      "lottie-react-native": "^2.6.1",
+      "lottie-react-native": "~2.6.1",
       "native-base": "^2.15.2",
       "react": "^16.13.1",
       "react-dom": "16.13.1",
       "react-individual-character-input-boxes": "^1.1.0",
-      "react-native": "^0.64.0",
+      "react-native": "~0.64.0",
       "react-native-androw": "0.0.34",
       "react-native-character-input": "^1.0.5",
       "react-native-countdown-component": "^2.7.1",
@@ -67,7 +68,7 @@ npm manifest:
       "react-native-image-picker": "^3.1.3",
       "react-native-magic-move": "^0.6.6",
       "react-native-material-ripple": "^0.9.1",
-      "react-native-paper": "^4.8.1",
+      "react-native-paper": "~4.8.1",
       "react-native-reanimated": "~1.13.0",
       "react-native-safe-area-context": "3.1.9",
       "react-native-scl-alert": "^1.2.1",
@@ -82,6 +83,10 @@ npm manifest:
     },
     "devDependencies": {
       "@babel/core": "~7.9.0"
+    },
+    "peerDependencies": {
+      "@freakycoder/react-native-bounceable": ">= 0.2.2",
+      "react-native-animated-spinkit": "^1.4.1"
     },
     "private": true
   }
@@ -1294,6 +1299,11 @@ Lockfile:
     version "0.7.5"
     resolved "https://registry.yarnpkg.com/@emotion/unitless/-/unitless-0.7.5.tgz#77211291c1900a700b8a78cfafda3160d76949ed"
     integrity sha512-OWORNpfjMsSSUBVrRBVGECkhWcULOAJz9ZW8uK9qgxD+87M7jHRcvh/A96XXNhXTLmKcoYSQtBEX7lHMO7YRwg==
+  
+  "@eva-design/eva@^2.1.0":
+    version "2.1.0"
+    resolved "https://registry.yarnpkg.com/@eva-design/eva/-/eva-2.1.0.tgz#210561abd37a6a894203420a727b1184d66e809a"
+    integrity sha512-n/8sUkjo0GWrO9dhsjijkqg+nlste2p8/3mOWT18wymm03hQXoT4kg31IhawjdWgzubjNzSjqPh+Pov5ShtsHQ==
   
   "@expo/config-plugins@1.0.28":
     version "1.0.28"
@@ -6360,7 +6370,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/lottie-ios/-/lottie-ios-3.2.2.tgz#c684bb9bdc91a970f15192506ee77b3c5c062ca6"
     integrity sha512-buYj/HbzoTeqiVy+Hpzfd2STdRW7RJnne+09z48nVvBYO+ioG5B5EvRb92pYOoRDNr0stQpfurzK1uFXW4gGCA==
   
-  lottie-react-native@^2.6.1:
+  lottie-react-native@~2.6.1:
     version "2.6.1"
     resolved "https://registry.yarnpkg.com/lottie-react-native/-/lottie-react-native-2.6.1.tgz#330d24fa6aac5928ea63f8e181b9b7d930a1a119"
     integrity sha512-Z+6lARvWWhB8n8OSmW7/aHkV71ftsmO7hYXFt0D+REy/G40mpkQt1H7Cdy1HqY4cKAp7EYDWVxhu5+fkdD6o4g==
@@ -8030,7 +8040,7 @@ Lockfile:
     dependencies:
       prop-types "^15.5.10"
   
-  react-native-paper@^4.8.1:
+  react-native-paper@~4.8.1:
     version "4.8.1"
     resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-4.8.1.tgz#ade4e552e2aaecfc3096c8aebda37bd99facf63f"
     integrity sha512-WgmqrDdcrr0ZbuiLCwMpmOMhl1n8uIvNulxsl2oCGtD8oeMkPJKHf4G/ONR+iNrSXcFbJek+uDRSmcGA5kDfUA==
@@ -8219,7 +8229,7 @@ Lockfile:
       xmldoc "^0.4.0"
       yargs "^9.0.0"
   
-  react-native@^0.64.0:
+  react-native@~0.64.0:
     version "0.64.0"
     resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.64.0.tgz#c3bde5b638bf8bcf12bae6e094930d39cb942ab7"
     integrity sha512-8dhSHBthgGwAjU+OjqUEA49229ThPMQH7URH0u8L0xoQFCnZO2sZ9Wc6KcbxI0x9KSmjCMFFZqRe3w3QsRv64g==
