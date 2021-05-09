@@ -24,16 +24,17 @@ class Categories extends React.Component {
     currentBrands:[],
     allQ:[],
     arryOfQuestions:[],
+    chosenbrand:"",
   }
 }
 
 getQ=async(Catname)=>{
   this.state.currentBrands=await this.getallbrands(Catname)
-   await this.getallqustions()
+  return await this.getallqustions()
 }
 getallbrands=async(Catname)=>{
   const brandOFcat=[]
-  const url = `http://192.168.1.27:44306/api/brands?Catname=`+Catname
+  const url = `http://172.20.10.2:44365/api/brands?Catname=`+Catname
   const userf =await fetch(url, {
       method: 'Get',
       headers: new Headers({
@@ -68,11 +69,12 @@ getallbrands=async(Catname)=>{
       {
           var randomNumberB = Math.floor(Math.random() * ((this.state.currentBrands.length)+1));
           var randomNumberQ = Math.floor(Math.random() * 4);
-          chosenbrand=this.state.currentBrands[randomNumberB];
+          this.state.chosenbrand=this.state.currentBrands[randomNumberB];
          prevQ= arryQuestions[randomNumberQ].prev;
          endQ=arryQuestions[randomNumberQ].end;
+         idtw=arryQuestions[randomNumberQ].id
          var fuuQ= prevQ+chosenbrand+endQ;
-          answers= await this.ansgetA(arryQuestions[randomNumberQ].id)
+          answers= await this.ansgetA(idtw)
           array.push({ question:fuuQ, answers:answers});
          i++;
 
@@ -81,8 +83,9 @@ getallbrands=async(Catname)=>{
       return this.state.arryOfQuestions=array;
 
   };
-  async ansgetA(questionNumber){
-    var twitterAns="2400"
+  ansgetA=async(questionNumber)=>{
+    var twitterAns=await this.gettwitterAns(questionNumber)
+   // var twitterAns="2400"
     var arrayOfUnmixAns=[]
     var twitterAnsWithC=Number(twitterAns)
     
@@ -93,7 +96,36 @@ getallbrands=async(Catname)=>{
 
 
   return arrayOfUnmixAns
-  }
+  };
+  gettwitterAns=async(questionNumber)=>{
+    const brandOFcat=[]
+    const url = `http://172.20.10.2:44365/api/Twitter?Input=`+this.state.chosenbrand+`&question=`+questionNumber
+    const userf =await fetch(url, {
+        method: 'Get',
+        headers: new Headers({
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json; charset=UTF-8'
+        })
+      })
+      
+   const res=await userf.json()
+        if(res != null)
+          {
+            switch (questionNumber) {
+              case 1:
+                return (res.data.public_metrics.followers_count);
+              case 3:
+                return (res[0].FavoriteCount);
+              case 4:
+                return (res[0].RetweetCount);
+              default:
+                  return Alert.alert("shirel");
+            }
+          
+      
+          }
+
+   };
 
   
   render() {
@@ -120,7 +152,7 @@ getallbrands=async(Catname)=>{
       
         title="Fast Food"
         source={require("../images/fastfood.jpg")}
-        onPress={() =>
+        onPress={async() =>
           this.props.navigation.navigate("Quiz", {
             title: "FastFood",
             questions:await this.getQ( "FastFood"),
@@ -131,7 +163,7 @@ getallbrands=async(Catname)=>{
       <CircularCard 
         title="Technology"
         source={require("../images/Technology.jpg")}
-        onPress={() =>
+        onPress={async() =>
           this.props.navigation.navigate("Quiz", {
             title: "Technology",
             questions:await this.getQ( "Technology"),
@@ -142,7 +174,7 @@ getallbrands=async(Catname)=>{
       <CircularCard 
         title="Retail"
         source={require("../images/Retail.png")}
-        onPress={() =>
+        onPress={async() =>
           this.props.navigation.navigate("Quiz", {
             title: "Retail",
             questions:await this.getQ( "Retail"),
@@ -153,7 +185,7 @@ getallbrands=async(Catname)=>{
       <CircularCard 
         title="Personal Care"
         source={require("../images/PersonalCare.png")}
-        onPress={() =>
+        onPress={async() =>
           this.props.navigation.navigate("Quiz", {
             title: "PersonalCare",
             questions:await this.getQ( "PersonalCare"),
@@ -164,7 +196,7 @@ getallbrands=async(Catname)=>{
       <CircularCard 
         title="Apparel"
         source={require("../images/Apparel.jpg")}
-        onPress={() =>
+        onPress={async() =>
           this.props.navigation.navigate("Quiz", {
             title: "Apparel",
             questions:await this.getQ( "Apparel"),
