@@ -110,7 +110,7 @@ export default  class  LoginView extends React.Component {
        <View style={styles.forgot}>
          <Text style={styles.forgot}>Don’t have an account? </Text>
          <TouchableOpacity
-       onPress={() => this.props.navigation.navigate("RegisterScreen")}
+       onPress={() => this.props.navigation.navigate("newuser")}
          >
            <Text style={styles.link}>Sign up</Text>
          </TouchableOpacity>
