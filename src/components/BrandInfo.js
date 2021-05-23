@@ -31,7 +31,7 @@ import { DataTable } from 'react-native-paper';
  export default function BrandInfo(props) {
 
   
-  const { MyBrand } = props
+
   
 
    return (
@@ -47,7 +47,7 @@ import { DataTable } from 'react-native-paper';
          }}>
            
            {<View>
-            <Header><Text style={styles.Header}>Google</Text></Header>
+            <Header><Text style={styles.Header}> {props.dataFromParent}</Text></Header>
   <LineChart
     data={{
       labels: ["Followers", "tweets", "Retweets", "Likes", "Commends"],

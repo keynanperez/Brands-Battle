@@ -93,7 +93,7 @@ import React, { useState } from 'react';
            
           
 
-  <BrandInfo/>
+  <BrandInfo dataFromParent = {SelectedBrand} />
 
 
          </View>
