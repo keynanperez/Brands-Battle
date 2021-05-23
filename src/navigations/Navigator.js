@@ -34,7 +34,7 @@ const AppNavigator = createStackNavigator(
         UserDashboard: { screen: UserDashboard },
         ResetPasswordScreen: { screen: ResetPasswordScreen },
         RegisterScreen: { screen: RegisterScreen },
-        newuser: { screen: NewUser },
+        NewUser: { screen: NewUser },
         endgame: { screen: endgame },
         nextlevel: { screen: nextlevel },
         WinnerPage: { screen: WinnerPage },
