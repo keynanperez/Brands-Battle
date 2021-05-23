@@ -3,6 +3,9 @@ import 'react-native-gesture-handler';
 import {registerRootComponent} from 'expo';
 import AppNavigator from './src/navigations/Navigator';
 import {DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { LogBox } from 'react-native'
+LogBox.ignoreLogs(['Warning: ...']) // Ignore log notification by message
+LogBox.ignoreAllLogs() //Ignore all log notifications
 const theme = {
   ...DefaultTheme,
   roundness: 2,
