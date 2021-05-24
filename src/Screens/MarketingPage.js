@@ -1,136 +1,190 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
- import { Item } from 'native-base';
-import React, { useState } from 'react';
- import {
-   SafeAreaView,
-   StyleSheet,
-   ScrollView,
-   View,
-   Text,
-   TextInput,
-   Dimensions
- } from 'react-native';
- import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from "react-native-chart-kit";
- import SearchDropDown from '../components/SearchDropDown'
- import BrandInfo from '../components/BrandInfo'
- import Brands from '../data/Data'
- export default function MarketingPage() {
-   
-   const [dataSource] = useState([])
-   for (var index = 0; index < Brands.length; index++) {
-    dataSource[index]=(Brands[index].BrandName);
-     
-  }
-   console.log(dataSource)
- 
-   const [colors] = useState(['#84DCC6', '#FEC8C8', '#F7E4CF', "#E8DEF3",
-   ])
+import React, { Component , useState } from 'react';
+import { Container, Header, Input, Icon, Button, List, Left, Right, Thumbnail, Body, Content, View } from 'native-base';
+import { FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { ListItem, Avatar } from 'react-native-elements';
+import Logo from '../components/Logogame'
+import Header2 from '../components/Header'
+import Paragraph from '../components/Paragraph'
+import BrandsList from '../components/BrandsList'
+const DATA = [
+  {
+    id: "0",
+    name: "Google",
+  },
+  {
+    id: "1",
+    name: "Apple",
+  },
+  {
+    id: "2",
+    name: "Microsoft",
+  },
+  {
+    id: "3",
+    name: "Facebook",
+  },
+  {
+    id: "4",
+    name: "IBM",
+  },
+  {
+    id: "5",
+    name: "Samsung",
+  },
+  {
+    id: "6",
+    name: "Amazon",
+  },
+  {
+    id: "7",
+    name: "Alibaba",
+  },
+  {
+    id: "8",
+    name: "Nike",
+  },
   
-   const [filtered, setFiltered] = useState(dataSource)
-   const [searching, setSearching] = useState(false)
-   const [SelectedBrand, setSelectedBrand] = useState("Google")
+];
+const datainfo = [
+{
+    id: "0",
+  name:"",
+    info: "Google info",
+    brandfollowers: "30,324",
+    brandtweets: "452",
+      Rating:"49.3",
+  },
+  {
+    id: "1",
+      name:"",
+    info: "Apple info",
+    brandfollowers: "52,324",
+    brandtweets: "1452",
+      Rating:"89.3",
+  },
+],
+
+ Item = ({ item, onPress, backgroundColor, textColor }) => (
+  <TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
+    <Text style={[styles.title, textColor]}>{item.name}</Text>
+  </TouchableOpacity>
+);
+
+
+
+const App = () => {
+  const [selectedId, setSelectedId,brandfollowers] = useState(null);
+
+   const handleClick = (id) => {
+    alert( datainfo[id].info);
+    }
+  const renderItem = ({ item }) => {
+    const backgroundColor = item.id === selectedId ? "#ffffff" : "#ffffff";
+    const color = item.id === selectedId ? 'white' : 'black';
+    const brandfollowers = item.brandfollowers;
+
    
-   const onSearch = (text) => {
-     if (text) {
-       setSearching(true)
-       const temp = text
+  
 
-       const tempList = dataSource.filter(item => {
-         if (item.match(temp)){
+    return (
+      <Item
+        item={item}
+        onPress={() => handleClick(item.id)}
+        backgroundColor={{ backgroundColor }}
+        textColor={{ color }}
+        brandfollowers={{brandfollowers}}
+        
+      />
+    );
+  };
 
-         
-          setSelectedBrand(item)
-           return item
-           
-         }
-       })
-       setFiltered(tempList)
-     }
-     else {
-       setSearching(false)
-       setFiltered(dataSource)
-     }
- 
-   }
-   const randomColor = () => {
-     return colors[Math.floor(Math.random() * colors.length)]
-   }
-
-   const selectfunc =(selecteditem) => {
-    
-   }
-   return (
-     <View style={styles.container}>
- 
-       <TextInput
-         style={styles.textInput}
-         placeholder="Search"
-         placeholderTextColor='white'
-         onChangeText={onSearch}
- 
-       />
-       <View style={{ justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
-   
-         <View style={{
-           flexWrap: 'wrap', flexDirection: 'row',
-           justifyContent: 'center'
- 
-         }}>
-           
+  return (
+    <Container>
+        <Header searchBar rounded>
           
+            <Icon name="ios-search" />
+            <Input placeholder="Search Brand" />
+          
+          
+          <Button transparent>
+            <Text>Search </Text>
+          </Button>
+        </Header>
+      <SafeAreaView style={styles.container}>
+       
+      <FlatList
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        extraData={selectedId}
+      />
+      </SafeAreaView>
+       <SafeAreaView style={styles.data}>
+        
+        <Paragraph>
+          <Text> Brand Name: </Text>
+         
+        </Paragraph>
+          <Paragraph>
+          <Text>Followers: </Text>
+         
+        </Paragraph>
+          <Paragraph>
+          <Text>Tweets: </Text>
+         
+        </Paragraph>
+          <Paragraph>
+          <Text>Rating: </Text>
+         
+       </Paragraph>
+      
+    </SafeAreaView>
+    </Container>
+  );
+};
 
-  <BrandInfo dataFromParent = {SelectedBrand} />
+const styles = StyleSheet.create({
+  container: {
+    //flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+    height:'40%',
+  },
+   data: {
+    //flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+    height:'60%',
+  },
+  item: {
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
+  },
 
 
-         </View>
- 
-       </View>
- 
-       {/* your components can stay here like anything */}
-       {/* and at the end of view */}
-       {
-         searching &&
-         <SearchDropDown
-     
-           onPress={() =>  selectfunc(SelectedBrand)}
-           dataSource={filtered} 
-           />
-       }
-     </View>
-   )
- }
- 
- 
- const styles = StyleSheet.create({
-   container: {
-     // justifyContent: 'center',
-     alignItems: 'center',
-     marginTop: '20%',
-     flex: 1
-   },
-   textInput: {
-     backgroundColor: '#BFBFBF',
-     width: '80%',
-     borderRadius: 5,
-     height: 50,
-     fontSize: 20,
-     fontWeight: 'bold',
-     paddingHorizontal: 10,
-   },
- });
- 
- 
+  itemBlock: {
+    flexDirection: 'row',
+    paddingBottom: 5,
+  },
+  itemImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+  },
+  itemMeta: {
+    marginLeft: 10,
+    justifyContent: 'center',
+  },
+  itemName: {
+    fontSize: 20,
+  },
+  itemLastMessage: {
+    fontSize: 14,
+    color: "#111",
+  }
+
+});
+
+export default App;
