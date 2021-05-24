@@ -43,8 +43,8 @@ render() {
         <Button rounded style={styles.butn} onPress={() =>this.props.navigation.navigate('WinnerPage')}
 >
           <Text style={styles.words}> winners table</Text>
-          <Text style={styles.words}> shirel</Text>
-        
+          <Text style={styles.words}> winners shirel</Text>
+          <Text style={styles.words}> hodaya</Text>
           </Button>
           <Button rounded style={styles.butn} onPress={() =>this.props.navigation.navigate('UserDashboard',{UserId:this.state.id,pointsU:this.state.points,stageU:this.state.stage,UserName:this.state.UserName,imgU:this.state.img})}>
            <Text style={styles.words}>my profile</Text>
