@@ -20,41 +20,29 @@ export default  class  LoginView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      UserName:"hodaya",
-      UserPass:"aaa",
+      UserMail:"",
+      UserName:"",
+      UserPass:"",
       UserId:"",
       pointsU:0,
-      stageU:1,
-      imgU:"",
 
     };
   }
 
-  async componentDidMount  (){
-   
-  
-     this._unsubscribeFocus  =  this.props.navigation.addListener('focus',(payload) =>{
- 
-   
- });
-   }
-  
   SubmitNote = async() =>{
- let  name=this.state.UserName;
+ let  Mail=this.state.UserMail;
  let pass=this.state.UserPass ;
-  if((name === '')||(pass === ''))
+  if((Mail === '')||(pass === ''))
    {
         alert("Please insert info!")
     }
     else{
-      this.props.navigation.navigate('UserHome',{UserId:this.state.UserId,pointsU:this.state.pointsU,stageU:this.state.stageU,UserName:this.state.UserName,imgU:this.state.imgU});
+     // this.props.navigation.navigate('UserHome',{UserId:this.state.UserId,pointsU:this.state.pointsU,stageU:this.state.stageU,UserName:this.state.UserName,imgU:this.state.imgU});
     
-      const url = ('http://192.168.0.105:44387/api/'+'Users/')
-
-     
-      const userf = await fetch(url, {
+     const url = `http://172.20.10.2:44365/api/Users`
+      const userf =await fetch(url, {
           method: 'Put',
-          body:   JSON.stringify([name, pass]),
+          body:   JSON.stringify([Mail, pass]),
           headers: new Headers({
             'Content-Type': 'application/json; charset=UTF-8',
             'Accept': 'application/json; charset=UTF-8'
@@ -68,23 +56,10 @@ export default  class  LoginView extends React.Component {
         const res= await userf.json()
           if(res.UserName != null)
             {
-             this.props.navigation.navigate('UserHome',{UserId:res.Id,pointsU:res.Points,stageU:res.UserStage,UserName:res.UserName,imgU:res.Img});
+             this.props.navigation.navigate('UserHome',{UserId:res.Id,UserPoints:res.Points,UserName:res.UserName});
            };
           
-            
-          //this.props.navigation.navigate('MyPageView',{UserId:item.UserId})
-           // res.forEach((item) => {
-              //if (item.UserName===name && item.UserPass===pass )
-             // {
-             // 
-               
-             // }
-             
-           // });
-        
-
-       
-
+    
     }
     
   }
@@ -97,11 +72,13 @@ export default  class  LoginView extends React.Component {
      <Background>
        <Logo />
        <Header>Welcome back.</Header>
-       <TextInput label="Email" style={styles.forgot} />
-       <TextInput style={styles.forgot} label="Password" />
+       <TextInput  onChangeText={Info=> this.setState({UserMail: Info})} 
+       label="Email" style={styles.forgot} />
+       <TextInput  onChangeText={Info=> this.setState({UserPass: Info})} 
+       style={styles.forgot} label="Password" />
        <View style={styles.forgotPassword}>
          <TouchableOpacity
-         onPress={() => this.props.navigation.navigate('ResetPasswordScreen')}
+         onPress={() => this.props.navigation.navigate("ResetPasswordScreen")}
          >
            <Text style={styles.link}>Forgot your password?</Text>
          </TouchableOpacity>
@@ -110,13 +87,14 @@ export default  class  LoginView extends React.Component {
        <View style={styles.forgot}>
          <Text style={styles.forgot}>Don’t have an account? </Text>
          <TouchableOpacity
+         
        onPress={() => this.props.navigation.navigate("NewUser")}
          >
            <Text style={styles.link}>Sign up</Text>
          </TouchableOpacity>
        </View>
         <TouchableOpacity
-       onPress={() => this.props.navigation.navigate("UserHome")}
+       onPress={this.SubmitNote}
          >
            <Text style={styles.login}>Sign in</Text>
          </TouchableOpacity>
