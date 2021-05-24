@@ -17,6 +17,7 @@ import {
   TextInput,
   Dimensions,
 } from "react-native";
+import MarketingTweets from "./MarketingTweets";
 import {
   LineChart,
   BarChart,
