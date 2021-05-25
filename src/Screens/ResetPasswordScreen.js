@@ -16,7 +16,7 @@ export default function ResetPasswordScreen({ navigation }) {
       setEmail({ ...email, error: emailError })
       return
     }
-    navigation.navigate('login')
+    navigation.navigate('LoginScreen')
   }
 
   return (

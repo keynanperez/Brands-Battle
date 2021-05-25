@@ -12,7 +12,7 @@ import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
 import { Container } from "native-base";
 import * as ImagePicker from "expo-image-picker";
-import {Image,View ,ImageBackground,StyleSheet,TouchableOpacity} from 'react-native';
+import {Image,View ,ImageBackground,StyleSheet} from 'react-native';
 import {  Text,Item, Button,Form,Input, Label, Icon, Thumbnail } from 'native-base';
 //import styles from "./MyStyle";
 import myUrl from "./Url";
@@ -22,24 +22,35 @@ class NewUser extends Component {
     this.state = {
       NewUserName:"",
       NewUserPass:"",
-      NewUserMail:"",
+      VerPass:"",
       points:0,
-      newuser:""
+      stage:1,
+      image:'../usav.png',
+      newuser:"",
+      hasCameraPermission: null,
 
     };
 
   }
 
-    insertUser=async()=>{
+  SubmitNew =()=>{
+
+    if (this.state.NewUserPass!= this.state.VerPass)
+    {
+      alert("the password dose not match try agin")
+    }
+else{
 
   this.state.newuser={
      UserName: this.state.NewUserName,
     UserPass:this.state.NewUserPass,
     points:this.state.points,
-    Mail:this.state.NewUserMail,
-  }
-  const url = `http://172.20.10.2:44365/api/Users`
-    const userf =await fetch(url, {
+    UserStage:this.state.stage,
+    Img:this.state.image}
+
+ 
+  const url = (myUrl+'Users/')
+    fetch(url, {
       method: 'Post',
       body: JSON.stringify(this.state.newuser),
       headers: new Headers({
@@ -48,23 +59,30 @@ class NewUser extends Component {
       })
     })
     .then((res) => {
-      if(res.json()!= null) 
-      this.props.navigation.navigate("login");
-    });
-    
+      return res.json(); 
+    }),
+    (error) => {
+      alert("noooo "+error)
+      console.log("err post=", error);
+    };
+
     this.setState({
       NewUserName:"",
       NewUserPass:"",
-      newuser:"",
-      NewUserMail:"",
-  
+      VerPass:"",
+      image:""
+      
     });
    
     }
+  }
+
+
+
+
+
   
- 
-  render() 
-  {
+  render() {
   
     return (
       <>
@@ -72,37 +90,38 @@ class NewUser extends Component {
       
       <Logo />
       <Header>Create Account</Header>
-      <TextInput onChangeText={Info=> this.setState({NewUserName: Info})}
+      <TextInput
         label="Name"
     
       />
-      <TextInput onChangeText={Info=> this.setState({NewUserMail: Info})}    
+      <TextInput
         label="Email"
+    
       />
-      <TextInput onChangeText={Info=> this.setState({NewUserPass: Info})}
+      <TextInput
         label="Password"
    
       />
-      <Button onPress={this.insertUser}
+      <Button
         mode="contained"
        
         style={{ marginTop: 24 }}
       >
         <Text>Sign Up</Text>
       </Button>
-      <TouchableOpacity  onPress={() => this.props.navigation.navigate('login')}style={styles.row}>
-  
+      <View style={styles.row}>
         <Text>Already have an account? </Text>
-
-      </TouchableOpacity>  
+     
+      </View>
     </Background>
+     
+
 </>
     );
    }
+  
 }
-export default NewUser;
-
-const styles = StyleSheet.create({
+  const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     marginTop: 4,
@@ -112,5 +131,10 @@ const styles = StyleSheet.create({
     color: theme.colors.primary,
   },
 })
+
+
+export default NewUser;
+
+
 
 
