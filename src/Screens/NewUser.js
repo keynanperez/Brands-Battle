@@ -38,7 +38,7 @@ class NewUser extends Component {
     points:this.state.points,
     Mail:this.state.NewUserMail,
   }
-  const url = `http://172.20.10.2:44365/api/Users`
+  const url = `http://192.168.0.107:44381/api/Users`
     const userf =await fetch(url, {
       method: 'Post',
       body: JSON.stringify(this.state.newuser),
