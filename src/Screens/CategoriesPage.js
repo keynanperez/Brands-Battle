@@ -88,7 +88,14 @@ getallbrands=async(Catname)=>{
    // var twitterAns="2400"
     var arrayOfUnmixAns=[]
     var twitterAnsWithC=Number(twitterAns)
-    if(twitterAnsWithC<=5)
+    if(twitterAnsWithC<=3)
+    {
+      arrayOfUnmixAns.push({ id:1,text:(twitterAnsWithC+2).toLocaleString()})
+      arrayOfUnmixAns.push({ id:2,text:(twitterAnsWithC+3).toLocaleString()})
+      arrayOfUnmixAns.push({ id:3,text:(twitterAnsWithC+6).toLocaleString()})
+      arrayOfUnmixAns.push({ id:4,text:twitterAnsWithC.toLocaleString(),correct: true })
+    }
+    if(twitterAnsWithC>=5)
     {
     arrayOfUnmixAns.push({ id:1,text:(twitterAnsWithC+Math.floor(twitterAnsWithC*0.2)).toLocaleString()})
     arrayOfUnmixAns.push({ id:2,text:(twitterAnsWithC-Math.floor(twitterAnsWithC*0.2)).toLocaleString()})
@@ -98,7 +105,7 @@ getallbrands=async(Catname)=>{
     else
     {
       arrayOfUnmixAns.push({ id:1,text:(twitterAnsWithC+2).toLocaleString()})
-      arrayOfUnmixAns.push({ id:2,text:(twitterAnsWithC-1).toLocaleString()})
+      arrayOfUnmixAns.push({ id:2,text:(twitterAnsWithC-3).toLocaleString()})
       arrayOfUnmixAns.push({ id:3,text:(twitterAnsWithC+6).toLocaleString()})
       arrayOfUnmixAns.push({ id:4,text:twitterAnsWithC.toLocaleString(),correct: true })
     }
@@ -132,6 +139,8 @@ getallbrands=async(Catname)=>{
                 return (res);
               case 12:
                 return (res);
+                case 14:
+                  return (res);
               default:
                   return Alert.alert("shirel");
             }
