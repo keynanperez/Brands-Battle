@@ -68,7 +68,7 @@ getallbrands=async(Catname)=>{
       while  (i<=10)
       {
           var randomNumberB = Math.floor(Math.random() * ((this.state.currentBrands.length)));
-          var randomNumberQ = Math.floor(Math.random() * 6);
+          var randomNumberQ = Math.floor(Math.random() * 7);
           this.state.chosenbrand=this.state.currentBrands[randomNumberB];
          prevQ= arryQuestions[randomNumberQ].prev;
          endQ=arryQuestions[randomNumberQ].end;
@@ -87,6 +87,30 @@ getallbrands=async(Catname)=>{
     var twitterAns=await this.gettwitterAns(questionNumber)
    // var twitterAns="2400"
     var arrayOfUnmixAns=[]
+  var max=0;
+  var idcorrect
+if (questionNumber==14)
+{
+  for(var i=0;i<4;i++)
+  {
+    if (max<= twitterAns[i][1])
+    {
+      idcorrect=i+1
+      max=twitterAns[i][1]
+    }
+
+  }
+  for(var i=0;i<4;i++)
+  {
+    if (i+1==idcorrect)  
+    arrayOfUnmixAns.push({ id:i+1,text:(twitterAns[i][0]).toLocaleString(),correct: true})
+    else
+    arrayOfUnmixAns.push({ id:i+1,text:(twitterAns[i][0]).toLocaleString()})
+  }
+
+}
+else{
+
     var twitterAnsWithC=Number(twitterAns)
     if(twitterAnsWithC<=3)
     {
@@ -95,7 +119,7 @@ getallbrands=async(Catname)=>{
       arrayOfUnmixAns.push({ id:3,text:(twitterAnsWithC+6).toLocaleString()})
       arrayOfUnmixAns.push({ id:4,text:twitterAnsWithC.toLocaleString(),correct: true })
     }
-    if(twitterAnsWithC>=5)
+   else if(twitterAnsWithC>=5)
     {
     arrayOfUnmixAns.push({ id:1,text:(twitterAnsWithC+Math.floor(twitterAnsWithC*0.2)).toLocaleString()})
     arrayOfUnmixAns.push({ id:2,text:(twitterAnsWithC-Math.floor(twitterAnsWithC*0.2)).toLocaleString()})
@@ -109,6 +133,7 @@ getallbrands=async(Catname)=>{
       arrayOfUnmixAns.push({ id:3,text:(twitterAnsWithC+6).toLocaleString()})
       arrayOfUnmixAns.push({ id:4,text:twitterAnsWithC.toLocaleString(),correct: true })
     }
+  }
 
   return arrayOfUnmixAns
   };
