@@ -20,9 +20,9 @@ export default  class  LoginView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      UserMail:"",
+      UserMail:"hodaya@gmail.com",
       UserName:"",
-      UserPass:"",
+      UserPass:"2021",
       UserId:"",
       pointsU:0,
 

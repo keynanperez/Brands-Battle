@@ -67,8 +67,8 @@ getallbrands=async(Catname)=>{
       var array=[]
       while  (i<=10)
       {
-          var randomNumberB = Math.floor(Math.random() * ((this.state.currentBrands.length)+1));
-          var randomNumberQ = Math.floor(Math.random() * 3);
+          var randomNumberB = Math.floor(Math.random() * ((this.state.currentBrands.length)));
+          var randomNumberQ = Math.floor(Math.random() * 6);
           this.state.chosenbrand=this.state.currentBrands[randomNumberB];
          prevQ= arryQuestions[randomNumberQ].prev;
          endQ=arryQuestions[randomNumberQ].end;
@@ -88,18 +88,26 @@ getallbrands=async(Catname)=>{
    // var twitterAns="2400"
     var arrayOfUnmixAns=[]
     var twitterAnsWithC=Number(twitterAns)
-    
+    if(twitterAnsWithC<=5)
+    {
     arrayOfUnmixAns.push({ id:1,text:(twitterAnsWithC+Math.floor(twitterAnsWithC*0.2)).toLocaleString()})
     arrayOfUnmixAns.push({ id:2,text:(twitterAnsWithC-Math.floor(twitterAnsWithC*0.2)).toLocaleString()})
     arrayOfUnmixAns.push({ id:3,text:(Math.floor(twitterAnsWithC/2)).toLocaleString()})
     arrayOfUnmixAns.push({ id:4,text:twitterAnsWithC.toLocaleString(),correct: true })
-
+    }
+    else
+    {
+      arrayOfUnmixAns.push({ id:1,text:(twitterAnsWithC+2).toLocaleString()})
+      arrayOfUnmixAns.push({ id:2,text:(twitterAnsWithC-1).toLocaleString()})
+      arrayOfUnmixAns.push({ id:3,text:(twitterAnsWithC+6).toLocaleString()})
+      arrayOfUnmixAns.push({ id:4,text:twitterAnsWithC.toLocaleString(),correct: true })
+    }
 
   return arrayOfUnmixAns
   };
   gettwitterAns=async(questionNumber)=>{
     const brandOFcat=[]
-    const url = `http://192.168.0.107:44305/api/Twitter?Input=`+this.state.chosenbrand+`&question=`+questionNumber
+    const url = `http://192.168.0.107:44381/api/Twitter?Input=`+this.state.chosenbrand+`&question=`+questionNumber
     const userf =await fetch(url, {
         method: 'Get',
         headers: new Headers({
@@ -118,6 +126,12 @@ getallbrands=async(Catname)=>{
                 return (res[0].FavoriteCount);
               case 4:
                 return (res[0].RetweetCount);
+              case 10:
+                return (res);
+              case 11:
+                return (res);
+              case 12:
+                return (res);
               default:
                   return Alert.alert("shirel");
             }

@@ -21,6 +21,25 @@ const questions = [
         prev: "How Many Retweeted  ",
         end: " Last Post?",
     },
+    {
+        id:10,
+        prev: "How Many Comments Did ",
+        end: " Last Post got?",
+    },
+
+    {
+        id:11,
+        prev: "How Many #hashtags ",
+        end: "Posed This Week?",
+    },
+    {
+        id:12,
+        prev: "How Many @tags  ",
+        end: "Posed This Week?",
+    },
+
+
+
 ];
 
 export default questions;
