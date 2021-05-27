@@ -34,7 +34,7 @@ getQ=async(Catname)=>{
 }
 getallbrands=async(Catname)=>{
   const brandOFcat=[]
-  const url = `http:/192.168.0.107:44381/api/brands?Catname=`+Catname
+  const url = `http:/10.0.0.25:44300/api/brands?Catname=`+Catname
   const userf =await fetch(url, {
       method: 'Get',
       headers: new Headers({
@@ -139,7 +139,7 @@ else{
   };
   gettwitterAns=async(questionNumber)=>{
     const brandOFcat=[]
-    const url = `http://192.168.0.107:44381/api/Twitter?Input=`+this.state.chosenbrand+`&question=`+questionNumber
+    const url = `http://10.0.0.25:44300/api/Twitter?Input=`+this.state.chosenbrand+`&question=`+questionNumber
     const userf =await fetch(url, {
         method: 'Get',
         headers: new Headers({

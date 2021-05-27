@@ -26,7 +26,7 @@ export default class WinnerPage extends Component {
    }
    getdata=async()=>{
 
-    const url = `http://192.168.0.105:51342/api/Users/`
+    const url = `http://10.0.0.25:44300/api/Users/`
     const userf =await fetch(url, {
         method: 'Get',
         headers: new Headers({

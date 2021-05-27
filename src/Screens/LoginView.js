@@ -39,7 +39,7 @@ export default  class  LoginView extends React.Component {
     else{
      // this.props.navigation.navigate('UserHome',{UserId:this.state.UserId,pointsU:this.state.pointsU,stageU:this.state.stageU,UserName:this.state.UserName,imgU:this.state.imgU});
     
-     const url = `http://192.168.0.107:44381/api/Users`
+     const url = `http://10.0.0.25:44300/api/Users`
       const userf =await fetch(url, {
           method: 'Put',
           body:   JSON.stringify([Mail, pass]),
@@ -73,9 +73,9 @@ export default  class  LoginView extends React.Component {
        <Logo />
        <Header>Welcome back.</Header>
        <TextInput  onChangeText={Info=> this.setState({UserMail: Info})} 
-       label="Email" style={styles.forgot} />
+       label="Email" value="Keynan@gmail.com" style={styles.forgot}  />
        <TextInput  onChangeText={Info=> this.setState({UserPass: Info})} 
-       style={styles.forgot} label="Password" />
+       style={styles.forgot} label="Password" value="2021"/>
        <View style={styles.forgotPassword}>
          <TouchableOpacity
          onPress={() => this.props.navigation.navigate("ResetPasswordScreen")}

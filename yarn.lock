@@ -8108,6 +8108,18 @@ react-native-screens@~2.15.0:
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.15.2.tgz#a449700e895b462937211ec72ed6f09652758f06"
   integrity sha512-CagNf2APXkVoRlF3Mugr264FbKbrBg9eXUkqhIPVeZB8EsdS8XPrnt99yj/pzmT+yJMBY0dGrjXT8+68WYh6YQ==
 
+react-native-search-box@^0.0.20:
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/react-native-search-box/-/react-native-search-box-0.0.20.tgz#25eedda46a1c69ab1875ea37c43762b69fb2c22a"
+  integrity sha512-ynyqX2wXynzgzt9wshBm6aE+/1EDOzCv49QcyGzoIsed3pgirzW4ealHLjFEkFos3Eb7RP5PriUGnjhyH1plLQ==
+  dependencies:
+    prop-types "^15.5.10"
+
+react-native-searchbox-1@^1.0.27:
+  version "1.0.27"
+  resolved "https://registry.yarnpkg.com/react-native-searchbox-1/-/react-native-searchbox-1-1.0.27.tgz#ad78548b39f915efdb33f477c963c0773f638e56"
+  integrity sha512-11SuTAmTP599q9lYX6k09DL7HAESxPVIlUZ2lw41cH/sYukBZp/ZjdG+ClJ8YO//DEU/GtHl7wnpHU0YS2yoJg==
+
 react-native-size-matters@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/react-native-size-matters/-/react-native-size-matters-0.3.1.tgz#24d0cfc335a2c730f6d58bd7b43ea5a41be4b49f"

@@ -17,7 +17,7 @@ import NewUser from '../../src/Screens/NewUser';
 import UserHome from '../../src/Screens/UserHome';
 import Marketing from "../../src/Screens/MarketingPage";
 import endgame from "../../src/Screens/endgame";
-//import MarketingHome from "../screens/MarketingHome";
+//import BrandInfo from "../../src/Screens/BrandInfo";
 
 const stackNavigatorOptions = {
     headerShown: false,
@@ -29,6 +29,7 @@ const AppNavigator = createStackNavigator(
         login : { screen: LoginView },
         gameView: { screen: gameView },
         Categories: { screen:CategoriesPage },
+        //BrandInfo: { screen:BrandInfo },
         Quiz: { screen: Quiz },
         UserHome: { screen: UserHome },
         UserDashboard: { screen: UserDashboard },
