@@ -39,7 +39,7 @@ export default  class  LoginView extends React.Component {
     else{
      // this.props.navigation.navigate('UserHome',{UserId:this.state.UserId,pointsU:this.state.pointsU,stageU:this.state.stageU,UserName:this.state.UserName,imgU:this.state.imgU});
     
-     const url = `http://192.168.0.107:44381/api/Users`
+     const url = `http://172.20.10.2:44381/api/Users`
       const userf =await fetch(url, {
           method: 'Put',
           body:   JSON.stringify([Mail, pass]),

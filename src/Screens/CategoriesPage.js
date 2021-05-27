@@ -24,7 +24,8 @@ class Categories extends React.Component {
     currentBrands:[],
     allQ:[],
     arryOfQuestions:[],
-    chosenbrand:"",
+    chosenbranda:"",
+    chosenbrandb:"",
   }
 }
 
@@ -34,7 +35,7 @@ getQ=async(Catname)=>{
 }
 getallbrands=async(Catname)=>{
   const brandOFcat=[]
-  const url = `http:/192.168.0.107:44381/api/brands?Catname=`+Catname
+  const url = `http:/172.20.10.2:44381/api/brands?Catname=`+Catname
   const userf =await fetch(url, {
       method: 'Get',
       headers: new Headers({
@@ -65,24 +66,41 @@ getallbrands=async(Catname)=>{
       var endQ=""
       var chosenbrand=""
       var array=[]
-      while  (i<=10)
-      {
+      while  (i<=10) {
           var randomNumberB = Math.floor(Math.random() * ((this.state.currentBrands.length)));
           var randomNumberQ = Math.floor(Math.random() * 7);
-          this.state.chosenbrand=this.state.currentBrands[randomNumberB];
+          this.state.chosenbranda=this.state.currentBrands[randomNumberB];
          prevQ= arryQuestions[randomNumberQ].prev;
          endQ=arryQuestions[randomNumberQ].end;
-         idtw=arryQuestions[randomNumberQ].id
-         var fuuQ= prevQ+this.state.chosenbrand+endQ;
-          answers= await this.ansgetA(idtw)
-          array.push({ question:fuuQ, answers:answers});
-         i++;
+         idtw=arryQuestions[randomNumberQ].id;
 
-      }
-      
-      return this.state.arryOfQuestions=array;
+          if(randomNumberQ== 6 ||randomNumberQ== 8||randomNumberQ==9||randomNumberQ== 13)
+            {  
+              var randomNumberC = Math.floor(Math.random() * ((this.state.currentBrands.length)));
+              this.state.chosenbrandb=this.state.currentBrands[randomNumberB];
+              var fuuQ= prevQ+this.state.chosenbranda+endQ+chosenbrandb;
+              answers= await this.ansgetB(idtw)
+              array.push({ question:fuuQ, answers:answers});
+              i++;
+              return this.state.arryOfQuestions=array;
+              
+            }
+         else
+          {
+        
+             var fuuQ= prevQ+this.state.chosenbrand+endQ;
+             answers= await this.ansgetA(idtw)
+             array.push({ question:fuuQ, answers:answers});
+             i++;
+            return this.state.arryOfQuestions=array;
+          }
+         
+
+        
+     }
 
   };
+
   ansgetA=async(questionNumber)=>{
     var twitterAns=await this.gettwitterAns(questionNumber)
    // var twitterAns="2400"
@@ -137,9 +155,39 @@ else{
 
   return arrayOfUnmixAns
   };
+
+  ansgetB=async(questionNumber)=>{
+    var twitterAns=await this.gettwitterDoubleAns(questionNumber)
+    var arrayOfUnmixAns=[];
+    if (twitterAns== this.state.chosenbranda)
+    {
+    arrayOfUnmixAns.push({ id:1,text: this.state.chosenbrandb})
+    arrayOfUnmixAns.push({ id:2,text: this.state.chosenbranda,correct: true })
+    }
+    else  if (twitterAns== this.state.chosenbrandb)
+    {
+      arrayOfUnmixAns.push({ id:1,text: this.state.chosenbranda})
+      arrayOfUnmixAns.push({ id:2,text: this.state.chosenbrandb,correct: true })
+      }
+  }
+  
+
+  gettwitterDoubleAns=async(questionNumber)=>{
+    const url = `http://172.20.10.2:44381/api/Twitter?InputA=`+this.state.chosenbrand+ + '&InputB=' + this.state.chosenbranda + '&question='+questionNumber
+    
+    const userf =await fetch(url, {
+        method: 'Get',
+        headers: new Headers({
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json; charset=UTF-8'
+        })
+      })
+      
+   const res=await userf.json()
+     return (res)
+    }
   gettwitterAns=async(questionNumber)=>{
-    const brandOFcat=[]
-    const url = `http://192.168.0.107:44381/api/Twitter?Input=`+this.state.chosenbrand+`&question=`+questionNumber
+    const url = `http://172.20.10.2:44381/api/Twitter?Input=`+this.state.chosenbrand+`&question=`+questionNumber
     const userf =await fetch(url, {
         method: 'Get',
         headers: new Headers({

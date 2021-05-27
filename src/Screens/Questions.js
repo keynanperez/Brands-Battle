@@ -22,6 +22,21 @@ const questions = [
         end: " Last Post?",
     },
     {
+        id:6,
+        prev: "Who twitted more during last week ",
+        end: "or",
+    },
+    {
+        id:8,
+        prev: "Who has more followers ",
+        end: "or",
+    },
+    {
+        id:9,
+        prev: "Who got more retweets during last week ",
+        end: "or",
+    },
+    {
         id:10,
         prev: "How Many Comments Did ",
         end: " Last Post got?",
@@ -38,8 +53,13 @@ const questions = [
         end: "Posed This Week?",
     },
     {
+        id:13,
+        prev: "Who got more likes during last week ",
+        end:"or",
+    },
+    {
         id:14,
-        prev: "wich post of ",
+        prev: "Wich post of ",
         end: "got more likes?",
     },
 
