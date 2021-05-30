@@ -1,4 +1,3 @@
-  
-const myUrl = "http://10.0.0.25:44300/api/";
+const myUrl = "http://127.0.0.1:8080/api/";
 
 export default myUrl;
