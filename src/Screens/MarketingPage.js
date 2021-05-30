@@ -5,8 +5,12 @@ import {
   Text,
   FlatList,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView,
+  SafeAreaView
 } from "react-native";
+import { Card, Avatar } from "react-native-paper";
+
 import { DataTable } from "react-native-paper";
 //import Button from '../components/Button'
 import Brands from "../data/Data";
@@ -27,13 +31,73 @@ class App extends React.Component {
       "IBM",
       "SAP",
       "Accenture",
-      "Samsung"
+      "Samsung",
+      "Intel",
+      "Baidu",
+      "Oracle",
+      "Huawei",
+      "YouTube",
+      "Cisco",
+      "Adobe",
+      "Salesforce",
+      "LinkedIn",
+      "HP",
+      "Instagram",
+      "Amazon",
+      "Alibaba",
+      "The Home Depot",
+      "Walmart",
+      "Costco",
+      "IKEA",
+      "Ebay",
+      "ALDI",
+      "L'Oréal Paris",
+      "Colgate",
+      "Crest",
+      "Estee Lauder",
+      "Dove",
+      "Garnier",
+      "Nivea",
+      "Gillette",
+      "McDonald's",
+      "Starbucks",
+      "Subway",
+      "KFC",
+      "Toyota",
+      "Mercedes-Benz",
+      "BMW",
+      "Ford",
+      "Chevrolet",
+      "Jeep",
+      "Porsche",
+      "Audi",
+      "Cadillac",
+      "Volkswagen",
+      "Lexus",
+      "Ferrari",
+      "Honda",
+      "Nike",
+      "Zara",
+      "Louis Vuitton",
+      "Hermes",
+      "Gucci",
+      "Chanel",
+      "Prada",
+      "Uniqlo",
+      "Burberry",
+      "Tom Ford",
+      "RalphLauren",
+      "Next",
+      "ASOS",
+      "Moncler",
+      "Adidas"
     ],
     resultList: [],
     chosenbrand: "",
     followers: "",
     image_url: "",
-    location: ""
+    location: "",
+    Popularty: ""
   };
 
   filterSearch = text => {
@@ -86,10 +150,7 @@ class App extends React.Component {
       image_url: res.data.profile_image_url
     });
     this.setState({
-      image_url: res.data.profile_image_url
-    });
-    this.setState({
-      image_url: res.data.profile_image_url
+      Popularty: res.data.profile_image_url
     });
 
     if (res != null) {
@@ -124,23 +185,24 @@ class App extends React.Component {
             style={styles.textInput}
             onChangeText={text => this.filterSearch(text)}
           />
-
-          <FlatList
-            style={styles.brandList}
-            data={this.state.resultList}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => this.PressBrand({ item })}
-                style={[styles.item]}
-              >
-                <Text style={[styles.title]}>{item}</Text>
-              </TouchableOpacity>
-            )}
-            keyExtractor={item => item.id}
-          />
-
+          <ScrollView style={styles.brandList}>
+            <FlatList
+              style={styles.brandList}
+              data={this.state.resultList}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => this.PressBrand({ item })}
+                  style={[styles.item]}
+                >
+                  <Text style={[styles.title]}>{item}</Text>
+                </TouchableOpacity>
+              )}
+              keyExtractor={item => item.id}
+            />
+          </ScrollView>
           {this.state.chosenbrand !== "" ? (
-            <View style={styles.brandInfo}>
+            <Card style={styles.brandInfo}>
+              {/*  <Avatar.Image size={100} source={{ uri: this.state.image_url }} /> */}
               <Image
                 source={{ uri: this.state.image_url }}
                 style={{ width: 80, height: 80, borderRadius: 60, margin: 10 }}
@@ -155,12 +217,9 @@ class App extends React.Component {
                 NO. of Followers: {this.state.followers}
               </Text>
               <Text style={styles.textoutput}>
-                Popularty: {this.state.followers}
+                Popularty: {this.state.Popularty}
               </Text>
-              <Text style={styles.textoutput}>
-                NO. of Followers: {this.state.followers}
-              </Text>
-            </View>
+            </Card>
           ) : null}
         </View>
       </Background>
@@ -197,7 +256,8 @@ const styles = StyleSheet.create({
   textoutput: {
     fontSize: 20,
     padding: 10,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    color: "#ffffff"
   },
   btnoutput: {
     //color: '#000000',
@@ -207,10 +267,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10
   },
   brandInfo: {
-    backgroundColor: "#ffffff",
-    borderRadius: 60,
+    backgroundColor: "#6200EE",
+    borderRadius: 90,
     height: "60%",
-    width: "100%",
+    width: 340,
     borderRadius: 5,
 
     fontSize: 30,
@@ -218,7 +278,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10
   },
   brandList: {
-    height: "50%",
+    height: 250,
     width: "80%"
   },
   item: {

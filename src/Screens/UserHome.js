@@ -11,7 +11,7 @@ import {
   ImageBackground
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Background from "../components/Backgroundgif";
+import Background from "../components/Backgroundgifhome";
 import Logo from "../components/Logo";
 import Header from "../components/Header";
 import Icon from "@expo/vector-icons/AntDesign";
