@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   StyleSheet,
   View,
@@ -7,10 +7,13 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  SafeAreaView
+  SafeAreaView,
+  Dimensions
 } from "react-native";
+import sentiment from "sentiment";
 import { Card, Avatar } from "react-native-paper";
-
+const { width } = Dimensions.get("window");
+import Swiper from "react-native-swiper";
 import { DataTable } from "react-native-paper";
 //import Button from '../components/Button'
 import Brands from "../data/Data";
@@ -19,6 +22,7 @@ import SearchBox from "react-native-searchbox-1";
 import Background from "../components/Backgroundgif";
 import Header from "../components/Header";
 import TextInput from "../components/TextInput";
+import { Button } from "native-base";
 
 class App extends React.Component {
   state = {
@@ -94,10 +98,14 @@ class App extends React.Component {
     ],
     resultList: [],
     chosenbrand: "",
+    chosenbrandRefrash: "",
     followers: "",
     image_url: "",
     location: "",
-    Popularty: ""
+    Popularty: "",
+    like_count: "",
+    reply_count: "",
+    retweet_count: ""
   };
 
   filterSearch = text => {
@@ -114,19 +122,22 @@ class App extends React.Component {
     });
   };
 
-  PressBrand = text => {
-    this.setState({
-      chosenbrand: text.item
+  PressBrand = async text => {
+    await this.setState({
+      chosenbrandRefrash: text.item
     });
-    var twitterAns = this.gettwitterAns("1");
+    var twitterAns = await this.gettwitterAns("1");
+    var twitterAns2 = await this.gettwitterPop("5");
+    var twitterAns2 = await this.gettwitts("14");
   };
+
   gettwitterAns = async questionNumber => {
     //alert(chosenbrand)
     const brandOFcat = [];
-    console.log(this.state.chosenbrand);
+    console.log(this.state.chosenbrandRefrash);
     const url =
       `http://127.0.0.1:8080/api/Twitter?Input=` +
-      this.state.chosenbrand +
+      this.state.chosenbrandRefrash +
       `&question=` +
       1;
     const userf = await fetch(url, {
@@ -139,6 +150,10 @@ class App extends React.Component {
 
     const res = await userf.json();
     console.log(res);
+    /*  console.log(res.includes.tweets[0].public_metrics.like_count);
+    console.log(res.includes.tweets[0].public_metrics.quote_count);
+    console.log(res.includes.tweets[0].public_metrics.reply_count);
+    console.log(res.includes.tweets[0].public_metrics.retweet_count); */
 
     this.setState({
       location: res.data.location
@@ -150,33 +165,83 @@ class App extends React.Component {
       image_url: res.data.profile_image_url
     });
     this.setState({
-      Popularty: res.data.profile_image_url
+      like_count: res.includes.tweets[0].public_metrics.like_count
+    });
+    this.setState({
+      reply_count: res.includes.tweets[0].public_metrics.reply_count
+    });
+    this.setState({
+      retweet_count: res.includes.tweets[0].public_metrics.retweet_count
+    });
+    this.setState({
+      chosenbrand: this.state.chosenbrandRefrash
+    });
+    var PopulartyCalc =
+      this.state.like_count * 0.3 +
+      this.state.reply_count * 0.2 +
+      this.state.retweet_count * 0.5;
+    var Populartysum =
+      this.state.like_count + this.state.reply_count + this.state.retweet_count;
+
+    var PopulartyCalculetor = (PopulartyCalc / Populartysum) * 100;
+    //alert(PopulartyCalculetor);
+  };
+  gettwitterPop = async questionNumber => {
+    //alert(chosenbrand)
+    const brandOFcat = [];
+    console.log(this.state.chosenbrand);
+    const url =
+      `http://127.0.0.1:8080/api/Twitter?Input=` +
+      this.state.chosenbrand +
+      `&question=` +
+      5;
+    const userf = await fetch(url, {
+      method: "Get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8"
+      })
     });
 
-    if (res != null) {
-      switch (1) {
-        case 1:
-          return res.data.public_metrics.followers_count;
+    const res = await userf.json();
+    // console.log(res);
+    this.setState({
+      Popularty: res
+    });
+    console.log(this.state.Popularty);
+  };
 
-        case 3:
-          return res[0].FavoriteCount;
-        case 4:
-          return res[0].RetweetCount;
-        case 10:
-          return res;
-        case 11:
-          return res;
-        case 12:
-          return res;
-        case 14:
-          return res;
-        default:
-          return Alert.alert("shirel");
-      }
-    }
+  gettwitts = async questionNumber => {
+    //alert(chosenbrand)
+    const brandOFcat = [];
+    console.log(this.state.chosenbrand);
+    const url =
+      `http://127.0.0.1:8080/api/Twitter?Input=` +
+      this.state.chosenbrand +
+      `&question=` +
+      14;
+    const userf = await fetch(url, {
+      method: "Get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8"
+      })
+    });
+
+    const res = await userf.json();
+    console.log(res);
+
+    /*  console.log(res.includes.tweets[0].public_metrics.like_count);
+    console.log(res.includes.tweets[0].public_metrics.quote_count);
+    console.log(res.includes.tweets[0].public_metrics.reply_count);
+    console.log(res.includes.tweets[0].public_metrics.retweet_count); */
   };
 
   render() {
+    var Sentiment = require("sentiment");
+    var sentiment = new Sentiment();
+    var result = sentiment.analyze("Cats are good.");
+    console.log(result.score);
     return (
       <Background>
         <View style={styles.view}>
@@ -214,11 +279,24 @@ class App extends React.Component {
                 Location: {this.state.location}
               </Text>
               <Text style={styles.textoutput}>
-                NO. of Followers: {this.state.followers}
+                NO. of Followers: {this.state.followers}K
               </Text>
               <Text style={styles.textoutput}>
-                Popularty: {this.state.Popularty}
+                Popularty Score: {this.state.Popularty}
               </Text>
+              <Button
+                icon="gamepad-variant"
+                mode="contained"
+                style={styles.card}
+                onPress={() =>
+                  this.props.navigation.navigate("MoreBrandData", {
+                    Popularty: this.state.Popularty,
+                    chosenbrand: this.state.chosenbrand
+                  })
+                }
+              >
+                <Text style={styles.text}> More Information </Text>
+              </Button>
             </Card>
           ) : null}
         </View>
@@ -257,6 +335,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 10,
     paddingHorizontal: 10,
+    fontWeight: "bold",
     color: "#ffffff"
   },
   btnoutput: {
@@ -269,11 +348,11 @@ const styles = StyleSheet.create({
   brandInfo: {
     backgroundColor: "#6200EE",
     borderRadius: 90,
-    height: "60%",
-    width: 340,
-    borderRadius: 5,
+    height: "50%",
+    width: 360,
+    borderRadius: 50,
 
-    fontSize: 30,
+    fontSize: 35,
     fontWeight: "bold",
     paddingHorizontal: 10
   },
@@ -288,6 +367,45 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 22
+  },
+  wrapper: {},
+
+  slide: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "transparent"
+  },
+
+  slide1: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#9DD6EB"
+  },
+
+  slide2: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#97CAE5"
+  },
+
+  slide3: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#92BBD9"
+  },
+
+  text: {
+    color: "#fff",
+    fontSize: 30,
+    fontWeight: "bold"
+  },
+
+  image: {
+    width,
+    flex: 1
   }
 });
 

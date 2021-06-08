@@ -51,8 +51,7 @@ npm manifest:
       "expo-image-picker": "~9.2.0",
       "expo-localization": "~9.1.0",
       "expo-status-bar": "~1.0.3",
-      "lottie-ios": "^3.2.0",
-      "lottie-react-native": "~2.6.1",
+     
       "native-base": "^2.15.2",
       "react": "^16.13.1",
       "react-dom": "16.13.1",
@@ -6360,25 +6359,7 @@ Lockfile:
     dependencies:
       js-tokens "^3.0.0 || ^4.0.0"
   
-  lottie-ios@2.5.0:
-    version "2.5.0"
-    resolved "https://registry.yarnpkg.com/lottie-ios/-/lottie-ios-2.5.0.tgz#55c808e785d4a6933b0c10b395530b17098b05de"
-    integrity sha1-VcgI54XUppM7DBCzlVMLFwmLBd4=
-  
-  lottie-ios@^3.2.0:
-    version "3.2.2"
-    resolved "https://registry.yarnpkg.com/lottie-ios/-/lottie-ios-3.2.2.tgz#c684bb9bdc91a970f15192506ee77b3c5c062ca6"
-    integrity sha512-buYj/HbzoTeqiVy+Hpzfd2STdRW7RJnne+09z48nVvBYO+ioG5B5EvRb92pYOoRDNr0stQpfurzK1uFXW4gGCA==
-  
-  lottie-react-native@~2.6.1:
-    version "2.6.1"
-    resolved "https://registry.yarnpkg.com/lottie-react-native/-/lottie-react-native-2.6.1.tgz#330d24fa6aac5928ea63f8e181b9b7d930a1a119"
-    integrity sha512-Z+6lARvWWhB8n8OSmW7/aHkV71ftsmO7hYXFt0D+REy/G40mpkQt1H7Cdy1HqY4cKAp7EYDWVxhu5+fkdD6o4g==
-    dependencies:
-      invariant "^2.2.2"
-      lottie-ios "2.5.0"
-      prop-types "^15.5.10"
-      react-native-safe-module "^1.1.0"
+
   
   lru-cache@^4.0.1:
     version "4.1.5"

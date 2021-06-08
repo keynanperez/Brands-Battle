@@ -25,7 +25,6 @@ import {
   Checkbox,
   List
 } from "react-native-paper";
-import LottieView from "lottie-react-native";
 
 import { SCLAlert, SCLAlertButton } from "react-native-scl-alert";
 import UserAppointments from "./UserAppointments";

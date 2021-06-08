@@ -8,6 +8,7 @@ import Button from "../components/Button";
 import TextInput from "../components/TextInput";
 import BackButton from "../components/BackButton";
 import { Item, Text } from "native-base";
+import sentiment from "sentiment";
 import { theme } from "../core/theme";
 import { ThemeContext, navigation } from "react-navigation";
 
@@ -63,6 +64,10 @@ export default class LoginView extends React.Component {
   };
 
   render() {
+    var Sentiment = require("sentiment");
+    var sentiment = new Sentiment();
+    var result = sentiment.analyze("Cats are bad and evil.");
+    console.log(result);
     return (
       <Background>
         <Logo />

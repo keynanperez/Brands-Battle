@@ -20,6 +20,7 @@ import ImagedCarouselCard from "../lib/ImagedCarouselCard";
 import Background from "../components/Background";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
+import BubbleSelect, { Bubble } from "react-native-bubble-select";
 //import QuizQuestions from './QuizQuestions'
 
 import Questions from "./Questions";
