@@ -7,14 +7,18 @@ import TweetsComponent from "./TweetsComponent";
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       Popularty: this.props.navigation.state.params.Popularty,
-      chosenbrand: this.props.navigation.state.params.chosenbrand
+      chosenbrand: this.props.navigation.state.params.chosenbrand,
+      listTweet: []
     };
     console.log(this.props.navigation.state.params.Popularty);
     console.log(this.props.navigation.state.params.chosenbrand);
   }
-
+  componentDidMount() {
+    this.gettwitts();
+  }
   gettwitts = async questionNumber => {
     //alert(chosenbrand)
     const brandOFcat = [];
@@ -35,8 +39,10 @@ export default class App extends React.Component {
     const res = await userf.json();
     console.log(res);
     this.setState({
-      Popularty: this.res
+      listTweet: res
     });
+    console.log("keynan peretz");
+    console.log(this.state.listTweet);
     /*  console.log(res.includes.tweets[0].public_metrics.like_count);
     console.log(res.includes.tweets[0].public_metrics.quote_count);
     console.log(res.includes.tweets[0].public_metrics.reply_count);
@@ -46,7 +52,7 @@ export default class App extends React.Component {
   render() {
     return (
       <Swiper style={styles.wrapper} showsButtons loop={false}>
-        <TweetsComponent />
+        <TweetsComponent first={this.state.listTweet} />
 
         <View testID="Beautiful" style={styles.slide2}>
           <Text style={styles.text}>Beautiful</Text>

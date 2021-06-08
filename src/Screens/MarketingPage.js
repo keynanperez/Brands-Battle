@@ -128,7 +128,8 @@ class App extends React.Component {
     });
     var twitterAns = await this.gettwitterAns("1");
     var twitterAns2 = await this.gettwitterPop("5");
-    var twitterAns2 = await this.gettwitts("14");
+    var twitterAns3 = await this.gettwitts("14");
+    var twitterAns4 = await this.gettcomm("15");
   };
 
   gettwitterAns = async questionNumber => {
@@ -230,6 +231,33 @@ class App extends React.Component {
 
     const res = await userf.json();
     console.log(res);
+
+    /*  console.log(res.includes.tweets[0].public_metrics.like_count);
+    console.log(res.includes.tweets[0].public_metrics.quote_count);
+    console.log(res.includes.tweets[0].public_metrics.reply_count);
+    console.log(res.includes.tweets[0].public_metrics.retweet_count); */
+  };
+
+  gettcomm = async questionNumber => {
+    //alert(chosenbrand)
+    const brandOFcat = [];
+    console.log(this.state.chosenbrand);
+    const url =
+      `http://127.0.0.1:8080/api/Twitter?Input=` +
+      this.state.chosenbrand +
+      `&question=` +
+      4;
+    const userf = await fetch(url, {
+      method: "Get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8"
+      })
+    });
+
+    const res = await userf.json();
+    console.log("Tweets");
+    console.log(res[0].FullText);
 
     /*  console.log(res.includes.tweets[0].public_metrics.like_count);
     console.log(res.includes.tweets[0].public_metrics.quote_count);
