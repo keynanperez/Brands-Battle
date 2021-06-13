@@ -64,10 +64,6 @@ export default class LoginView extends React.Component {
   };
 
   render() {
-    var Sentiment = require("sentiment");
-    var sentiment = new Sentiment();
-    var result = sentiment.analyze("Cats are bad and evil.");
-    console.log(result);
     return (
       <Background>
         <Logo />

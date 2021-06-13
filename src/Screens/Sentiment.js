@@ -27,7 +27,9 @@ export default class Example extends React.Component {
           Result: 0,
           Color: "#1abc9c"
         }
-      ]
+      ],
+      brand: props.brand,
+      fetchlist: []
     };
   }
   getTotal = a => {
@@ -43,6 +45,31 @@ export default class Example extends React.Component {
     if (res.score > 0) return "#1abc9c";
     else return "#BC1A1A";
   };
+  gettwitterPop = async questionNumber => {
+    const brandOFcat = [];
+
+    const url =
+      `http://127.0.0.1:8080/api/Twitter?Input=` +
+      this.state.brand +
+      `&question=` +
+      16;
+    const userf = await fetch(url, {
+      method: "Get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8"
+      })
+    });
+
+    const res = await userf.json();
+    console.log(res);
+    this.setState({
+      fetchlist: res
+    });
+  };
+  componentDidMount() {
+    this.gettwitterPop(12);
+  }
   render() {
     return (
       <>
@@ -54,7 +81,7 @@ export default class Example extends React.Component {
           // spacing={20}
           sections={[
             {
-              data: this.state.list
+              data: this.state.fetchlist
             }
           ]}
           style={styles.gridView}
@@ -62,13 +89,11 @@ export default class Example extends React.Component {
             <View
               style={[
                 styles.itemContainer,
-                { backgroundColor: this.getMotal(item.Comment) }
+                { backgroundColor: this.getMotal(item) }
               ]}
             >
-              <Text style={styles.itemName}>{item.Comment}</Text>
-              <Text style={styles.itemName}>
-                Score: {this.getTotal(item.Comment)}
-              </Text>
+              <Text style={styles.itemName}>{item}</Text>
+              <Text style={styles.itemName}>Score: {this.getTotal(item)}</Text>
             </View>
           )}
           renderSectionHeader={({ section }) => (
@@ -88,7 +113,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     borderRadius: 5,
     padding: 10,
-    height: 100
+    height: 150
   },
   itemName: {
     fontSize: 20,

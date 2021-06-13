@@ -14,13 +14,6 @@ export default class Example extends React.Component {
         { name: props.first[3], code: "#9b59b6" }
       ]
     };
-
-    /* const [items, setItems] = React.useState([
-      { name: props.first[0], code: "#1abc9c" },
-      { name: props.first[1], code: "#2ecc71" },
-      { name: props.first[2], code: "#3498db" },
-      { name: props.first[3], code: "#9b59b6" }
-    ]); */
   }
   componentDidMount() {
     console.log("componentDidMount() lifecycle");
@@ -31,9 +24,6 @@ export default class Example extends React.Component {
         <Header style={styles.Header}>Best Tweets</Header>
         <SectionGrid
           itemDimension={190}
-          // staticDimension={300}
-          // fixed
-          // spacing={20}
           sections={[
             {
               data: this.state.items

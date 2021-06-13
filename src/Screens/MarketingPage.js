@@ -257,10 +257,6 @@ class App extends React.Component {
   };
 
   render() {
-    var Sentiment = require("sentiment");
-    var sentiment = new Sentiment();
-    var result = sentiment.analyze("Cats are good.");
-
     return (
       <Background>
         <View style={styles.view}>
@@ -286,7 +282,6 @@ class App extends React.Component {
           </ScrollView>
           {this.state.chosenbrand !== "" ? (
             <Card style={styles.brandInfo}>
-              {/*  <Avatar.Image size={100} source={{ uri: this.state.image_url }} /> */}
               <Image
                 source={{ uri: this.state.image_url }}
                 style={{ width: 80, height: 80, borderRadius: 60, margin: 10 }}

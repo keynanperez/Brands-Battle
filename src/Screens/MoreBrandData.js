@@ -4,6 +4,7 @@ import Swiper from "react-native-swiper";
 import { FlatGrid } from "react-native-super-grid";
 import TweetsComponent from "./TweetsComponent";
 import SentimentPage from "./Sentiment";
+import Chart from "./Chart";
 import sentiment from "sentiment";
 import {
   LineChart,
@@ -49,11 +50,6 @@ export default class App extends React.Component {
     this.setState({
       listTweet: res
     });
-
-    /*  console.log(res.includes.tweets[0].public_metrics.like_count);
-    console.log(res.includes.tweets[0].public_metrics.quote_count);
-    console.log(res.includes.tweets[0].public_metrics.reply_count);
-    console.log(res.includes.tweets[0].public_metrics.retweet_count); */
   };
 
   render() {
@@ -61,11 +57,9 @@ export default class App extends React.Component {
       <Swiper style={styles.wrapper} showsButtons loop={false}>
         <TweetsComponent first={this.state.listTweet} />
 
-        <SentimentPage />
+        <SentimentPage brand={this.state.chosenbrand} />
 
-        <View testID="Simple" style={styles.slide3}>
-          <Text style={styles.text}>And simple</Text>
-        </View>
+        {/*   <Chart /> */}
       </Swiper>
     );
   }
