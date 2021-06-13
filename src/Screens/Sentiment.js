@@ -1,34 +1,52 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { SectionGrid } from "react-native-super-grid";
+import { Container, Content, Badge, Icon } from "native-base";
 import Header from "../components/Header";
+
 export default class Example extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      items: [
-        { name: props.first[0], code: "#1abc9c" },
-        { name: props.first[1], code: "#2ecc71" },
-        { name: props.first[2], code: "#3498db" },
-        { name: props.first[3], code: "#9b59b6" }
+      list: [
+        {
+          Comment: "my whole body feels itchy and like its on fire",
+          Result: 0,
+          Color: "#1abc9c"
+        },
+        {
+          Comment:
+            "don`t like it and i hate my new timetable, having such a bad week",
+          Result: 0,
+          Color: "#1abc9c"
+        },
+        { Comment: "i like it!!", Result: 0, Color: "#1abc9c" },
+        {
+          Comment: "hope ur havin fun",
+          Result: 0,
+          Color: "#1abc9c"
+        }
       ]
     };
-
-    /* const [items, setItems] = React.useState([
-      { name: props.first[0], code: "#1abc9c" },
-      { name: props.first[1], code: "#2ecc71" },
-      { name: props.first[2], code: "#3498db" },
-      { name: props.first[3], code: "#9b59b6" }
-    ]); */
   }
-  componentDidMount() {
-    console.log("componentDidMount() lifecycle");
-  }
+  getTotal = a => {
+    var Sentiment = require("sentiment");
+    var sentiment = new Sentiment();
+    var res = sentiment.analyze(a);
+    return res.score;
+  };
+  getMotal = a => {
+    var Sentiment = require("sentiment");
+    var sentiment = new Sentiment();
+    var res = sentiment.analyze(a);
+    if (res.score > 0) return "#1abc9c";
+    else return "#BC1A1A";
+  };
   render() {
     return (
       <>
-        <Header style={styles.Header}>Best Tweets</Header>
+        <Header style={styles.Header}>Sentement analyze</Header>
         <SectionGrid
           itemDimension={190}
           // staticDimension={300}
@@ -36,15 +54,21 @@ export default class Example extends React.Component {
           // spacing={20}
           sections={[
             {
-              data: this.state.items
+              data: this.state.list
             }
           ]}
           style={styles.gridView}
           renderItem={({ item, section, index }) => (
             <View
-              style={[styles.itemContainer, { backgroundColor: item.code }]}
+              style={[
+                styles.itemContainer,
+                { backgroundColor: this.getMotal(item.Comment) }
+              ]}
             >
-              <Text style={styles.itemName}>{item.name}</Text>
+              <Text style={styles.itemName}>{item.Comment}</Text>
+              <Text style={styles.itemName}>
+                Score: {this.getTotal(item.Comment)}
+              </Text>
             </View>
           )}
           renderSectionHeader={({ section }) => (
@@ -55,7 +79,6 @@ export default class Example extends React.Component {
     );
   }
 }
-
 const styles = StyleSheet.create({
   gridView: {
     marginTop: 20,
@@ -65,10 +88,10 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     borderRadius: 5,
     padding: 10,
-    height: 200
+    height: 100
   },
   itemName: {
-    fontSize: 16,
+    fontSize: 20,
     color: "#fff",
     fontWeight: "600"
   },

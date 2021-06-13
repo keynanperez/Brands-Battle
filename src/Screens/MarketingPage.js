@@ -135,7 +135,7 @@ class App extends React.Component {
   gettwitterAns = async questionNumber => {
     //alert(chosenbrand)
     const brandOFcat = [];
-    console.log(this.state.chosenbrandRefrash);
+
     const url =
       `http://127.0.0.1:8080/api/Twitter?Input=` +
       this.state.chosenbrandRefrash +
@@ -150,11 +150,6 @@ class App extends React.Component {
     });
 
     const res = await userf.json();
-    console.log(res);
-    /*  console.log(res.includes.tweets[0].public_metrics.like_count);
-    console.log(res.includes.tweets[0].public_metrics.quote_count);
-    console.log(res.includes.tweets[0].public_metrics.reply_count);
-    console.log(res.includes.tweets[0].public_metrics.retweet_count); */
 
     this.setState({
       location: res.data.location
@@ -190,7 +185,7 @@ class App extends React.Component {
   gettwitterPop = async questionNumber => {
     //alert(chosenbrand)
     const brandOFcat = [];
-    console.log(this.state.chosenbrand);
+
     const url =
       `http://127.0.0.1:8080/api/Twitter?Input=` +
       this.state.chosenbrand +
@@ -209,13 +204,12 @@ class App extends React.Component {
     this.setState({
       Popularty: res
     });
-    console.log(this.state.Popularty);
   };
 
   gettwitts = async questionNumber => {
     //alert(chosenbrand)
     const brandOFcat = [];
-    console.log(this.state.chosenbrand);
+
     const url =
       `http://127.0.0.1:8080/api/Twitter?Input=` +
       this.state.chosenbrand +
@@ -230,7 +224,6 @@ class App extends React.Component {
     });
 
     const res = await userf.json();
-    console.log(res);
 
     /*  console.log(res.includes.tweets[0].public_metrics.like_count);
     console.log(res.includes.tweets[0].public_metrics.quote_count);
@@ -241,7 +234,7 @@ class App extends React.Component {
   gettcomm = async questionNumber => {
     //alert(chosenbrand)
     const brandOFcat = [];
-    console.log(this.state.chosenbrand);
+
     const url =
       `http://127.0.0.1:8080/api/Twitter?Input=` +
       this.state.chosenbrand +
@@ -256,8 +249,6 @@ class App extends React.Component {
     });
 
     const res = await userf.json();
-    console.log("Tweets");
-    console.log(res[0].FullText);
 
     /*  console.log(res.includes.tweets[0].public_metrics.like_count);
     console.log(res.includes.tweets[0].public_metrics.quote_count);
@@ -269,7 +260,7 @@ class App extends React.Component {
     var Sentiment = require("sentiment");
     var sentiment = new Sentiment();
     var result = sentiment.analyze("Cats are good.");
-    console.log(result.score);
+
     return (
       <Background>
         <View style={styles.view}>

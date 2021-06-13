@@ -3,6 +3,16 @@ import { Text, View, StyleSheet } from "react-native";
 import Swiper from "react-native-swiper";
 import { FlatGrid } from "react-native-super-grid";
 import TweetsComponent from "./TweetsComponent";
+import SentimentPage from "./Sentiment";
+import sentiment from "sentiment";
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart
+} from "react-native-chart-kit";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -13,8 +23,6 @@ export default class App extends React.Component {
       chosenbrand: this.props.navigation.state.params.chosenbrand,
       listTweet: []
     };
-    console.log(this.props.navigation.state.params.Popularty);
-    console.log(this.props.navigation.state.params.chosenbrand);
   }
   componentDidMount() {
     this.gettwitts();
@@ -22,7 +30,7 @@ export default class App extends React.Component {
   gettwitts = async questionNumber => {
     //alert(chosenbrand)
     const brandOFcat = [];
-    console.log(this.state.chosenbrand);
+
     const url =
       `http://127.0.0.1:8080/api/Twitter?Input=` +
       this.state.chosenbrand +
@@ -37,12 +45,11 @@ export default class App extends React.Component {
     });
 
     const res = await userf.json();
-    console.log(res);
+
     this.setState({
       listTweet: res
     });
-    console.log("keynan peretz");
-    console.log(this.state.listTweet);
+
     /*  console.log(res.includes.tweets[0].public_metrics.like_count);
     console.log(res.includes.tweets[0].public_metrics.quote_count);
     console.log(res.includes.tweets[0].public_metrics.reply_count);
@@ -54,9 +61,8 @@ export default class App extends React.Component {
       <Swiper style={styles.wrapper} showsButtons loop={false}>
         <TweetsComponent first={this.state.listTweet} />
 
-        <View testID="Beautiful" style={styles.slide2}>
-          <Text style={styles.text}>Beautiful</Text>
-        </View>
+        <SentimentPage />
+
         <View testID="Simple" style={styles.slide3}>
           <Text style={styles.text}>And simple</Text>
         </View>
