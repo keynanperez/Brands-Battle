@@ -5,6 +5,7 @@ import { FlatGrid } from "react-native-super-grid";
 import TweetsComponent from "./TweetsComponent";
 import SentimentPage from "./Sentiment";
 import Chart from "./Chart";
+import Pie from "./Pie";
 import sentiment from "sentiment";
 import {
   LineChart,
@@ -59,7 +60,7 @@ export default class App extends React.Component {
 
         <SentimentPage brand={this.state.chosenbrand} />
 
-        {/*   <Chart /> */}
+        <Chart />
       </Swiper>
     );
   }

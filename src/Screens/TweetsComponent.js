@@ -15,12 +15,10 @@ export default class Example extends React.Component {
       ]
     };
   }
-  componentDidMount() {
-    console.log("componentDidMount() lifecycle");
-  }
+
   render() {
     return (
-      <>
+      <View style={styles.gridView}>
         <Header style={styles.Header}>Best Tweets</Header>
         <SectionGrid
           itemDimension={190}
@@ -41,7 +39,7 @@ export default class Example extends React.Component {
             <Text style={styles.sectionHeader}>{section.title}</Text>
           )}
         />
-      </>
+      </View>
     );
   }
 }

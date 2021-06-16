@@ -15,33 +15,53 @@ import {
   ContributionGraph,
   StackedBarChart
 } from "react-native-chart-kit";
-import Pie from "./Pie";
 
 export default class App extends React.Component {
   render() {
+    const data = [
+      {
+        name: "Tweets",
+        population: 21500000,
+        color: "rgba(131, 167, 234, 1)",
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+      },
+      {
+        name: "Retweets",
+        population: 2800000,
+        color: "#F00",
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+      },
+      {
+        name: "Comments",
+        population: 527612,
+        color: "red",
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+      },
+      {
+        name: "Likes",
+        population: 8538000,
+        color: "#ffffff",
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+      },
+      {
+        name: "Followers",
+        population: 11920000,
+        color: "rgb(0, 0, 255)",
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+      }
+    ];
+
     return (
       <View style={styles.gridView}>
-        <LineChart
-          gridView
-          data={{
-            labels: ["January", "February", "March", "April", "May", "June"],
-            datasets: [
-              {
-                data: [
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100,
-                  Math.random() * 100
-                ]
-              }
-            ]
-          }}
-          width={Dimensions.get("window").width} // from react-native
+        <PieChart
+          data={data}
+          width={Dimensions.get("window").width}
           height={220}
-          yAxisSuffix="k"
-          yAxisInterval={1} // optional, defaults to 1
           chartConfig={{
             backgroundColor: "#e26a00",
             backgroundGradientFrom: "#fb8c00",
@@ -58,13 +78,9 @@ export default class App extends React.Component {
               stroke: "#ffa726"
             }
           }}
-          bezier
-          style={{
-            marginVertical: 8,
-            borderRadius: 16
-          }}
+          accessor={"population"}
+          backgroundColor={"transparent"}
         />
-        <Pie></Pie>
       </View>
     );
   }
