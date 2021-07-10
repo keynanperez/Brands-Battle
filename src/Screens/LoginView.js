@@ -10,7 +10,7 @@ import BackButton from '../components/BackButton'
 import { Item, Text } from 'native-base';
 import { theme } from '../core/theme'
 import { ThemeContext ,navigation} from 'react-navigation';
-
+import myurl from "./Url"
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, ThemeConsumer } from 'react-native-elements';
 import myUrl from "./Url";
@@ -39,7 +39,7 @@ export default  class  LoginView extends React.Component {
     else{
      // this.props.navigation.navigate('UserHome',{UserId:this.state.UserId,pointsU:this.state.pointsU,stageU:this.state.stageU,UserName:this.state.UserName,imgU:this.state.imgU});
     
-     const url = `http://172.20.10.2:44381/api/Users`
+     const url = myurl+'Users'
       const userf =await fetch(url, {
           method: 'Put',
           body:   JSON.stringify([Mail, pass]),

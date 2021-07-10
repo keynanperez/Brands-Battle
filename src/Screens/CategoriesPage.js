@@ -1,4 +1,5 @@
 import React , { Component }from "react";
+import myurl from "./Url"
 import { ImageBackground, ScrollView, StatusBar, StyleSheet ,  Text,
   View,
   Image,
@@ -17,6 +18,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 //import QuizQuestions from './QuizQuestions'
 
 import Questions from "./Questions"
+import myUrl from "./Url";
 class Categories extends React.Component {
   constructor(props) {
     super(props);
@@ -35,7 +37,7 @@ getQ=async(Catname)=>{
 }
 getallbrands=async(Catname)=>{
   const brandOFcat=[]
-  const url = `http:/172.20.10.2:44381/api/brands?Catname=`+Catname
+  const url = myurl+`brands?Catname=`+Catname
   const userf =await fetch(url, {
       method: 'Get',
       headers: new Headers({
@@ -66,6 +68,7 @@ getallbrands=async(Catname)=>{
       var endQ=""
       var chosenbrand=""
       var array=[]
+      var answers=""
       while  (i<=10) {
           var randomNumberB = Math.floor(Math.random() * ((this.state.currentBrands.length)));
           var randomNumberQ = Math.floor(Math.random() * 7);
@@ -74,31 +77,31 @@ getallbrands=async(Catname)=>{
          endQ=arryQuestions[randomNumberQ].end;
          idtw=arryQuestions[randomNumberQ].id;
 
-          if(randomNumberQ== 6 ||randomNumberQ== 8||randomNumberQ==9||randomNumberQ== 13)
+          if(randomNumberQ== 3 ||randomNumberQ== 4||randomNumberQ==5||randomNumberQ== 9)
             {  
-              var randomNumberC = Math.floor(Math.random() * ((this.state.currentBrands.length)));
-              this.state.chosenbrandb=this.state.currentBrands[randomNumberB];
-              var fuuQ= prevQ+this.state.chosenbranda+endQ+chosenbrandb;
+              var randomNumberC = Math.floor(Math.random() * 7);;
+              this.state.chosenbrandb=this.state.currentBrands[randomNumberC];
+              var fuuQ= prevQ+this.state.chosenbranda+endQ+this.state.chosenbrandb;
               answers= await this.ansgetB(idtw)
               array.push({ question:fuuQ, answers:answers});
               i++;
-              return this.state.arryOfQuestions=array;
+           
               
             }
          else
           {
-        
-             var fuuQ= prevQ+this.state.chosenbrand+endQ;
+           
+             var fuuQ= prevQ+this.state.chosenbranda+endQ;
              answers= await this.ansgetA(idtw)
              array.push({ question:fuuQ, answers:answers});
              i++;
-            return this.state.arryOfQuestions=array;
+         
           }
          
 
         
      }
-
+     return this.state.arryOfQuestions=array;
   };
 
   ansgetA=async(questionNumber)=>{
@@ -173,7 +176,7 @@ else{
   
 
   gettwitterDoubleAns=async(questionNumber)=>{
-    const url = `http://172.20.10.2:44381/api/Twitter?InputA=`+this.state.chosenbrand+ + '&InputB=' + this.state.chosenbranda + '&question='+questionNumber
+    const url = myurl+`Twitter?InputA=`+this.state.chosenbrandb+ '&InputB=' + this.state.chosenbranda + '&question='+questionNumber
     
     const userf =await fetch(url, {
         method: 'Get',
@@ -187,7 +190,7 @@ else{
      return (res)
     }
   gettwitterAns=async(questionNumber)=>{
-    const url = `http://172.20.10.2:44381/api/Twitter?Input=`+this.state.chosenbrand+`&question=`+questionNumber
+    const url = myurl+`Twitter?Input=`+this.state.chosenbranda+`&question=`+questionNumber
     const userf =await fetch(url, {
         method: 'Get',
         headers: new Headers({
@@ -200,22 +203,22 @@ else{
         if(res != null)
           {
             switch (questionNumber) {
-              case 1:
+              case 0:
                 return (res.data.public_metrics.followers_count);
-              case 3:
+              case 1:
                 return (res[0].FavoriteCount);
-              case 4:
+              case 2:
                 return (res[0].RetweetCount);
-              case 10:
+              case 7:
                 return (res);
-              case 11:
+              case 6:
                 return (res);
-              case 12:
+              case 8:
                 return (res);
-                case 14:
+                case 10:
                   return (res);
               default:
-                  return Alert.alert("shirel");
+                  return (res);
             }
           
       
