@@ -171,7 +171,8 @@ else{
     {
       arrayOfUnmixAns.push({ id:1,text: this.state.chosenbranda})
       arrayOfUnmixAns.push({ id:2,text: this.state.chosenbrandb,correct: true })
-      }
+    }
+    return arrayOfUnmixAns;
   }
   
 
