@@ -49,7 +49,14 @@ class Quiz extends React.Component {
   
   nextQuestion = () => {
     this.setState(state => {
-      
+      const internal = setInterval(() => {
+        if (this.state.timer <= 0 ){
+          this.nextQuestion()}
+      else {
+        this.setState({timer: this.state.timer - 1}) 
+        clearInterval(internal)}
+      } , 1000)
+    
       const nextIndex = this.state.activeQuestionIndex + 1;
     
       if (nextIndex >= state.totalCount) {

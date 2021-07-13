@@ -2,10 +2,11 @@
 import { Row} from 'react-native-easy-grid';
 import * as Permissions from 'expo-permissions';  
 import React, { Component } from "react";
+
 import Background from '../components/Background'
 import Logo from '../components/Logo'
 import Header from '../components/Header'
-import myurl from "./Url"
+
 import TextInput from '../components/TextInput'
 import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
@@ -37,7 +38,7 @@ class NewUser extends Component {
     points:this.state.points,
     Mail:this.state.NewUserMail,
   }
-  const url = myurl+`Users`
+  const url = `http://172.20.10.2:44365/api/Users`
     const userf =await fetch(url, {
       method: 'Post',
       body: JSON.stringify(this.state.newuser),
