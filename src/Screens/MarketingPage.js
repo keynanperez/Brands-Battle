@@ -200,7 +200,7 @@ class App extends React.Component {
     });
 
     const res = await userf.json();
-    // console.log(res);
+    console.log(res);
     this.setState({
       Popularty: res
     });
@@ -225,10 +225,10 @@ class App extends React.Component {
 
     const res = await userf.json();
 
-    /*  console.log(res.includes.tweets[0].public_metrics.like_count);
+    console.log(res.includes.tweets[0].public_metrics.like_count);
     console.log(res.includes.tweets[0].public_metrics.quote_count);
     console.log(res.includes.tweets[0].public_metrics.reply_count);
-    console.log(res.includes.tweets[0].public_metrics.retweet_count); */
+    console.log(res.includes.tweets[0].public_metrics.retweet_count);
   };
 
   gettcomm = async questionNumber => {
@@ -250,10 +250,10 @@ class App extends React.Component {
 
     const res = await userf.json();
 
-    /*  console.log(res.includes.tweets[0].public_metrics.like_count);
+    console.log(res.includes.tweets[0].public_metrics.like_count);
     console.log(res.includes.tweets[0].public_metrics.quote_count);
     console.log(res.includes.tweets[0].public_metrics.reply_count);
-    console.log(res.includes.tweets[0].public_metrics.retweet_count); */
+    console.log(res.includes.tweets[0].public_metrics.retweet_count);
   };
 
   render() {
