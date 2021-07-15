@@ -22,8 +22,39 @@ class Categories extends React.Component {
     arryOfQuestions:[],
     chosenbranda:"",
     chosenbrandb:"",
+    UserId:"",
+    UserPoints:"",
+    UserName:"",
   }
 }
+
+
+    async componentDidMount  (){
+      await this.getdata()
+      this._unsubscribeFocus  = await this.props.navigation.addListener('focus',(payload) =>{
+      this.getdata()
+  
+    
+  });
+    }
+   
+    getdata = async () => {
+      this.setState({
+        UserId:this.props.navigation.state.params.UserId,
+      });
+      this.setState({
+        UserName:this.props.navigation.state.params.UserName,
+      });
+      this.setState({
+        UserPoints:this.props.navigation.state.params.UserPoints,
+      });
+    };
+  
+
+
+
+
+
 
 getQ=async(Catname)=>{
   this.state.currentBrands=await this.getallbrands(Catname)
@@ -204,14 +235,7 @@ else{
                 return (res[0].FavoriteCount);
               case 2:
                 return (res[0].RetweetCount);
-              case 7:
-                return (res);
-              case 6:
-                return (res);
-              case 8:
-                return (res);
-                case 10:
-                  return (res);
+
               default:
                   return (res);
             }
@@ -228,7 +252,7 @@ else{
            <Background>
           
     <View style={styles.add}>
-                <ScrollView horizontal={true} showHorizontalScrollIndicator={false}>
+                <ScrollView horizontal={false} showHorizontalScrollIndicator={false}>
          
             <CircularCard 
         title="Cars"
@@ -237,7 +261,8 @@ else{
          this.props.navigation.navigate("Quiz", {
             title: "Cars",
             questions:await this.getQ("Cars"),
-            color: "#6F96B8"
+            color: "#6F96B8",
+            UserId:this.state.Id,UserPoints:this.state.Points,UserName:this.state.UserName
           })
         }
       />
@@ -250,7 +275,8 @@ else{
           this.props.navigation.navigate("Quiz", {
             title: "Fast Food",
             questions:await this.getQ( "Fast Food"),
-            color: "#6F96B8"
+            color: "#6F96B8",
+            UserId:this.state.Id,UserPoints:this.state.Points,UserName:this.state.UserName
           })
         }
       />
@@ -262,6 +288,7 @@ else{
             title: "Technology",
             questions:await this.getQ( "Technology"),
             color: "#6F96B8",
+            UserId:this.state.Id,UserPoints:this.state.Points,UserName:this.state.UserName
           })
         }
       />
@@ -272,7 +299,8 @@ else{
           this.props.navigation.navigate("Quiz", {
             title: "Retail",
             questions:await this.getQ( "Retail"),
-            color: "#6F96B8"
+            color: "#6F96B8",
+            UserId:this.state.Id,UserPoints:this.state.Points,UserName:this.state.UserName
           })
         }
       />
@@ -283,7 +311,8 @@ else{
           this.props.navigation.navigate("Quiz", {
             title: "Personal Care",
             questions:await this.getQ( "Personal Care"),
-            color: "#6F96B8"
+            color: "#6F96B8",
+            UserId:this.state.Id,UserPoints:this.state.Points,UserName:this.state.UserName
           })
         }
       />
@@ -295,6 +324,7 @@ else{
             title: "Apparel",
             questions:await this.getQ( "Apparel"),
             color: "#6F96B8",
+            UserId:this.state.Id,UserPoints:this.state.Points,UserName:this.state.UserName
           })
         }
       />

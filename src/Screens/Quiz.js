@@ -34,10 +34,36 @@ class Quiz extends React.Component {
     answerCorrect: false,
     shuffeled:[],
     key:0,
+    userupd :[],
+    UserId:"",
+    UserPoints:"",
+    UserName:"",
+    Points:0,
   };
 
 
+  async componentDidMount  (){
+    await this.getdata()
+    this._unsubscribeFocus  = await this.props.navigation.addListener('focus',(payload) =>{
+    this.getdata()
+
   
+});
+  }
+ 
+  getdata = async () => {
+    this.setState({
+      UserId:this.props.navigation.state.params.UserId,
+    });
+    this.setState({
+      UserName:this.props.navigation.state.params.UserName,
+    });
+    this.setState({
+      UserPoints:this.props.navigation.state.params.UserPoints,
+    });
+  };
+
+
 
    shuffle=(array)=> {
     var tmp, current, top = array.length;
@@ -56,8 +82,12 @@ class Quiz extends React.Component {
     this.setState(state => {
       
       const nextIndex = this.state.activeQuestionIndex + 1;
-      this.state.timer=60;
       if (nextIndex >= state.totalCount) {
+        this.state.userupd={
+          Id:this.state.UserId,
+         Points:this.state.UserPoints+this.state.correctCount,
+        }
+          this.postdata()
         return this.props.navigation.navigate('endgame')
        // return this.props.navigation.popToTop();
       }
@@ -88,6 +118,22 @@ class Quiz extends React.Component {
     );
   };
 
+  postdata=async()=>{
+    
+    
+    const url = (myUrl+'Users/')
+   const userdata= await fetch(url, {
+      method: 'Delete',
+      body: JSON.stringify(this.state.userupd),
+      headers: new Headers({
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json; charset=UTF-8'
+      })
+    })
+    this.setState({UserPoints:"",UserId:""})
+
+  }
+
   OnEndTime=() => {
 
     this.state.key= this.state.key+1;
@@ -116,7 +162,7 @@ const renderTime = ({ remainingTime }) => {
   return (
     <View className="timer">
       <Text className="text">Remaining</Text>
-      <Text className="value">{remainingTime}</Text>
+      <Text className="value" style={{textAlign:"center",fontSize:25,color:'#ffff'}}>{remainingTime}</Text>
       <Text className="text">seconds</Text>
     </View>
   );

@@ -21,7 +21,7 @@ class MyPageView extends Component {
       this.state = {
         UserId:"",
         UserPoints:"",
-        stage: 1,
+       // stage: 1,
         UserName:"",
         img: "",   
       };
@@ -137,7 +137,7 @@ class MyPageView extends Component {
         </View>
 
 
-            <Button block success rounded style={styles.card} onPress={() =>this.props.navigation.push('Categories',{id:this.state.id,points:this.state.points,stage:this.state.stage,UserName:this.state.UserNameU,imgU:this.state.img})}>
+            <Button block success rounded style={styles.card} onPress={() =>this.props.navigation.push('Categories',{ UserId:this.state.Id,UserPoints:this.state.Points,UserName:this.state.UserName})}>
            <Text>Play</Text>
              </Button>
      
