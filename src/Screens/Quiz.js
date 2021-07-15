@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, StatusBar, Text, SafeAreaView } from "react-native";
 import { Button, ButtonContainer } from "../components/Button";
 import Alert from "../components/Alert";
+import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 
 const styles = StyleSheet.create({
   container: {
@@ -32,8 +33,11 @@ class Quiz extends React.Component {
     answered: false,
     answerCorrect: false,
     shuffeled:[],
-    timer: 10,
   };
+
+
+  
+
    shuffle=(array)=> {
     var tmp, current, top = array.length;
     if(top) while(--top) {
@@ -51,7 +55,7 @@ class Quiz extends React.Component {
     this.setState(state => {
       
       const nextIndex = this.state.activeQuestionIndex + 1;
-    
+      this.state.timer=60;
       if (nextIndex >= state.totalCount) {
         return this.props.navigation.navigate('endgame')
        // return this.props.navigation.popToTop();
@@ -78,13 +82,16 @@ class Quiz extends React.Component {
 
         return nextState;
       },
-      () => {
-        setTimeout(() => this.nextQuestion(), 750);
-      }
+      
+      () => { setTimeout(() => this.nextQuestion(), 1000);}
     );
   };
 
+  OnEndTime=() => {
 
+    this.nextQuestion();
+    return [true, 1000];
+  }
 
   render() {
    
@@ -93,6 +100,19 @@ class Quiz extends React.Component {
     const question = questions[this.state.activeQuestionIndex];
     var answers=questions[this.state.activeQuestionIndex].answers;
     answers=this.shuffle(answers);
+const renderTime = ({ remainingTime }) => {
+  if (remainingTime === 0) {
+    return <Text className="timer">Too lale...</Text>;
+  }
+
+  return (
+    <View className="timer">
+      <Text className="text">Remaining</Text>
+      <Text className="value">{remainingTime}</Text>
+      <Text className="text">seconds</Text>
+    </View>
+  );
+};
     
     return (
       <View
@@ -104,7 +124,17 @@ class Quiz extends React.Component {
         <StatusBar barStyle="light-content" />
         <SafeAreaView style={styles.safearea}>
           <View>
-         <Text style={styles.proftextstime} > timer {this.state.timer} </Text>
+            
+          <View className="timer-wrapper" style={{paddingLeft:'28%',paddingBottom:'15%'}}>
+        <CountdownCircleTimer
+          isPlaying
+          duration={30}
+          colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+          onComplete={() => this.OnEndTime()}
+        >
+          {renderTime}
+        </CountdownCircleTimer>
+      </View>
 
             <Text style={styles.text}>{question.question}</Text>
 
@@ -124,7 +154,8 @@ class Quiz extends React.Component {
             visible={this.state.answered}
             ></Alert>
           <Text style={styles.text}></Text>
-          <Button rounded text='SKIP' onPress={() => this.nextQuestion()}/>
+      
+          <Button rounded text='SKIP' onPress={() => this.OnEndTime()}/>
     
          
         </SafeAreaView>
