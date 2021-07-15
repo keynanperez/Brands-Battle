@@ -77,6 +77,7 @@ class NewUser extends Component {
       />
       <TextInput onChangeText={Info=> this.setState({NewUserMail: Info})}    
         label="Email"
+        ggjh
       />
       <TextInput onChangeText={Info=> this.setState({NewUserPass: Info})}
         label="Password"

@@ -24,7 +24,7 @@ export default  class  LoginView extends React.Component {
       UserName:"",
       UserPass:"2021",
       UserId:"",
-      pointsU:0,
+      UserPoints:0,
 
     };
   }

@@ -39,12 +39,11 @@ export default class UserHome extends React.Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
-      points: 0,
+      UserId:"",
+      UserPoints:"",
       stage: 1,
-      id: 0,
-      UserNameU: "",
+      UserName:"",
       img: "",
     };
     //alert(this.state.prevScreentor[1].Barber_Email)
@@ -60,27 +59,19 @@ export default class UserHome extends React.Component {
   }
 
   getdata = async () => {
-    const { UserId } = this.props.route.params;
     this.setState({
-      id: UserId,
+      UserId:this.props.navigation.state.params.UserId,
     });
-    const { UserName } = this.props.route.params;
     this.setState({
-      UserNameU: UserName,
+      UserName:this.props.navigation.state.params.UserName,
     });
-    const { pointsU } = this.props.route.params;
     this.setState({
-      points: pointsU,
-    });
-    const { stageU } = this.props.route.params;
-    this.setState({
-      stage: stageU,
-    });
-    const { imgU } = this.props.route.params;
-    this.setState({
-      img: imgU,
+      UserPoints:this.props.navigation.state.params.UserPoints,
     });
   };
+
+
+
   render() {
     const { navigation } = this.props;
     //alert("keynan");
@@ -90,15 +81,12 @@ export default class UserHome extends React.Component {
       
           <View>
             <Button icon="twitter" mode="contained" style={styles.card}
-           
-            
+
             onPress={() =>
               this.props.navigation.navigate("Marketing", {
-                id: this.state.id,
-                points: this.state.points,
-                stage: this.state.stage,
-                UserName: this.state.UserNameU,
-                imgU: this.state.img,
+                UserId: this.state.UserId,
+                UserPoints: this.state.UserPoints,
+                UserName: this.state.UserName,
               })
             }
         >
@@ -113,11 +101,9 @@ export default class UserHome extends React.Component {
             
             onPress={() =>
               this.props.navigation.navigate("UserDashboard", {
-                id: this.state.id,
-                points: this.state.points,
-                stage: this.state.stage,
-                UserName: this.state.UserNameU,
-                imgU: this.state.img,
+                UserId: this.state.UserId,
+                UserPoints: this.state.UserPoints,
+                UserName: this.state.UserName,
               })
             }
         >

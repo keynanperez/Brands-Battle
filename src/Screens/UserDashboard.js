@@ -18,12 +18,11 @@ class MyPageView extends Component {
     constructor(props) {
       super(props);
       this.state = {
-         points:0,
-         stage:1,
-         id:0,
-         UserNameU: "",
-         img:""
-         
+        UserId:"",
+        UserPoints:"",
+        stage: 1,
+        UserName:"",
+        img: "",   
       };
     }
     async componentDidMount  (){
@@ -35,20 +34,17 @@ class MyPageView extends Component {
   });
     }
    
-    getdata=async()=>{
-    
-    const {id}=this.props.route.params;
-    this.setState({id:id})
-    const{UserName}=this.props.route.params;
-    this.setState({UserName:UserName})
-    const {points}=this.props.route.params;
-    this.setState({points:points})
-    const{stage}=this.props.route.params;
-    this.setState({stage:stage})
-    const{img}=this.props.route.params;
-    this.setState({img:img})
-
-}
+    getdata = async () => {
+      this.setState({
+        UserId:this.props.navigation.state.params.UserId,
+      });
+      this.setState({
+        UserName:this.props.navigation.state.params.UserName,
+      });
+      this.setState({
+        UserPoints:this.props.navigation.state.params.UserPoints,
+      });
+    };
   
   render()
   {
@@ -86,16 +82,16 @@ class MyPageView extends Component {
 
         <View style={styles.infoContainer}>
           <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>
-            Keynan Peretz
+            User Name 
           </Text>
           <Text style={[styles.text, { color: "#aeb5bc", fontSize: 14 }]}>
-            Student
+          {this.state.UserName} 
           </Text>
         </View>
 
         <View style={styles.statsContainer}>
           <View style={styles.statsBox}>
-            <Text style={[styles.text, { fontSize: 24 }]}>{this.state.points}</Text>
+            <Text style={[styles.text, { fontSize: 24 }]}>{this.state.UserPoints}</Text>
             <Text style={[styles.text, styles.subText]}>Total Points</Text>
           </View>
           <View
@@ -108,7 +104,7 @@ class MyPageView extends Component {
               },
             ]}
           >
-            <Text style={[styles.text, { fontSize: 24 }]}>112</Text>
+            <Text style={[styles.text, { fontSize: 24 }]}>1</Text>
             <Text style={[styles.text, styles.subText]}>Games</Text>
           </View>
           <View style={styles.statsBox}>
@@ -118,11 +114,6 @@ class MyPageView extends Component {
         </View>
 
 
-          
-         
-       
-            
-           
             <Button block success rounded style={styles.card} onPress={() =>this.props.navigation.push('Categories',{id:this.state.id,points:this.state.points,stage:this.state.stage,UserName:this.state.UserNameU,imgU:this.state.img})}>
            <Text>Play</Text>
              </Button>
