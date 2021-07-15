@@ -32,6 +32,7 @@
     "react-native": "~0.64.0",
     "react-native-androw": "0.0.34",
     "react-native-character-input": "^1.0.5",
+    "react-native-countdown-circle-timer": "^2.5.3",
     "react-native-countdown-component": "^2.7.1",
     "react-native-dynamic-search-bar": "^2.0.0",
     "react-native-dynamic-vector-icons": "^1.1.4",

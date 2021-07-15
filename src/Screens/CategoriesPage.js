@@ -4,12 +4,6 @@ import { ImageBackground, ScrollView, StatusBar, StyleSheet ,  Text,
   View,
   Image,
   SafeAreaView} from "react-native";
-import ApparelQuestions from "../data/Apparel";
-import CarsQuestions from "../data/Cars";
-import FastFoodQuestions from "../data/FastFood";
-import PersonalCareQuestions from "../data/PersonalCare";
-import RetailQuestions from "../data/Retail";
-import TechnologyQuestions from "../data/Technology";
 import CircularCard from "../lib/CircularCard";
 import ImagedCarouselCard from "../lib/ImagedCarouselCard";
 import Background from '../components/Background';
@@ -79,7 +73,7 @@ getallbrands=async(Catname)=>{
 
           if(randomNumberQ== 3 ||randomNumberQ== 4||randomNumberQ==5||randomNumberQ== 9)
             {  
-              var randomNumberC = Math.floor(Math.random() * 7);;
+              var randomNumberC = Math.floor(Math.random() * ((this.state.currentBrands.length)));
               this.state.chosenbrandb=this.state.currentBrands[randomNumberC];
               var fuuQ= prevQ+this.state.chosenbranda+endQ+this.state.chosenbrandb;
               answers= await this.ansgetB(idtw)
@@ -254,8 +248,8 @@ else{
         source={require("../images/fastfood.jpg")}
         onPress={async() =>
           this.props.navigation.navigate("Quiz", {
-            title: "FastFood",
-            questions:await this.getQ( "FastFood"),
+            title: "Fast Food",
+            questions:await this.getQ( "Fast Food"),
             color: "#6F96B8"
           })
         }
@@ -287,8 +281,8 @@ else{
         source={require("../images/PersonalCare.png")}
         onPress={async() =>
           this.props.navigation.navigate("Quiz", {
-            title: "PersonalCare",
-            questions:await this.getQ( "PersonalCare"),
+            title: "Personal Care",
+            questions:await this.getQ( "Personal Care"),
             color: "#6F96B8"
           })
         }

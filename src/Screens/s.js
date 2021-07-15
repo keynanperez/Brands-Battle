@@ -82,7 +82,7 @@ class Categories extends Component {
         source={require("../images/fastfood.jpg")}
         onPress={() =>
           this.props.navigation.navigate("Quiz", {
-            title: "FastFood",
+            title: "Fast Food",
             questions: FastFoodQuestions,
             color: "#6F96B8"
           })
@@ -115,7 +115,7 @@ class Categories extends Component {
         source={require("../images/PersonalCare.png")}
         onPress={() =>
           this.props.navigation.navigate("Quiz", {
-            title: "PersonalCare",
+            title: "Personal Care",
             questions: PersonalCareQuestions,
             color: "#6F96B8"
           })
