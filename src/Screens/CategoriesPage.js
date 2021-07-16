@@ -96,7 +96,7 @@ getallbrands=async(Catname)=>{
       var answers=""
       while  (i<=10) {
           var randomNumberB = Math.floor(Math.random() * ((this.state.currentBrands.length)));
-          var randomNumberQ = Math.floor(Math.random() * 7);
+          var randomNumberQ = Math.floor(Math.random() * 10);
           this.state.chosenbranda=this.state.currentBrands[randomNumberB];
          prevQ= arryQuestions[randomNumberQ].prev;
          endQ=arryQuestions[randomNumberQ].end;
@@ -105,6 +105,8 @@ getallbrands=async(Catname)=>{
           if(randomNumberQ== 3 ||randomNumberQ== 4||randomNumberQ==5||randomNumberQ== 9)
             {  
               var randomNumberC = Math.floor(Math.random() * ((this.state.currentBrands.length)));
+              if(this.state.currentBrands[randomNumberC] ==  this.state.chosenbranda)
+              randomNumberC++;
               this.state.chosenbrandb=this.state.currentBrands[randomNumberC];
               var fuuQ= prevQ+this.state.chosenbranda+endQ+this.state.chosenbrandb;
               answers= await this.ansgetB(idtw)
@@ -262,7 +264,7 @@ else{
             title: "Cars",
             questions:await this.getQ("Cars"),
             color: "#6F96B8",
-            UserId:this.state.Id,UserPoints:this.state.Points,UserName:this.state.UserName
+            UserId:this.state.UserId,UserPoints:this.state.UserPoints,UserName:this.state.UserName
           })
         }
       />
@@ -276,7 +278,7 @@ else{
             title: "Fast Food",
             questions:await this.getQ( "Fast Food"),
             color: "#6F96B8",
-            UserId:this.state.Id,UserPoints:this.state.Points,UserName:this.state.UserName
+            UserId:this.state.UserId,UserPoints:this.state.UserPoints,UserName:this.state.UserName
           })
         }
       />
@@ -288,7 +290,7 @@ else{
             title: "Technology",
             questions:await this.getQ( "Technology"),
             color: "#6F96B8",
-            UserId:this.state.Id,UserPoints:this.state.Points,UserName:this.state.UserName
+            UserId:this.state.UserId,UserPoints:this.state.UserPoints,UserName:this.state.UserName
           })
         }
       />
@@ -300,7 +302,8 @@ else{
             title: "Retail",
             questions:await this.getQ( "Retail"),
             color: "#6F96B8",
-            UserId:this.state.Id,UserPoints:this.state.Points,UserName:this.state.UserName
+            UserId:this.state.UserId,UserPoints:this.state.UserPoints,UserName:this.state.UserName
+
           })
         }
       />
@@ -312,7 +315,8 @@ else{
             title: "Personal Care",
             questions:await this.getQ( "Personal Care"),
             color: "#6F96B8",
-            UserId:this.state.Id,UserPoints:this.state.Points,UserName:this.state.UserName
+            UserId:this.state.UserId,UserPoints:this.state.UserPoints,UserName:this.state.UserName
+
           })
         }
       />
@@ -324,7 +328,8 @@ else{
             title: "Apparel",
             questions:await this.getQ( "Apparel"),
             color: "#6F96B8",
-            UserId:this.state.Id,UserPoints:this.state.Points,UserName:this.state.UserName
+            UserId:this.state.UserId,UserPoints:this.state.UserPoints,UserName:this.state.UserName
+
           })
         }
       />

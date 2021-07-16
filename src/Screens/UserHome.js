@@ -42,7 +42,7 @@ export default class UserHome extends React.Component {
     this.state = {
       UserId:"",
       UserPoints:"",
-      stage: 1,
+      //stage: 1,
       UserName:"",
       img: "",
     };

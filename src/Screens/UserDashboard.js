@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -28,43 +27,23 @@ class MyPageView extends Component {
     }
     async componentDidMount  (){
       await this.getdata()
-       this.setState({
-        img: await this.getimage(),
-      });
       this._unsubscribeFocus  = await this.props.navigation.addListener('focus',(payload) =>{
       this.getdata()
-     
-  });
-  alert(this.state.img)
-    }
-   
-    getdata = async () => {
-      this.setState({
-        UserId:this.props.navigation.state.params.UserId,
-      });
-      this.setState({
-        UserName:this.props.navigation.state.params.UserName,
-      });
-      this.setState({
-        UserPoints:this.props.navigation.state.params.UserPoints,
-      });
-    };
-       getimage = async () => {
-      try{
-        const getAsyncStorageData = await AsyncStorage.getItem(this.state.UserName);
-        if(getAsyncStorageData !== null) {
-          alert("Data successfully get");
-          return getAsyncStorageData;
-          // value previously stored
-        }
-       
-      }
-     catch(e) {
-      alert("Failed to get the data from the storage");
-    //  console.log(e);
-    }
-    }
   
+    
+  });
+} 
+  getdata=async()=>{
+    
+    const {UserId}=this.props.route.params;
+    this.setState({UserId:UserId})
+    const{UserName}=this.props.route.params;
+    this.setState({UserName:UserName})
+    const {UserPoints}=this.props.route.params;
+    this.setState({points:UserPoints})
+    
+}
+
   render()
   {
   return (
@@ -76,11 +55,7 @@ class MyPageView extends Component {
         <View style={{ alignSelf: "center" }}>
           <View style={styles.profileImage}>
             <Image
-            source={{
-              uri: 
-              this.state.img}
-            }
-            //  source={require("../assets/profile-pic.jpg")}
+              source={require("../assets/profile-pic.jpg")}
               style={styles.image}
               resizeMode="center"
             ></Image>
@@ -137,7 +112,7 @@ class MyPageView extends Component {
         </View>
 
 
-            <Button block success rounded style={styles.card} onPress={() =>this.props.navigation.push('Categories',{ UserId:this.state.Id,UserPoints:this.state.Points,UserName:this.state.UserName})}>
+            <Button block success rounded style={styles.card} onPress={() =>this.props.navigation.push('Categories',{ UserId:this.state.UserId,UserPoints:this.state.UserPoints,UserName:this.state.UserName})}>
            <Text>Play</Text>
              </Button>
      
@@ -170,8 +145,7 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     width: undefined,
-    height: undefined
-    ,
+    height: undefined,
   },
   titleBar: {
     flexDirection: "row",

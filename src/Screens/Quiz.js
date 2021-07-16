@@ -3,7 +3,7 @@ import { View, StyleSheet, StatusBar, Text, SafeAreaView } from "react-native";
 import { Button, ButtonContainer } from "../components/Button";
 import Alert from "../components/Alert";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
-
+import myurl from "./Url"
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#6F96B8",
@@ -83,12 +83,16 @@ class Quiz extends React.Component {
       
       const nextIndex = this.state.activeQuestionIndex + 1;
       if (nextIndex >= state.totalCount) {
+        if (this.state.UserPoints=="")
+        this.state.UserPoints=0;
         this.state.userupd={
           Id:this.state.UserId,
          Points:this.state.UserPoints+this.state.correctCount,
         }
           this.postdata()
-        return this.props.navigation.navigate('endgame')
+        return this.props.navigation.navigate('endgame',{UserId: this.state.UserId,
+        UserPoints: this.state.UserPoints,
+        UserName: this.state.UserName})
        // return this.props.navigation.popToTop();
       }
   
@@ -121,7 +125,7 @@ class Quiz extends React.Component {
   postdata=async()=>{
     
     
-    const url = (myUrl+'Users/')
+    const url = (myurl+'Users/')
    const userdata= await fetch(url, {
       method: 'Delete',
       body: JSON.stringify(this.state.userupd),
