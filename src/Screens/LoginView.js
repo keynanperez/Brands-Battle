@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { TouchableOpacity, StyleSheet, View } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {TouchableOpacity, StyleSheet, View } from 'react-native'
 //import { Text } from 'react-native-paper'
 import Background from '../components/Background'
 import Logo from '../components/Logo'
@@ -28,7 +29,7 @@ export default  class  LoginView extends React.Component {
 
     };
   }
-
+ 
   SubmitNote = async() =>{
  let  Mail=this.state.UserMail;
  let pass=this.state.UserPass ;
