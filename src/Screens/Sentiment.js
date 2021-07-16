@@ -3,6 +3,8 @@ import { StyleSheet, View, Text } from "react-native";
 import { SectionGrid } from "react-native-super-grid";
 import { Container, Content, Badge, Icon } from "native-base";
 import Header from "../components/Header";
+//import Sent from "../node-sentiment/index";
+//import sentiment from "node-sentiment";
 
 export default class Example extends React.Component {
   constructor(props) {
@@ -32,17 +34,20 @@ export default class Example extends React.Component {
       fetchlist: []
     };
   }
-  getTotal = a => {
-    var Sentiment = require("sentiment");
-    var sentiment = new Sentiment();
-    var res = sentiment.analyze(a);
-    return res.score;
+
+  getTotalNew = a => {
+    var sentiment = require("node-sentiment");
+    //var Sent = new sentiment();
+    var res = sentiment(a);
+    console.log(res.comparative);
+    if (res.comparative != 0) return res.comparative;
   };
   getMotal = a => {
-    var Sentiment = require("sentiment");
-    var sentiment = new Sentiment();
-    var res = sentiment.analyze(a);
-    if (res.score > 0) return "#1abc9c";
+    var sentiment = require("node-sentiment");
+    //var sentiment = new Sentiment();
+    var res = sentiment(a);
+    //var res = sentiment.analyze(a);
+    if (res.comparative > 0) return "#1abc9c";
     else return "#BC1A1A";
   };
   gettwitterPop = async questionNumber => {
@@ -93,7 +98,9 @@ export default class Example extends React.Component {
               ]}
             >
               <Text style={styles.itemName}>{item}</Text>
-              <Text style={styles.itemName}>Score: {this.getTotal(item)}</Text>
+              <Text style={styles.itemName}>
+                Score: {this.getTotalNew(item)}
+              </Text>
             </View>
           )}
           renderSectionHeader={({ section }) => (
