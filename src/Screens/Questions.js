@@ -19,17 +19,17 @@ const questions = [
     {
         id:3,
         prev: "Who twitted more during last week ",
-        end: "or",
+        end: " or ",
     },
     {
         id:4,
         prev: "Who has more followers ",
-        end: "or",
+        end: " or ",
     },
     {
         id:5,
         prev: "Who got more retweets during last week ",
-        end: "or",
+        end: " or ",
     },
     {
         id:6,
@@ -50,7 +50,7 @@ const questions = [
     {
         id:9,
         prev: "Who got more likes during last week ",
-        end:"or",
+        end:" or ",
     },
     {
         id:10,

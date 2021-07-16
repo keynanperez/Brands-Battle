@@ -33,6 +33,7 @@ class Quiz extends React.Component {
     answered: false,
     answerCorrect: false,
     shuffeled:[],
+    key:0,
   };
 
 
@@ -83,14 +84,21 @@ class Quiz extends React.Component {
         return nextState;
       },
       
-      () => { setTimeout(() => this.nextQuestion(), 1000);}
+      () => { setTimeout(() => this.OnEndStage(), 1000);}
     );
   };
 
   OnEndTime=() => {
 
+    this.state.key= this.state.key+1;
     this.nextQuestion();
     return [true, 1000];
+  }
+  OnEndStage=() => {
+
+    this.state.key= this.state.key+1;
+    this.nextQuestion();
+    //return [true, 1000];
   }
 
   render() {
@@ -127,6 +135,7 @@ const renderTime = ({ remainingTime }) => {
             
           <View className="timer-wrapper" style={{paddingLeft:'28%',paddingBottom:'15%'}}>
         <CountdownCircleTimer
+         key={this.state.key}
           isPlaying
           duration={30}
           colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
@@ -155,7 +164,7 @@ const renderTime = ({ remainingTime }) => {
             ></Alert>
           <Text style={styles.text}></Text>
       
-          <Button rounded text='SKIP' onPress={() => this.OnEndTime()}/>
+          <Button rounded text='SKIP' onPress={() => this.OnEndStage()}/>
     
          
         </SafeAreaView>
