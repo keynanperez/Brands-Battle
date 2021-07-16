@@ -31,7 +31,8 @@ export default class Example extends React.Component {
         }
       ],
       brand: props.brand,
-      fetchlist: []
+      fetchlist: [],
+      Sentimentfetchlist: []
     };
   }
 
@@ -47,8 +48,10 @@ export default class Example extends React.Component {
     //var sentiment = new Sentiment();
     var res = sentiment(a);
     //var res = sentiment.analyze(a);
-    if (res.comparative > 0) return "#1abc9c";
-    else return "#BC1A1A";
+    if (res.comparative > 0) {
+      return "#1abc9c";
+    }
+    if (res.comparative < 0) return "#BC1A1A";
   };
   gettwitterPop = async questionNumber => {
     const brandOFcat = [];
@@ -67,14 +70,35 @@ export default class Example extends React.Component {
     });
 
     const res = await userf.json();
-    console.log(res);
+    //console.log(this.getTotalNew(res[0]));
+
     this.setState({
       fetchlist: res
     });
   };
   componentDidMount() {
     this.gettwitterPop(12);
+    let a = this.NewList(this.state.fetchlist);
+    this.setState({
+      Sentimentfetchlist: a
+    });
   }
+
+  NewList = a => {
+    let i;
+    var sum = [];
+    var sentiment = require("node-sentiment");
+    for (let index = 0; index < a.length; index++) {
+      //let point = this.getTotalNew(a[index]);
+      var res = sentiment(a[index]);
+      if (res.comparative != 0) {
+        sum.push(a[index]);
+      }
+      i++;
+    }
+    console.log(sum);
+    return sum;
+  };
   render() {
     return (
       <>
@@ -86,7 +110,7 @@ export default class Example extends React.Component {
           // spacing={20}
           sections={[
             {
-              data: this.state.fetchlist
+              data: this.NewList(this.state.fetchlist)
             }
           ]}
           style={styles.gridView}
