@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   AppRegistry,
   StyleSheet,
@@ -16,41 +16,138 @@ import {
   StackedBarChart
 } from "react-native-chart-kit";
 
-export default class App extends React.Component {
-  render() {
-    const data = [
+export default class Pie extends React.Component {
+  constructor(props) {
+    super(props);
+    //  alert(this.props.brand);
+    this.state = {
+      count: this.props.brand
+      //fetchlist: [],
+      // Sentimentfetchlist: [],
+
+      // listTweet: [],
+      // likes: props.likes,
+      // comments: props.comments,
+      // folow: props.folow,
+      // retweets: props.retweets
+    };
+    alert(this.state.count[1]);
+  }
+
+  /*   getTotalNew = a => {
+    var sentiment = require("node-sentiment");
+    //var Sent = new sentiment();
+    var res = sentiment(a);
+    console.log(res.comparative);
+    if (res.comparative != 0) return res.comparative;
+  };
+  getMotal = a => {
+    var sentiment = require("node-sentiment");
+    //var sentiment = new Sentiment();
+    var res = sentiment(a);
+    //var res = sentiment.analyze(a);
+    if (res.comparative > 0) {
+      return "#1abc9c";
+    }
+    if (res.comparative < 0) return "#BC1A1A";
+  }; */
+  gettwitterPop = async questionNumber => {
+    const brandOFcat = [];
+
+    const url =
+      `http://127.0.0.1:8080/api/Twitter?Input=` +
+      this.state.brand +
+      `&question=` +
+      16;
+    const userf = await fetch(url, {
+      method: "Get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8"
+      })
+    });
+
+    const res = await userf.json();
+    //console.log(this.getTotalNew(res[0]));
+
+    this.setState({
+      fetchlist: res
+    });
+  };
+  /* componentDidMount() {
+    this.gettwitterPop(12);
+    let a = this.NewList(this.state.fetchlist);
+    this.setState({
+      Sentimentfetchlist: a
+    });
+    alert(this.state.likes);
+  }
+  NewList = a => {
+    let i;
+    var sum = [];
+    var sentiment = require("node-sentiment");
+    for (let index = 0; index < a.length; index++) {
+      //let point = this.getTotalNew(a[index]);
+      var res = sentiment(a[index]);
+      if (res.comparative != 0) {
+        sum.push(a[index]);
+      }
+      i++;
+    }
+    console.log(sum);
+    return sum;
+  }; */
+
+  /*   const data = [
       {
         name: "Tweets",
-        population: 21500000,
+        population: this.state.folow,
         color: "rgba(131, 167, 234, 1)",
         legendFontColor: "#7F7F7F",
         legendFontSize: 15
       },
       {
         name: "Retweets",
-        population: 2800000,
+        population: this.state.retweets,
         color: "#F00",
         legendFontColor: "#7F7F7F",
         legendFontSize: 15
       },
       {
         name: "Comments",
-        population: 527612,
+        population: this.state.comments,
         color: "red",
         legendFontColor: "#7F7F7F",
         legendFontSize: 15
       },
       {
         name: "Likes",
-        population: 8538000,
+        population: this.state.likes,
         color: "#ffffff",
         legendFontColor: "#7F7F7F",
         legendFontSize: 15
       },
       {
         name: "Followers",
-        population: 11920000,
+        population: this.state.folow,
         color: "rgb(0, 0, 255)",
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+      }
+    ]; */
+  render() {
+    const data = [
+      {
+        name: "Posetive",
+        population: this.state.count[0],
+        color: "rgba(131, 167, 234, 1)",
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+      },
+      {
+        name: "Negative",
+        population: this.state.count[1],
+        color: "#F00",
         legendFontColor: "#7F7F7F",
         legendFontSize: 15
       }

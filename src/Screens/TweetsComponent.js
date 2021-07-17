@@ -8,17 +8,17 @@ export default class Example extends React.Component {
 
     this.state = {
       items: [
-        { name: props.first[0], code: "#1abc9c" },
-        { name: props.first[1], code: "#2ecc71" },
-        { name: props.first[2], code: "#3498db" },
-        { name: props.first[3], code: "#9b59b6" }
+        { name: this.props.first[0], code: "#1abc9c" },
+        { name: this.props.first[1], code: "#2ecc71" },
+        { name: this.props.first[2], code: "#3498db" },
+        { name: this.props.first[3], code: "#9b59b6" }
       ]
     };
   }
 
   render() {
     return (
-      <View style={styles.gridView}>
+      <>
         <Header style={styles.Header}>Best Tweets</Header>
         <SectionGrid
           itemDimension={190}
@@ -39,7 +39,7 @@ export default class Example extends React.Component {
             <Text style={styles.sectionHeader}>{section.title}</Text>
           )}
         />
-      </View>
+      </>
     );
   }
 }

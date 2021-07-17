@@ -6,52 +6,38 @@ import Header from "../components/Header";
 //import Sent from "../node-sentiment/index";
 //import sentiment from "node-sentiment";
 
-export default class Example extends React.Component {
+export default class Sentiment extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      list: [
-        {
-          Comment: "my whole body feels itchy and like its on fire",
-          Result: 0,
-          Color: "#1abc9c"
-        },
-        {
-          Comment:
-            "don`t like it and i hate my new timetable, having such a bad week",
-          Result: 0,
-          Color: "#1abc9c"
-        },
-        { Comment: "i like it!!", Result: 0, Color: "#1abc9c" },
-        {
-          Comment: "hope ur havin fun",
-          Result: 0,
-          Color: "#1abc9c"
-        }
-      ],
       brand: props.brand,
       fetchlist: [],
       Sentimentfetchlist: []
     };
   }
+  X = a => {
+    alert("ke");
+    return "keynan";
+  };
 
   getTotalNew = a => {
     var sentiment = require("node-sentiment");
     //var Sent = new sentiment();
     var res = sentiment(a);
-    console.log(res.comparative);
+    //.log(res.comparative);
     if (res.comparative != 0) return res.comparative;
   };
   getMotal = a => {
     var sentiment = require("node-sentiment");
-    //var sentiment = new Sentiment();
     var res = sentiment(a);
-    //var res = sentiment.analyze(a);
+
     if (res.comparative > 0) {
       return "#1abc9c";
     }
-    if (res.comparative < 0) return "#BC1A1A";
+    if (res.comparative < 0) {
+      return "#BC1A1A";
+    }
   };
   gettwitterPop = async questionNumber => {
     const brandOFcat = [];
@@ -96,7 +82,7 @@ export default class Example extends React.Component {
       }
       i++;
     }
-    console.log(sum);
+    //console.log(sum);
     return sum;
   };
   render() {

@@ -105,9 +105,10 @@ class App extends React.Component {
     Popularty: "",
     like_count: "",
     reply_count: "",
-    retweet_count: ""
+    retweet_count: "",
+    fetchlist: ""
   };
-
+  // filter the brand list in the searchbar
   filterSearch = text => {
     const searchingText = text.toUpperCase();
     const upperCaseList = [];
@@ -121,7 +122,7 @@ class App extends React.Component {
       resultList: filteredList
     });
   };
-
+  // the main function that call the Answers
   PressBrand = async text => {
     await this.setState({
       chosenbrandRefrash: text.item
@@ -130,6 +131,7 @@ class App extends React.Component {
     var twitterAns2 = await this.gettwitterPop("5");
     var twitterAns3 = await this.gettwitts("14");
     var twitterAns4 = await this.gettcomm("15");
+    var twitterAns4 = await this.gettwitterComments("16");
   };
 
   gettwitterAns = async questionNumber => {
@@ -172,20 +174,10 @@ class App extends React.Component {
     this.setState({
       chosenbrand: this.state.chosenbrandRefrash
     });
-    var PopulartyCalc =
-      this.state.like_count * 0.3 +
-      this.state.reply_count * 0.2 +
-      this.state.retweet_count * 0.5;
-    var Populartysum =
-      this.state.like_count + this.state.reply_count + this.state.retweet_count;
-
-    var PopulartyCalculetor = (PopulartyCalc / Populartysum) * 100;
-    //alert(PopulartyCalculetor);
   };
+  //return the popularty score
   gettwitterPop = async questionNumber => {
-    //alert(chosenbrand)
     const brandOFcat = [];
-
     const url =
       `http://127.0.0.1:8080/api/Twitter?Input=` +
       this.state.chosenbrand +
@@ -200,14 +192,14 @@ class App extends React.Component {
     });
 
     const res = await userf.json();
-    console.log(res);
+    //console.log(res);
     this.setState({
       Popularty: res
     });
   };
 
+  // return the tweets
   gettwitts = async questionNumber => {
-    //alert(chosenbrand)
     const brandOFcat = [];
 
     const url =
@@ -224,17 +216,11 @@ class App extends React.Component {
     });
 
     const res = await userf.json();
-
-    console.log(res.includes.tweets[0].public_metrics.like_count);
-    console.log(res.includes.tweets[0].public_metrics.quote_count);
-    console.log(res.includes.tweets[0].public_metrics.reply_count);
-    console.log(res.includes.tweets[0].public_metrics.retweet_count);
   };
 
+  //return all comments
   gettcomm = async questionNumber => {
-    //alert(chosenbrand)
     const brandOFcat = [];
-
     const url =
       `http://127.0.0.1:8080/api/Twitter?Input=` +
       this.state.chosenbrand +
@@ -249,13 +235,31 @@ class App extends React.Component {
     });
 
     const res = await userf.json();
-
-    console.log(res.includes.tweets[0].public_metrics.like_count);
-    console.log(res.includes.tweets[0].public_metrics.quote_count);
-    console.log(res.includes.tweets[0].public_metrics.reply_count);
-    console.log(res.includes.tweets[0].public_metrics.retweet_count);
   };
 
+  gettwitterComments = async questionNumber => {
+    const brandOFcat = [];
+
+    const url =
+      `http://127.0.0.1:8080/api/Twitter?Input=` +
+      this.state.brand +
+      `&question=` +
+      16;
+    const userf = await fetch(url, {
+      method: "Get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8"
+      })
+    });
+
+    const res = await userf.json();
+    //console.log(this.getTotalNew(res[0]));
+
+    this.setState({
+      fetchlist: res
+    });
+  };
   render() {
     return (
       <Background>
@@ -305,7 +309,11 @@ class App extends React.Component {
                 onPress={() =>
                   this.props.navigation.navigate("MoreBrandData", {
                     Popularty: this.state.Popularty,
-                    chosenbrand: this.state.chosenbrand
+                    chosenbrand: this.state.chosenbrand,
+                    likes: this.state.like_count,
+                    comments: this.state.fetchlist,
+                    retweets: this.state.retweet_count,
+                    follow: this.state.followers
                   })
                 }
               >

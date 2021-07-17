@@ -19,11 +19,15 @@ import {
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-
+    //console.log(this.props.navigation.state.params.comments);
     this.state = {
       Popularty: this.props.navigation.state.params.Popularty,
       chosenbrand: this.props.navigation.state.params.chosenbrand,
-      listTweet: []
+      listTweet: [],
+      likes: this.props.navigation.state.params.likes,
+      comments: this.props.navigation.state.params.comments,
+      follow: this.props.navigation.state.params.follow,
+      retweets: this.props.navigation.state.params.retweets
     };
   }
   componentDidMount() {
@@ -54,13 +58,21 @@ export default class App extends React.Component {
   };
 
   render() {
+    console.log(this.state.comments);
     return (
       <Swiper style={styles.wrapper} showsButtons loop={false}>
         <TweetsComponent first={this.state.listTweet} />
 
         <SentimentPage brand={this.state.chosenbrand} />
 
-        <Chart />
+        <Chart
+          brand={this.state.chosenbrand}
+          // comments={this.state.comments}
+          /*  likes={this.state.like_count}
+          comments={this.state.comments}
+          retweets={this.state.retweets}
+          follow={this.state.follow} */
+        />
       </Swiper>
     );
   }

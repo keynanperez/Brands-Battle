@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   AppRegistry,
   StyleSheet,
@@ -16,8 +16,72 @@ import {
   StackedBarChart
 } from "react-native-chart-kit";
 import Pie from "./Pie";
+import Sentiment from "./Sentiment";
 
-export default class App extends React.Component {
+export default class Chart extends React.Component {
+  constructor(props) {
+    super(props);
+    //console.log(this.props);
+    //console.log(this.props);
+
+    this.state = {
+      brand: this.props.brand,
+      fetchlist: " ",
+      posCounter: 0
+    };
+  }
+  gettwitterPop = async questionNumber => {
+    const brandOFcat = [];
+
+    const url =
+      `http://127.0.0.1:8080/api/Twitter?Input=` +
+      this.state.brand +
+      `&question=` +
+      16;
+    const userf = await fetch(url, {
+      method: "Get",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8"
+      })
+    });
+
+    const res = await userf.json();
+    // console.log(res);
+    this.ReactionCounter(res);
+    /* this.setState({
+      fetchlist: res
+    }); */
+    console.log(this.state.fetchlist);
+  };
+  ReactionCounter = a => {
+    var sentiment = require("node-sentiment");
+    let pos = [0, 0];
+    //let neg = 0;
+    //alert(a.length);
+    for (let index = 0; index < a.length; index++) {
+      let res = sentiment(a[index]);
+
+      if (res.comparative > 0) {
+        //alert("hi");
+        pos[0]++;
+      }
+      if (res.comparative < 0) {
+        pos[1]++;
+      }
+    }
+
+    this.setState({
+      posCounter: pos
+    });
+    alert(this.state.posCounter[1]);
+    alert(this.state.posCounter[0]);
+  };
+  componentDidMount() {
+    this.gettwitterPop(12);
+    // this.ReactionCounter(this.state.fetchlist);
+  }
+
   render() {
     return (
       <View style={styles.gridView}>
@@ -64,7 +128,8 @@ export default class App extends React.Component {
             borderRadius: 16
           }}
         />
-        <Pie></Pie>
+
+        <Pie brand={this.state.posCounter}></Pie>
       </View>
     );
   }
