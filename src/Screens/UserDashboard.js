@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -27,22 +28,44 @@ class MyPageView extends Component {
     }
     async componentDidMount  (){
       await this.getdata()
-      this._unsubscribeFocus  = await this.props.navigation.addListener('focus',(payload) =>{
-      this.getdata()
-  
+      this.setState({
+       img: await this.getimage(),
+     });
+     this._unsubscribeFocus  = await this.props.navigation.addListener('focus',(payload) =>{
+     this.getdata()
     
-  });
-} 
-  getdata=async()=>{
     
-    const {UserId}=this.props.route.params;
-    this.setState({UserId:UserId})
-    const{UserName}=this.props.route.params;
-    this.setState({UserName:UserName})
-    const {UserPoints}=this.props.route.params;
-    this.setState({points:UserPoints})
+    });
+    alert(this.state.img)
+      }
+     
+      getdata = async () => {
+        this.setState({
+          UserId:this.props.navigation.state.params.UserId,
+        });
+        this.setState({
+          UserName:this.props.navigation.state.params.UserName,
+        });
+        this.setState({
+          UserPoints:this.props.navigation.state.params.UserPoints,
+        });
+      };
     
-}
+getimage = async () => {
+  try{
+    const getAsyncStorageData = await AsyncStorage.getItem(this.state.UserName);
+    if(getAsyncStorageData !== null) {
+      alert("Data successfully get");
+      return getAsyncStorageData;
+      // value previously stored
+    }
+   
+  }
+  catch(e) {
+    alert("Failed to get the data from the storage");
+  //  console.log(e);
+  }
+  }
 
   render()
   {
@@ -54,8 +77,12 @@ class MyPageView extends Component {
 
         <View style={{ alignSelf: "center" }}>
           <View style={styles.profileImage}>
-            <Image
-              source={require("../assets/profile-pic.jpg")}
+          <Image
+            source={{
+              uri: 
+              this.state.img}
+            }
+            //  source={require("../assets/profile-pic.jpg")}
               style={styles.image}
               resizeMode="center"
             ></Image>
