@@ -10,7 +10,7 @@ import {
   SafeAreaView,
   Dimensions
 } from "react-native";
-import sentiment from "sentiment";
+import myurl from './Url';
 import { Card, Avatar } from "react-native-paper";
 const { width } = Dimensions.get("window");
 import Swiper from "react-native-swiper";
@@ -23,6 +23,7 @@ import Background from "../components/Backgroundgif";
 import Header from "../components/Header";
 import TextInput from "../components/TextInput";
 import { Button } from "native-base";
+import myUrl from "./Url";
 
 class App extends React.Component {
   state = {
@@ -127,8 +128,8 @@ class App extends React.Component {
     await this.setState({
       chosenbrandRefrash: text.item
     });
-    var twitterAns = await this.gettwitterAns("1");
-    var twitterAns2 = await this.gettwitterPop("5");
+    var twitterAns = await this.gettwitterAns("0");
+    var twitterAns2 = await this.gettwitterPop("11");
     var twitterAns3 = await this.gettwitts("14");
     var twitterAns4 = await this.gettcomm("15");
     var twitterAns4 = await this.gettwitterComments("16");
@@ -139,7 +140,7 @@ class App extends React.Component {
     const brandOFcat = [];
 
     const url =
-      `http://127.0.0.1:8080/api/Twitter?Input=` +
+      myurl+`/Twitter?Input=` +
       this.state.chosenbrandRefrash +
       `&question=` +
       1;
@@ -179,7 +180,7 @@ class App extends React.Component {
   gettwitterPop = async questionNumber => {
     const brandOFcat = [];
     const url =
-      `http://127.0.0.1:8080/api/Twitter?Input=` +
+      myurl+'/Twitter?Input='+
       this.state.chosenbrand +
       `&question=` +
       5;
@@ -203,7 +204,7 @@ class App extends React.Component {
     const brandOFcat = [];
 
     const url =
-      `http://127.0.0.1:8080/api/Twitter?Input=` +
+    myurl+'/Twitter?Input=' +
       this.state.chosenbrand +
       `&question=` +
       14;
@@ -222,7 +223,7 @@ class App extends React.Component {
   gettcomm = async questionNumber => {
     const brandOFcat = [];
     const url =
-      `http://127.0.0.1:8080/api/Twitter?Input=` +
+    myurl+'/Twitter?Input=' +
       this.state.chosenbrand +
       `&question=` +
       4;
@@ -241,7 +242,7 @@ class App extends React.Component {
     const brandOFcat = [];
 
     const url =
-      `http://127.0.0.1:8080/api/Twitter?Input=` +
+    myurl+'/Twitter?Input='+ 
       this.state.brand +
       `&question=` +
       16;
