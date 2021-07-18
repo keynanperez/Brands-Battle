@@ -223,7 +223,7 @@ const renderTime = ({ remainingTime }) => {
           {renderTime}
         </CountdownCircleTimer>
       </View>
-      <Text style={styles.text}>{brand}</Text>
+     
 
 
             <Text style={styles.text}>{question.question}</Text>

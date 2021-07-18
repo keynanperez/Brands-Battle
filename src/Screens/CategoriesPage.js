@@ -257,7 +257,7 @@ else{
            <Background>
           
     <View style={styles.add}>
-                <ScrollView horizontal={false} showHorizontalScrollIndicator={false}>
+                <ScrollView horizontal={true} showHorizontalScrollIndicator={false}>
          
             <CircularCard 
         title="Cars"

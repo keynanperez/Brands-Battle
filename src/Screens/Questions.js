@@ -40,12 +40,12 @@ const questions = [
     {
         id:7,
         prev: "How Many #hashtags ",
-        end: "Posed This Week?",
+        end: " Posed This Week?",
     },
     {
         id:8,
         prev: "How Many @tags  ",
-        end: "Posed This Week?",
+        end: " Posed This Week?",
     },
     {
         id:9,
@@ -55,7 +55,7 @@ const questions = [
     {
         id:10,
         prev: "Wich post of ",
-        end: "got more likes?",
+        end: " got more likes?",
     },
 
 
