@@ -12,7 +12,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 //import QuizQuestions from './QuizQuestions'
 
 import Questions from "./Questions"
-import myUrl from "./Url";
+
 class Categories extends React.Component {
   constructor(props) {
     super(props);

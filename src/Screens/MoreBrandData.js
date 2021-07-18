@@ -7,6 +7,7 @@ import SentimentPage from "./Sentiment";
 import Chart from "./Chart";
 import Pie from "./Pie";
 import sentiment from "sentiment";
+import myurl from './Url';
 import {
   LineChart,
   BarChart,
@@ -38,7 +39,7 @@ export default class App extends React.Component {
     const brandOFcat = [];
 
     const url =
-      `http://127.0.0.1:8080/api/Twitter?Input=` +
+      myurl +`Twitter?Input=` +
       this.state.chosenbrand +
       `&question=` +
       14;

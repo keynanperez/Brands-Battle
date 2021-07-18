@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { SectionGrid } from "react-native-super-grid";
 import { Container, Content, Badge, Icon } from "native-base";
+
+import myurl from './Url';
 import Header from "../components/Header";
-//import Sent from "../node-sentiment/index";
-//import sentiment from "node-sentiment";
+
 
 export default class Sentiment extends React.Component {
   constructor(props) {
@@ -43,7 +44,7 @@ export default class Sentiment extends React.Component {
     const brandOFcat = [];
 
     const url =
-      `http://127.0.0.1:8080/api/Twitter?Input=` +
+      myurl+`Twitter?Input=` +
       this.state.brand +
       `&question=` +
       16;

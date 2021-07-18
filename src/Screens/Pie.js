@@ -15,6 +15,7 @@ import {
   ContributionGraph,
   StackedBarChart
 } from "react-native-chart-kit";
+import myurl from './Url'
 
 export default class Pie extends React.Component {
   constructor(props) {
@@ -55,7 +56,7 @@ export default class Pie extends React.Component {
     const brandOFcat = [];
 
     const url =
-      `http://127.0.0.1:8080/api/Twitter?Input=` +
+      myurl+`Twitter?Input=` +
       this.state.brand +
       `&question=` +
       16;

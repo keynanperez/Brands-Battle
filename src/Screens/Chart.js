@@ -16,7 +16,8 @@ import {
   StackedBarChart
 } from "react-native-chart-kit";
 import Pie from "./Pie";
-import Sentiment from "./Sentiment";
+//import sentiment from "sentiment";
+import myurl from './Url'
 
 export default class Chart extends React.Component {
   constructor(props) {
@@ -34,7 +35,7 @@ export default class Chart extends React.Component {
     const brandOFcat = [];
 
     const url =
-      `http://127.0.0.1:8080/api/Twitter?Input=` +
+      myurl+`Twitter?Input=` +
       this.state.brand +
       `&question=` +
       16;
