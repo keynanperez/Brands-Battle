@@ -106,11 +106,14 @@ getallbrands=async(Catname)=>{
             {  
               var randomNumberC = Math.floor(Math.random() * ((this.state.currentBrands.length)));
               if(this.state.currentBrands[randomNumberC] ==  this.state.chosenbranda)
+              if (randomNumberC== this.state.currentBrands.length)
+              randomNumberC--;
+              else
               randomNumberC++;
               this.state.chosenbrandb=this.state.currentBrands[randomNumberC];
               var fuuQ= prevQ+this.state.chosenbranda+endQ+this.state.chosenbrandb;
               answers= await this.ansgetB(idtw)
-              array.push({ question:fuuQ, answers:answers,brand:chosenbranda});
+              array.push({ question:fuuQ, answers:answers,brand:this.state.chosenbranda});
               i++;
            
               
@@ -120,7 +123,7 @@ getallbrands=async(Catname)=>{
            
              var fuuQ= prevQ+this.state.chosenbranda+endQ;
              answers= await this.ansgetA(idtw)
-             array.push({ question:fuuQ, answers:answers,brand:chosenbranda});
+             array.push({ question:fuuQ, answers:answers,brand:this.state.chosenbranda});
              i++;
          
           }
