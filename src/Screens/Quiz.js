@@ -2,7 +2,8 @@ import React from "react";
 import { View, StyleSheet, StatusBar, Text, SafeAreaView } from "react-native";
 import { Button, ButtonContainer } from "../components/Button";
 import Alert from "../components/Alert";
-
+import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
+import myurl from "./Url"
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#6F96B8",
@@ -32,8 +33,38 @@ class Quiz extends React.Component {
     answered: false,
     answerCorrect: false,
     shuffeled:[],
-    timer: 10,
+    key:0,
+    userupd :[],
+    UserId:"",
+    UserPoints:"",
+    UserName:"",
+    Points:0,
   };
+
+
+  async componentDidMount  (){
+    await this.getdata()
+    this._unsubscribeFocus  = await this.props.navigation.addListener('focus',(payload) =>{
+    this.getdata()
+
+  
+});
+  }
+ 
+  getdata = async () => {
+    this.setState({
+      UserId:this.props.navigation.state.params.UserId,
+    });
+    this.setState({
+      UserName:this.props.navigation.state.params.UserName,
+    });
+    this.setState({
+      UserPoints:this.props.navigation.state.params.UserPoints,
+    });
+  };
+
+
+
    shuffle=(array)=> {
     var tmp, current, top = array.length;
     if(top) while(--top) {
@@ -58,9 +89,17 @@ class Quiz extends React.Component {
       } , 1000)
     
       const nextIndex = this.state.activeQuestionIndex + 1;
-    
       if (nextIndex >= state.totalCount) {
-        return this.props.navigation.navigate('endgame')
+        if (this.state.UserPoints=="")
+        this.state.UserPoints=0;
+        this.state.userupd={
+          Id:this.state.UserId,
+         Points:this.state.UserPoints+this.state.correctCount,
+        }
+          this.postdata()
+        return this.props.navigation.navigate('endgame',{UserId: this.state.UserId,
+        UserPoints: this.state.UserPoints,
+        UserName: this.state.UserName})
        // return this.props.navigation.popToTop();
       }
   
@@ -85,13 +124,39 @@ class Quiz extends React.Component {
 
         return nextState;
       },
-      () => {
-        setTimeout(() => this.nextQuestion(), 750);
-      }
+      
+      () => { setTimeout(() => this.OnEndStage(), 1000);}
     );
   };
 
+  postdata=async()=>{
+    
+    
+    const url = (myurl+'Users/')
+   const userdata= await fetch(url, {
+      method: 'Delete',
+      body: JSON.stringify(this.state.userupd),
+      headers: new Headers({
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Accept': 'application/json; charset=UTF-8'
+      })
+    })
+    this.setState({UserPoints:"",UserId:""})
 
+  }
+
+  OnEndTime=() => {
+
+    this.state.key= this.state.key+1;
+    this.nextQuestion();
+    return [true, 1000];
+  }
+  OnEndStage=() => {
+
+    this.state.key= this.state.key+1;
+    this.nextQuestion();
+    //return [true, 1000];
+  }
 
   render() {
    
@@ -100,6 +165,19 @@ class Quiz extends React.Component {
     const question = questions[this.state.activeQuestionIndex];
     var answers=questions[this.state.activeQuestionIndex].answers;
     answers=this.shuffle(answers);
+const renderTime = ({ remainingTime }) => {
+  if (remainingTime === 0) {
+    return <Text className="timer">Too lale...</Text>;
+  }
+
+  return (
+    <View className="timer">
+      <Text className="text">Remaining</Text>
+      <Text className="value" style={{textAlign:"center",fontSize:25,color:'#ffff'}}>{remainingTime}</Text>
+      <Text className="text">seconds</Text>
+    </View>
+  );
+};
     
     return (
       <View
@@ -111,7 +189,18 @@ class Quiz extends React.Component {
         <StatusBar barStyle="light-content" />
         <SafeAreaView style={styles.safearea}>
           <View>
-         <Text style={styles.proftextstime} > timer {this.state.timer} </Text>
+            
+          <View className="timer-wrapper" style={{paddingLeft:'28%',paddingBottom:'15%'}}>
+        <CountdownCircleTimer
+         key={this.state.key}
+          isPlaying
+          duration={30}
+          colors={[["#004777", 0.33], ["#F7B801", 0.33], ["#A30000"]]}
+          onComplete={() => this.OnEndTime()}
+        >
+          {renderTime}
+        </CountdownCircleTimer>
+      </View>
 
             <Text style={styles.text}>{question.question}</Text>
 
@@ -131,7 +220,8 @@ class Quiz extends React.Component {
             visible={this.state.answered}
             ></Alert>
           <Text style={styles.text}></Text>
-          <Button rounded text='SKIP' onPress={() => this.nextQuestion()}/>
+      
+          <Button rounded text='SKIP' onPress={() => this.OnEndStage()}/>
     
          
         </SafeAreaView>

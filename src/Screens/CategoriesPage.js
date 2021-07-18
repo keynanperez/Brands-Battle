@@ -1,14 +1,9 @@
 import React , { Component }from "react";
+import myurl from "./Url"
 import { ImageBackground, ScrollView, StatusBar, StyleSheet ,  Text,
   View,
   Image,
   SafeAreaView} from "react-native";
-import ApparelQuestions from "../data/Apparel";
-import CarsQuestions from "../data/Cars";
-import FastFoodQuestions from "../data/FastFood";
-import PersonalCareQuestions from "../data/PersonalCare";
-import RetailQuestions from "../data/Retail";
-import TechnologyQuestions from "../data/Technology";
 import CircularCard from "../lib/CircularCard";
 import ImagedCarouselCard from "../lib/ImagedCarouselCard";
 import Background from '../components/Background';
@@ -17,6 +12,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 //import QuizQuestions from './QuizQuestions'
 
 import Questions from "./Questions"
+
 class Categories extends React.Component {
   constructor(props) {
     super(props);
@@ -24,9 +20,41 @@ class Categories extends React.Component {
     currentBrands:[],
     allQ:[],
     arryOfQuestions:[],
-    chosenbrand:"",
+    chosenbranda:"",
+    chosenbrandb:"",
+    UserId:"",
+    UserPoints:"",
+    UserName:"",
   }
 }
+
+
+    async componentDidMount  (){
+      await this.getdata()
+      this._unsubscribeFocus  = await this.props.navigation.addListener('focus',(payload) =>{
+      this.getdata()
+  
+    
+  });
+    }
+   
+    getdata = async () => {
+      this.setState({
+        UserId:this.props.navigation.state.params.UserId,
+      });
+      this.setState({
+        UserName:this.props.navigation.state.params.UserName,
+      });
+      this.setState({
+        UserPoints:this.props.navigation.state.params.UserPoints,
+      });
+    };
+  
+
+
+
+
+
 
 getQ=async(Catname)=>{
   this.state.currentBrands=await this.getallbrands(Catname)
@@ -34,7 +62,7 @@ getQ=async(Catname)=>{
 }
 getallbrands=async(Catname)=>{
   const brandOFcat=[]
-  const url = `http://172.20.10.2:44365/api/brands?Catname=`+Catname
+  const url = myurl+`brands?Catname=`+Catname
   const userf =await fetch(url, {
       method: 'Get',
       headers: new Headers({
@@ -65,41 +93,132 @@ getallbrands=async(Catname)=>{
       var endQ=""
       var chosenbrand=""
       var array=[]
-      while  (i<=10)
-      {
-          var randomNumberB = Math.floor(Math.random() * ((this.state.currentBrands.length)+1));
-          var randomNumberQ = Math.floor(Math.random() * 3);
-          this.state.chosenbrand=this.state.currentBrands[randomNumberB];
+      var answers=""
+      while  (i<=10) {
+          var randomNumberB = Math.floor(Math.random() * ((this.state.currentBrands.length)));
+          var randomNumberQ = Math.floor(Math.random() * 10);
+          this.state.chosenbranda=this.state.currentBrands[randomNumberB];
          prevQ= arryQuestions[randomNumberQ].prev;
          endQ=arryQuestions[randomNumberQ].end;
-         idtw=arryQuestions[randomNumberQ].id
-         var fuuQ= prevQ+this.state.chosenbrand+endQ;
-          answers= await this.ansgetA(idtw)
-          array.push({ question:fuuQ, answers:answers});
-         i++;
+         idtw=arryQuestions[randomNumberQ].id;
 
-      }
-      
-      return this.state.arryOfQuestions=array;
+          if(randomNumberQ== 3 ||randomNumberQ== 4||randomNumberQ==5||randomNumberQ== 9)
+            {  
+              var randomNumberC = Math.floor(Math.random() * ((this.state.currentBrands.length)));
+              if(this.state.currentBrands[randomNumberC] ==  this.state.chosenbranda)
+              randomNumberC++;
+              this.state.chosenbrandb=this.state.currentBrands[randomNumberC];
+              var fuuQ= prevQ+this.state.chosenbranda+endQ+this.state.chosenbrandb;
+              answers= await this.ansgetB(idtw)
+              array.push({ question:fuuQ, answers:answers});
+              i++;
+           
+              
+            }
+         else
+          {
+           
+             var fuuQ= prevQ+this.state.chosenbranda+endQ;
+             answers= await this.ansgetA(idtw)
+             array.push({ question:fuuQ, answers:answers});
+             i++;
+         
+          }
+         
 
+        
+     }
+     return this.state.arryOfQuestions=array;
   };
+
   ansgetA=async(questionNumber)=>{
     var twitterAns=await this.gettwitterAns(questionNumber)
    // var twitterAns="2400"
     var arrayOfUnmixAns=[]
+  var max=0;
+  var idcorrect
+if (questionNumber==14)
+{
+  for(var i=0;i<4;i++)
+  {
+    if (max<= twitterAns[i][1])
+    {
+      idcorrect=i+1
+      max=twitterAns[i][1]
+    }
+
+  }
+  for(var i=0;i<4;i++)
+  {
+    if (i+1==idcorrect)  
+    arrayOfUnmixAns.push({ id:i+1,text:(twitterAns[i][0]).toLocaleString(),correct: true})
+    else
+    arrayOfUnmixAns.push({ id:i+1,text:(twitterAns[i][0]).toLocaleString()})
+  }
+
+}
+else{
+
     var twitterAnsWithC=Number(twitterAns)
-    
+    if(twitterAnsWithC<=3)
+    {
+      arrayOfUnmixAns.push({ id:1,text:(twitterAnsWithC+2).toLocaleString()})
+      arrayOfUnmixAns.push({ id:2,text:(twitterAnsWithC+3).toLocaleString()})
+      arrayOfUnmixAns.push({ id:3,text:(twitterAnsWithC+6).toLocaleString()})
+      arrayOfUnmixAns.push({ id:4,text:twitterAnsWithC.toLocaleString(),correct: true })
+    }
+   else if(twitterAnsWithC>=5)
+    {
     arrayOfUnmixAns.push({ id:1,text:(twitterAnsWithC+Math.floor(twitterAnsWithC*0.2)).toLocaleString()})
     arrayOfUnmixAns.push({ id:2,text:(twitterAnsWithC-Math.floor(twitterAnsWithC*0.2)).toLocaleString()})
     arrayOfUnmixAns.push({ id:3,text:(Math.floor(twitterAnsWithC/2)).toLocaleString()})
     arrayOfUnmixAns.push({ id:4,text:twitterAnsWithC.toLocaleString(),correct: true })
-
+    }
+    else
+    {
+      arrayOfUnmixAns.push({ id:1,text:(twitterAnsWithC+2).toLocaleString()})
+      arrayOfUnmixAns.push({ id:2,text:(twitterAnsWithC-3).toLocaleString()})
+      arrayOfUnmixAns.push({ id:3,text:(twitterAnsWithC+6).toLocaleString()})
+      arrayOfUnmixAns.push({ id:4,text:twitterAnsWithC.toLocaleString(),correct: true })
+    }
+  }
 
   return arrayOfUnmixAns
   };
+
+  ansgetB=async(questionNumber)=>{
+    var twitterAns=await this.gettwitterDoubleAns(questionNumber)
+    var arrayOfUnmixAns=[];
+    if (twitterAns== this.state.chosenbranda)
+    {
+    arrayOfUnmixAns.push({ id:1,text: this.state.chosenbrandb})
+    arrayOfUnmixAns.push({ id:2,text: this.state.chosenbranda,correct: true })
+    }
+    else  if (twitterAns== this.state.chosenbrandb)
+    {
+      arrayOfUnmixAns.push({ id:1,text: this.state.chosenbranda})
+      arrayOfUnmixAns.push({ id:2,text: this.state.chosenbrandb,correct: true })
+    }
+    return arrayOfUnmixAns;
+  }
+  
+
+  gettwitterDoubleAns=async(questionNumber)=>{
+    const url = myurl+`Twitter?InputA=`+this.state.chosenbrandb+ '&InputB=' + this.state.chosenbranda + '&question='+questionNumber
+    
+    const userf =await fetch(url, {
+        method: 'Get',
+        headers: new Headers({
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json; charset=UTF-8'
+        })
+      })
+      
+   const res=await userf.json()
+     return (res)
+    }
   gettwitterAns=async(questionNumber)=>{
-    const brandOFcat=[]
-    const url = `http://172.20.10.2:44365/api/Twitter?Input=`+this.state.chosenbrand+`&question=`+questionNumber
+    const url = myurl+`Twitter?Input=`+this.state.chosenbranda+`&question=`+questionNumber
     const userf =await fetch(url, {
         method: 'Get',
         headers: new Headers({
@@ -112,14 +231,15 @@ getallbrands=async(Catname)=>{
         if(res != null)
           {
             switch (questionNumber) {
-              case 1:
+              case 0:
                 return (res.data.public_metrics.followers_count);
-              case 3:
+              case 1:
                 return (res[0].FavoriteCount);
-              case 4:
+              case 2:
                 return (res[0].RetweetCount);
+
               default:
-                  return Alert.alert("shirel");
+                  return (res);
             }
           
       
@@ -134,7 +254,7 @@ getallbrands=async(Catname)=>{
            <Background>
           
     <View style={styles.add}>
-                <ScrollView horizontal={true} showHorizontalScrollIndicator={false}>
+                <ScrollView horizontal={false} showHorizontalScrollIndicator={false}>
          
             <CircularCard 
         title="Cars"
@@ -143,7 +263,8 @@ getallbrands=async(Catname)=>{
          this.props.navigation.navigate("Quiz", {
             title: "Cars",
             questions:await this.getQ("Cars"),
-            color: "#6F96B8"
+            color: "#6F96B8",
+            UserId:this.state.UserId,UserPoints:this.state.UserPoints,UserName:this.state.UserName
           })
         }
       />
@@ -154,9 +275,10 @@ getallbrands=async(Catname)=>{
         source={require("../images/fastfood.jpg")}
         onPress={async() =>
           this.props.navigation.navigate("Quiz", {
-            title: "FastFood",
-            questions:await this.getQ( "FastFood"),
-            color: "#6F96B8"
+            title: "Fast Food",
+            questions:await this.getQ( "Fast Food"),
+            color: "#6F96B8",
+            UserId:this.state.UserId,UserPoints:this.state.UserPoints,UserName:this.state.UserName
           })
         }
       />
@@ -168,6 +290,7 @@ getallbrands=async(Catname)=>{
             title: "Technology",
             questions:await this.getQ( "Technology"),
             color: "#6F96B8",
+            UserId:this.state.UserId,UserPoints:this.state.UserPoints,UserName:this.state.UserName
           })
         }
       />
@@ -178,7 +301,9 @@ getallbrands=async(Catname)=>{
           this.props.navigation.navigate("Quiz", {
             title: "Retail",
             questions:await this.getQ( "Retail"),
-            color: "#6F96B8"
+            color: "#6F96B8",
+            UserId:this.state.UserId,UserPoints:this.state.UserPoints,UserName:this.state.UserName
+
           })
         }
       />
@@ -187,9 +312,11 @@ getallbrands=async(Catname)=>{
         source={require("../images/PersonalCare.png")}
         onPress={async() =>
           this.props.navigation.navigate("Quiz", {
-            title: "PersonalCare",
-            questions:await this.getQ( "PersonalCare"),
-            color: "#6F96B8"
+            title: "Personal Care",
+            questions:await this.getQ( "Personal Care"),
+            color: "#6F96B8",
+            UserId:this.state.UserId,UserPoints:this.state.UserPoints,UserName:this.state.UserName
+
           })
         }
       />
@@ -201,6 +328,8 @@ getallbrands=async(Catname)=>{
             title: "Apparel",
             questions:await this.getQ( "Apparel"),
             color: "#6F96B8",
+            UserId:this.state.UserId,UserPoints:this.state.UserPoints,UserName:this.state.UserName
+
           })
         }
       />
