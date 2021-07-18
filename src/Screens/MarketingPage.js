@@ -140,7 +140,7 @@ class App extends React.Component {
     const brandOFcat = [];
 
     const url =
-      myurl+`/Twitter?Input=` +
+      myurl+`Twitter?Input=` +
       this.state.chosenbrandRefrash +
       `&question=` +
       1;
@@ -180,7 +180,7 @@ class App extends React.Component {
   gettwitterPop = async questionNumber => {
     const brandOFcat = [];
     const url =
-      myurl+'/Twitter?Input='+
+      myurl+'Twitter?Input='+
       this.state.chosenbrand +
       `&question=` +
       5;
@@ -204,7 +204,7 @@ class App extends React.Component {
     const brandOFcat = [];
 
     const url =
-    myurl+'/Twitter?Input=' +
+    myurl+'Twitter?Input=' +
       this.state.chosenbrand +
       `&question=` +
       14;
@@ -223,7 +223,7 @@ class App extends React.Component {
   gettcomm = async questionNumber => {
     const brandOFcat = [];
     const url =
-    myurl+'/Twitter?Input=' +
+    myurl+'Twitter?Input=' +
       this.state.chosenbrand +
       `&question=` +
       4;
@@ -242,7 +242,7 @@ class App extends React.Component {
     const brandOFcat = [];
 
     const url =
-    myurl+'/Twitter?Input='+ 
+    myurl+'Twitter?Input='+ 
       this.state.brand +
       `&question=` +
       16;

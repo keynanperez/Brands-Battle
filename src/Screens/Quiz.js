@@ -157,6 +157,8 @@ class Quiz extends React.Component {
     const questions =this.props.navigation.state.params.questions// []);//this.props.navigation.state.param.questions;
     const question = questions[this.state.activeQuestionIndex];
     var answers=questions[this.state.activeQuestionIndex].answers;
+    var brand=questions[this.state.activeQuestionIndex].brand;
+
     answers=this.shuffle(answers);
 const renderTime = ({ remainingTime }) => {
   if (remainingTime === 0) {
@@ -194,6 +196,8 @@ const renderTime = ({ remainingTime }) => {
           {renderTime}
         </CountdownCircleTimer>
       </View>
+      <Text style={styles.text}>{brand}</Text>
+
 
             <Text style={styles.text}>{question.question}</Text>
 
