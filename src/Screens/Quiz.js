@@ -39,6 +39,7 @@ class Quiz extends React.Component {
     UserPoints:"",
     UserName:"",
     Points:0,
+    brand:"",
   };
 
 
@@ -118,8 +119,10 @@ class Quiz extends React.Component {
         if (correct) {
           nextState.correctCount = state.correctCount + 1;
           nextState.answerCorrect = true;
+          this.addToBrandCorrectCount()
         } else {
           nextState.answerCorrect = false;
+         this.addToBrandCount()
         }
 
         return nextState;
@@ -129,6 +132,30 @@ class Quiz extends React.Component {
     );
   };
 
+  addToBrandCorrectCount=async()=>{
+    const url = (myurl+'brands?value='+this.state.brand)
+    await fetch(url, {
+       method: 'Post',
+       body: JSON.stringify(this.state.userupd),
+       headers: new Headers({
+         'Content-Type': 'application/json; charset=UTF-8',
+         'Accept': 'application/json; charset=UTF-8'
+       })
+     })
+
+  }
+  addToBrandCount=async()=>{
+    const url = (myurl+'brands?value='+this.state.brand)
+  await fetch(url, {
+       method: 'Put',
+       body: JSON.stringify(this.state.userupd),
+       headers: new Headers({
+         'Content-Type': 'application/json; charset=UTF-8',
+         'Accept': 'application/json; charset=UTF-8'
+       })
+     })
+
+  }
   postdata=async()=>{
     
     
@@ -164,6 +191,8 @@ class Quiz extends React.Component {
     const questions =this.props.navigation.state.params.questions// []);//this.props.navigation.state.param.questions;
     const question = questions[this.state.activeQuestionIndex];
     var answers=questions[this.state.activeQuestionIndex].answers;
+    var brand=questions[this.state.activeQuestionIndex].brand;
+  this.state.brand=brand;
     answers=this.shuffle(answers);
 const renderTime = ({ remainingTime }) => {
   if (remainingTime === 0) {
@@ -201,6 +230,8 @@ const renderTime = ({ remainingTime }) => {
           {renderTime}
         </CountdownCircleTimer>
       </View>
+      <Text style={styles.text}>{brand}</Text>
+
 
             <Text style={styles.text}>{question.question}</Text>
 
